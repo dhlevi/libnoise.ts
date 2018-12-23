@@ -1,0 +1,25 @@
+{
+  "name": "libnoise-ts",
+  "version": "0.1.0",
+  "description": "A port of libnoise, modernised and ported to TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peabnuts123/libnoise.ts.git"
+  },
+  "keywords": [
+    "typescript",
+    "libnoise",
+    "perlin",
+    "noise"
+  ],
+  "author": "peabnuts123",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peabnuts123/libnoise.ts/issues"
+  },
+  "homepage": "https://github.com/peabnuts123/libnoise.ts#readme"
+}
