@@ -1,5 +1,6 @@
 # libnoise.js
 
-A (mostly) direct port of C++ [libnoise](http://libnoise.sourceforge.net/index.html) for CommonJS/Node.js
+### Original project (by [jmcneese](https://github.com/jmcneese/libnoise.js)):
+> A (mostly) direct port of C++ [libnoise](http://libnoise.sourceforge.net/index.html) for CommonJS/Node.js
 
-[![Code Climate](https://codeclimate.com/github/jmcneese/libnoise.js.png)](https://codeclimate.com/github/jmcneese/libnoise.js)
+This is a fork that ports the code to TypeScript and modernises things a bit. This library can be used with both Node.js and web projects.
