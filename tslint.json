@@ -18,7 +18,9 @@
     "no-unused-expression": false,
     "object-literal-sort-keys": false,
     "forin": false,
-    "variable-name": [true, "allow-leading-underscore", "allow-pascal-case"]
+    "variable-name": [true, "allow-leading-underscore", "allow-pascal-case"],
+    "no-bitwise": false,
+    "one-variable-per-declaration": false
   },
   "rulesDirectory": []
 }

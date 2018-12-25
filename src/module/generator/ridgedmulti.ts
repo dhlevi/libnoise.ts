@@ -1,6 +1,6 @@
-import NoiseGen from '@app/noisegen';
 import MathFuncs from '@app/mathfuncs';
 import Misc from '@app/misc';
+import NoiseGen from '@app/noisegen';
 
 class RidgedMulti {
 
@@ -12,17 +12,16 @@ class RidgedMulti {
   public static DEFAULT_RIDGED_GAIN = 2.0;
   public static RIDGED_MAX_OCTAVE = 30;
 
-  public frequency: number;
-  public octaves: number;
-  public seed: number;
-  public quality: number;
-  public offset: number;
-  public gain: number;
-  public _lacunarity: number;
-  public weights: number[];
+  private frequency: number;
+  private octaves: number;
+  private seed: number;
+  private quality: number;
+  private offset: number;
+  private gain: number;
+  private _lacunarity: number;
+  private weights: number[];
 
-  constructor(frequency, lacunarity, octaves, seed, quality, offset, gain) {
-
+  constructor(frequency?: number, lacunarity?: number, octaves?: number, seed?: number, quality?: number, offset?: number, gain?: number) {
     this.frequency = frequency || RidgedMulti.DEFAULT_RIDGED_FREQUENCY;
     this.lacunarity = lacunarity || RidgedMulti.DEFAULT_RIDGED_LACUNARITY;
     this.octaves = octaves || RidgedMulti.DEFAULT_RIDGED_OCTAVE_COUNT;
@@ -32,20 +31,18 @@ class RidgedMulti {
     this.gain = gain || RidgedMulti.DEFAULT_RIDGED_GAIN;
   }
 
-
-  get lacunarity() {
+  public get lacunarity() {
     return this._lacunarity;
   }
-
-  set lacunarity(v) {
+  public set lacunarity(v: number) {
     this._lacunarity = v;
 
-    var h = 1.0;
-    var frequency = 1.0;
+    let h = 1.0;
+    let frequency = 1.0;
 
     this.weights = [];
 
-    for (var i = 0; i < RidgedMulti.RIDGED_MAX_OCTAVE; i++) {
+    for (let i = 0; i < RidgedMulti.RIDGED_MAX_OCTAVE; i++) {
 
       // Compute weight for each frequency.
       this.weights[i] = Math.pow(frequency, -h);
@@ -54,20 +51,21 @@ class RidgedMulti {
     }
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
+    let nx;
+    let ny;
+    let nz;
+    let seed;
 
-    var nx, ny, nz, seed;
-
-    var value = 0.0;
-    var signal = 0.0;
-    var weight = 1.0;
+    let value = 0.0;
+    let signal = 0.0;
+    let weight = 1.0;
 
     x = (x * this.frequency);
     y = (y * this.frequency);
     z = (z * this.frequency);
 
-    for (var octave = 0; octave < this.octaves; octave++) {
-
+    for (let octave = 0; octave < this.octaves; octave++) {
       // Make sure that these floating-point values have the same range as a 32-
       // bit integer so that we can pass them to the coherent-noise functions.
       nx = MathFuncs.makeInt32Range(x);
@@ -103,7 +101,6 @@ class RidgedMulti {
       x *= this.lacunarity;
       y *= this.lacunarity;
       z *= this.lacunarity;
-
     }
 
     return (value * 1.25) - 1.0;

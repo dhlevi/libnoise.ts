@@ -1,15 +1,13 @@
 import MathFuncs from '@app/mathfuncs';
 
-var Checkerboard = function () { };
+class Checkerboard {
+  public getValue(x: number, y: number, z: number) {
+    let ix = Math.floor(MathFuncs.makeInt32Range(x));
+    let iy = Math.floor(MathFuncs.makeInt32Range(y));
+    let iz = Math.floor(MathFuncs.makeInt32Range(z));
 
-Checkerboard.prototype.getValue = function (x, y, z) {
-
-  var ix = Math.floor(MathFuncs.makeInt32Range(x));
-  var iy = Math.floor(MathFuncs.makeInt32Range(y));
-  var iz = Math.floor(MathFuncs.makeInt32Range(z));
-
-  return (ix & 1 ^ iy & 1 ^ iz & 1) ? -1.0 : 1.0;
-
-};
+    return (ix & 1 ^ iy & 1 ^ iz & 1) ? -1.0 : 1.0;
+  }
+}
 
 export default Checkerboard;

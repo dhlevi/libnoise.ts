@@ -1,16 +1,13 @@
 class Abs {
-  sourceModule: any;
+  private sourceModule: any;
 
-  constructor(sourceModule) {
+  constructor(sourceModule?: any) {
     this.sourceModule = sourceModule || null;
   }
 
-  getValue(x, y, z) {
-
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
-
       throw new Error('Invalid or missing source module!');
-
     }
 
     return Math.abs(this.sourceModule.getValue(x, y, z));

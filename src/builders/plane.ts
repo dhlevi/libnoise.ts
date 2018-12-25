@@ -1,6 +1,6 @@
 import Interpolation from '@app/interpolation';
-import NoiseMap from '@app/noisemap';
 import Plane from '@app/model/plane';
+import NoiseMap from '@app/noisemap';
 
 class NoiseMapBuilderPlane {
   private sourceModule: any;
@@ -13,7 +13,7 @@ class NoiseMapBuilderPlane {
   private _upperXBound: number;
   private _upperYBound: number;
 
-  constructor(sourceModule, width, height, seamless) {
+  constructor(sourceModule?: any, width?: number, height?: number, seamless?: boolean) {
     this.sourceModule = sourceModule || null;
     this.width = width || 256;
     this.height = height || 256;
@@ -27,37 +27,37 @@ class NoiseMapBuilderPlane {
     this.noiseMap = new NoiseMap(this.width, this.height);
   }
 
-  get lowerXBound() {
+  public get lowerXBound() {
     return this._lowerXBound;
   }
-  set lowerXBound(v) {
+  public set lowerXBound(v: number) {
     this._lowerXBound = v;
   }
 
-  get lowerYBound() {
+  public get lowerYBound() {
     return this._lowerYBound;
   }
-  set lowerYBound(v) {
+  public set lowerYBound(v: number) {
     this._lowerYBound = v;
   }
 
-  get upperXBound() {
+  public get upperXBound() {
     return this._upperXBound;
   }
-  set upperXBound(v) {
+  public set upperXBound(v: number) {
     this._upperXBound = v;
   }
 
-  get upperYBound() {
+  public get upperYBound() {
     return this._upperYBound;
   }
-  set upperYBound(v) {
+  public set upperYBound(v: number) {
     this._upperYBound = v;
   }
 
-  build() {
-    var xExtent = this.upperXBound - this.lowerXBound;
-    var yExtent = this.upperYBound - this.lowerYBound;
+  public build() {
+    let xExtent = this.upperXBound - this.lowerXBound;
+    let yExtent = this.upperYBound - this.lowerYBound;
 
     if (xExtent < 0 || yExtent < 0) {
 
@@ -72,19 +72,20 @@ class NoiseMapBuilderPlane {
     }
 
     // Create the plane model.
-    var plane = new Plane(this.sourceModule);
-    var xDelta = xExtent / this.width;
-    var yDelta = yExtent / this.height;
-    var curX = this.lowerXBound;
-    var curY = this.lowerYBound;
-    var value, xBlend;
+    let plane = new Plane(this.sourceModule);
+    let xDelta = xExtent / this.width;
+    let yDelta = yExtent / this.height;
+    let curX = this.lowerXBound;
+    let curY = this.lowerYBound;
+    let value;
+    let xBlend;
 
     // Fill every point in the noise map with the output values from the model.
-    for (var y = 0; y < this.height; y++) {
+    for (let y = 0; y < this.height; y++) {
 
       curX = this.lowerXBound;
 
-      for (var x = 0; x < this.width; x++) {
+      for (let x = 0; x < this.width; x++) {
 
         if (!this.seamless) {
 
@@ -98,14 +99,14 @@ class NoiseMapBuilderPlane {
             Interpolation.linear(
               plane.getValue(curX, curY),
               plane.getValue(curX + xExtent, curY),
-              xBlend
+              xBlend,
             ),
             Interpolation.linear(
               plane.getValue(curX, curY + yExtent),
               plane.getValue(curX + xExtent, curY + yExtent),
-              xBlend
+              xBlend,
             ),
-            1.0 - ((curY - this.lowerYBound) / yExtent)
+            1.0 - ((curY - this.lowerYBound) / yExtent),
           );
         }
 
@@ -122,7 +123,7 @@ class NoiseMapBuilderPlane {
     return this.noiseMap;
   }
 
-  setBounds(lowerXBound, lowerYBound, upperXBound, upperYBound) {
+  public setBounds(lowerXBound: number, lowerYBound: number, upperXBound: number, upperYBound: number) {
     this.upperXBound = upperXBound;
     this.upperYBound = upperYBound;
     this.lowerXBound = lowerXBound;

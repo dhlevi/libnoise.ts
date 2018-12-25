@@ -4,20 +4,20 @@ class TranslatePoint {
   private translateY: number;
   private translateZ: number;
 
-  constructor(sourceModule, translateX, translateY, translateZ) {
+  constructor(sourceModule?: any, translateX?: number, translateY?: number, translateZ?: number) {
     this.sourceModule = sourceModule || null;
     this.translateX = translateX || 0;
     this.translateY = translateY || 0;
     this.translateZ = translateZ || 0;
   }
 
-  setTranslation(x, y, z) {
+  public setTranslation(x: number, y: number, z: number) {
     this.translateX = x;
     this.translateY = y;
     this.translateZ = z;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing source module!');
     }
@@ -25,7 +25,7 @@ class TranslatePoint {
     return this.sourceModule.getValue(
       x + this.translateX,
       y + this.translateY,
-      z + this.translateZ
+      z + this.translateZ,
     );
   }
 }

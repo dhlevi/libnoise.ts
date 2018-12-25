@@ -1,20 +1,21 @@
 class Cylinders {
   public static DEFAULT_CYLINDERS_FREQUENCY = 1.0;
-  frequency: any;
 
-  constructor(frequency) {
+  private frequency: number;
+
+  constructor(frequency?: number) {
     this.frequency = frequency || Cylinders.DEFAULT_CYLINDERS_FREQUENCY;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     x = (x * this.frequency);
     y = (y * this.frequency);
     z = (z);
 
-    var distFromCenter = Math.sqrt(x * x + z * z);
-    var distFromSmallerSphere = distFromCenter - Math.floor(distFromCenter);
-    var distFromLargerSphere = 1.0 - distFromSmallerSphere;
-    var nearestDist = Math.min(distFromSmallerSphere, distFromLargerSphere);
+    let distFromCenter = Math.sqrt(x * x + z * z);
+    let distFromSmallerSphere = distFromCenter - Math.floor(distFromCenter);
+    let distFromLargerSphere = 1.0 - distFromSmallerSphere;
+    let nearestDist = Math.min(distFromSmallerSphere, distFromLargerSphere);
 
     return 1.0 - (nearestDist * 4.0); // Puts it in the -1.0 to +1.0 range.
   }

@@ -1,17 +1,17 @@
 class Displace {
-  sourceModule: any;
-  xModule: any;
-  yModule: any;
-  zModule: any;
+  private sourceModule: any;
+  private xModule: any;
+  private yModule: any;
+  private zModule: any;
 
-  constructor(sourceModule, xModule, yModule, zModule) {
+  constructor(sourceModule?: any, xModule?: any, yModule?: any, zModule?: any) {
     this.sourceModule = sourceModule || null;
     this.xModule = xModule || null;
     this.yModule = yModule || null;
     this.zModule = zModule || null;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing source module!');
     }
@@ -23,7 +23,7 @@ class Displace {
     return this.sourceModule.getValue(
       x + this.xModule.getValue(x, y, z),
       y + this.yModule.getValue(x, y, z),
-      z + this.zModule.getValue(x, y, z)
+      z + this.zModule.getValue(x, y, z),
     );
   }
 }

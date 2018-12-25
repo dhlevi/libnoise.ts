@@ -2,12 +2,12 @@ class Exponent {
   private sourceModule: any;
   private exponent: number;
 
-  constructor(sourceModule, exponent) {
+  constructor(sourceModule?: any, exponent?: number) {
     this.sourceModule = sourceModule || null;
-    this.exponent = exponent || 1
+    this.exponent = exponent || 1;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing source module!');
     }

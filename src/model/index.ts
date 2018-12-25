@@ -8,4 +8,4 @@ export {
   Line,
   Plane,
   Sphere,
-}
+};

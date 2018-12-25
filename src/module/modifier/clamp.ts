@@ -6,17 +6,16 @@ class Clamp {
   private _lowerBound: number;
   private _upperBound: number;
 
-  constructor(sourceModule, lowerBound, upperBound) {
+  constructor(sourceModule?: any, lowerBound?: number, upperBound?: number) {
     this.sourceModule = sourceModule || null;
     this.lowerBound = lowerBound || null;
     this.upperBound = upperBound || null;
   }
 
-  get lowerBound() {
+  public get lowerBound() {
     return this._lowerBound;
   }
-
-  set lowerBound(v) {
+  public set lowerBound(v: number) {
     if (v > this.upperBound) {
       throw new Error('Lower bound cannot exceed upper bound!');
     }
@@ -24,11 +23,10 @@ class Clamp {
     this._lowerBound = v;
   }
 
-  get upperBound() {
+  public get upperBound() {
     return this._upperBound;
   }
-
-  set upperBound(v) {
+  public set upperBound(v: number) {
     if (v < this.lowerBound) {
       throw new Error('Upper bound cannot be less than lower bound!');
     }
@@ -36,7 +34,7 @@ class Clamp {
     this._upperBound = v;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing source module!');
     }
@@ -44,7 +42,7 @@ class Clamp {
     return Misc.clampValue(this.sourceModule.getValue(x, y, z), this.lowerBound, this.upperBound);
   }
 
-  setBounds(lowerBound, upperBound) {
+  public setBounds(lowerBound: number, upperBound: number) {
     this.upperBound = upperBound;
     this.lowerBound = lowerBound;
   }

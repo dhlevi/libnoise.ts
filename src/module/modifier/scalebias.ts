@@ -6,13 +6,13 @@ class ScaleBias {
   private scale: number;
   private bias: number;
 
-  constructor(sourceModule, scale, bias) {
+  constructor(sourceModule?: any, scale?: number, bias?: number) {
     this.sourceModule = sourceModule || null;
     this.scale = scale || ScaleBias.DEFAULT_SCALE;
     this.bias = bias || ScaleBias.DEFAULT_BIAS;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing source module!');
     }

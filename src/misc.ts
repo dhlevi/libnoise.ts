@@ -10,7 +10,7 @@ const Misc = {
   },
 
   exponentFilter(value: number, cover: number, sharpness: number) {
-    var c = value - (255 - cover);
+    let c = value - (255 - cover);
 
     if (c < 0) {
       c = 0;
@@ -23,14 +23,15 @@ const Misc = {
     return (value - lowerBound) / (upperBound - lowerBound);
   },
 
-  swapValues(a: any | any[], b: any = undefined) {
+  // @TODO overload instead of this mess
+  swapValues(a: any | any[], b?: any) {
     if (Array.isArray(a)) {
       a = a[0];
       b = a[1];
     }
 
     return [b, a];
-  }
+  },
 };
 
 export default Misc;

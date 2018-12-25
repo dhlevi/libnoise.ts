@@ -5,13 +5,13 @@ class Select {
   public static DEFAULT_SELECT_LOWER_BOUND = -1.0;
   public static DEFAULT_SELECT_UPPER_BOUND = 1.0;
 
-  sourceModules: any[];
-  controlModule: any | null;
-  _edge: number;
-  _lowerBound: number;
-  _upperBound: number;
+  private sourceModules: any[];
+  private controlModule: any | null;
+  private _edge: number;
+  private _lowerBound: number;
+  private _upperBound: number;
 
-  constructor(sourceModules, controlModule, edge, lowerBound, upperBound) {
+  constructor(sourceModules?: any, controlModule?: any, edge?: number, lowerBound?: number, upperBound?: number) {
     this.sourceModules = sourceModules || [];
     this.controlModule = controlModule || null;
     this.edge = edge || Select.DEFAULT_SELECT_EDGE_FALLOFF;
@@ -19,21 +19,21 @@ class Select {
     this.upperBound = upperBound || Select.DEFAULT_SELECT_UPPER_BOUND;
   }
 
-  get edge() {
+  public get edge() {
     return this._edge;
   }
-  set edge(v) {
+  public set edge(v: number) {
     // Make sure that the edge falloff curves do not overlap.
-    var size = this.upperBound - this.lowerBound;
-    var half = size / 2;
+    let size = this.upperBound - this.lowerBound;
+    let half = size / 2;
 
     this._edge = (v > half) ? half : v;
   }
 
-  get lowerBound() {
+  public get lowerBound() {
     return this._lowerBound;
   }
-  set lowerBound(v) {
+  public set lowerBound(v: number) {
     if (v > this.upperBound) {
       throw new Error('Lower bound cannot exceed upper bound!');
     }
@@ -41,10 +41,10 @@ class Select {
     this._lowerBound = v;
   }
 
-  get upperBound() {
+  public get upperBound() {
     return this._upperBound;
   }
-  set upperBound(v) {
+  public set upperBound(v: number) {
     if (v < this.lowerBound) {
       throw new Error('Upper bound cannot be less than lower bound!');
     }
@@ -52,26 +52,22 @@ class Select {
     this._upperBound = v;
   }
 
-  setBounds(lower, upper) {
+  public setBounds(lower: number, upper: number) {
     this.upperBound = upper;
     this.lowerBound = lower;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!(this.sourceModules.length < 2)) {
-
       throw new Error('Invalid or missing source module(s)!');
-
     }
 
     if (!this.controlModule) {
-
       throw new Error('Invalid or missing control module!');
-
     }
 
-    var lowerCurve, upperCurve;
-    var controlValue = this.controlModule.getValue(x, y, z);
+    let lowerCurve, upperCurve;
+    let controlValue = this.controlModule.getValue(x, y, z);
 
     if (this.edge > 0.0) {
 
@@ -92,7 +88,7 @@ class Select {
         return Interpolation.linear(
           this.sourceModules[0].getValue(x, y, z),
           this.sourceModules[1].getValue(x, y, z),
-          Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve))
+          Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve)),
         );
 
       } else if (controlValue < (this.upperBound - this.edge)) {
@@ -112,7 +108,7 @@ class Select {
         return Interpolation.linear(
           this.sourceModules[1].getValue(x, y, z),
           this.sourceModules[0].getValue(x, y, z),
-          Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve))
+          Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve)),
         );
 
       }

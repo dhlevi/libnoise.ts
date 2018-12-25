@@ -1,12 +1,13 @@
 class Const {
   public static DEFAULT_CONST_VALUE: number = 0.0;
-  value: number;
 
-  constructor(v) {
+  private value: number;
+
+  constructor(v?: number) {
     this.value = v || Const.DEFAULT_CONST_VALUE;
   }
 
-  getValue() {
+  public getValue() {
     return this.value;
   }
 }

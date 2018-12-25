@@ -1,5 +1,5 @@
-import NoiseMap from '@app/noisemap';
 import Sphere from '@app/model/sphere';
+import NoiseMap from '@app/noisemap';
 
 class NoiseMapBuilderSphere {
   private sourceModule: any;
@@ -11,7 +11,7 @@ class NoiseMapBuilderSphere {
   private _southLatBound: number;
   private _westLonBound: number;
 
-  constructor(sourceModule, width, height) {
+  constructor(sourceModule?: any, width?: number, height?: number) {
     this.sourceModule = sourceModule || null;
     this.width = width || 256;
     this.height = height || 256;
@@ -24,10 +24,10 @@ class NoiseMapBuilderSphere {
     this.noiseMap = new NoiseMap(this.width, this.height);
   }
 
-  get eastLonBound() {
+  public get eastLonBound() {
     return this._eastLonBound;
   }
-  set eastLonBound(v) {
+  public set eastLonBound(v: number) {
     if (v <= this.westLonBound) {
       throw new Error('Lower bound cannot equal or exceed east bound!');
     }
@@ -35,10 +35,10 @@ class NoiseMapBuilderSphere {
     this._eastLonBound = v;
   }
 
-  get northLatBound() {
+  public get northLatBound() {
     return this._northLatbound;
   }
-  set northLatBound(v) {
+  public set northLatBound(v: number) {
     if (v <= this.southLatBound) {
       throw new Error('Lower bound cannot equal or exceed east bound!');
     }
@@ -46,10 +46,10 @@ class NoiseMapBuilderSphere {
     this._northLatbound = v;
   }
 
-  get southLatBound() {
+  public get southLatBound() {
     return this._southLatBound;
   }
-  set southLatBound(v) {
+  public set southLatBound(v: number) {
     if (v >= this.northLatBound) {
       throw new Error('Lower bound cannot equal or exceed east bound!');
     }
@@ -57,10 +57,10 @@ class NoiseMapBuilderSphere {
     this._westLonBound = v;
   }
 
-  get westLonBound() {
+  public get westLonBound() {
     return this._westLonBound;
   }
-  set westLonBound(v) {
+  public set westLonBound(v: number) {
     if (v >= this.eastLonBound) {
 
       throw new Error('Lower bound cannot equal or exceed east bound!');
@@ -70,27 +70,24 @@ class NoiseMapBuilderSphere {
     this._westLonBound = v;
   }
 
-  build() {
-
+  public build() {
     if (!this.sourceModule) {
-
       throw new Error('Invalid or missing module!');
-
     }
 
     // Create the cylinder model.
-    var sphere = new Sphere(this.sourceModule);
-    var xDelta = (this.eastLonBound - this.westLonBound) / this.width;
-    var yDelta = (this.northLatBound - this.southLatBound) / this.height;
-    var curLon = this.westLonBound;
-    var curLat = this.eastLonBound;
+    let sphere = new Sphere(this.sourceModule);
+    let xDelta = (this.eastLonBound - this.westLonBound) / this.width;
+    let yDelta = (this.northLatBound - this.southLatBound) / this.height;
+    let curLon = this.westLonBound;
+    let curLat = this.eastLonBound;
 
     // Fill every point in the noise map with the output values from the model.
-    for (var y = 0; y < this.height; y++) {
+    for (let y = 0; y < this.height; y++) {
 
       curLon = this.westLonBound;
 
-      for (var x = 0; x < this.width; x++) {
+      for (let x = 0; x < this.width; x++) {
 
         this.noiseMap.setValue(x, y, sphere.getValue(curLat, curLon));
 
@@ -106,13 +103,11 @@ class NoiseMapBuilderSphere {
 
   }
 
-  setBounds(westLonBound, eastLonBound, southLatBound, northLatBound) {
-
+  public setBounds(westLonBound: number, eastLonBound: number, southLatBound: number, northLatBound: number) {
     this.westLonBound = westLonBound;
     this.eastLonBound = eastLonBound;
     this.southLatBound = southLatBound;
     this.northLatBound = northLatBound;
-
   }
 }
 

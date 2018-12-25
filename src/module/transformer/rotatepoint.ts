@@ -21,7 +21,7 @@ class RotatePoint {
   private _yAngle: number;
   private _zAngle: number;
 
-  constructor(sourceModule, xAngle, yAngle, zAngle) {
+  constructor(sourceModule?: any, xAngle?: number, yAngle?: number, zAngle?: number) {
     this.x1matrix = null;
     this.x2matrix = null;
     this.x3matrix = null;
@@ -39,43 +39,40 @@ class RotatePoint {
     this.calcMatrices();
   }
 
-  get xAngle() {
+  public get xAngle() {
     return this._xAngle;
   }
-
-  set xAngle(v: number) {
+  public set xAngle(v: number) {
     this._xAngle = v;
 
     this.calcMatrices();
   }
 
-  get yAngle() {
+  public get yAngle() {
     return this._yAngle;
   }
-
-  set yAngle(v: number) {
+  public set yAngle(v: number) {
     this._yAngle = v;
 
     this.calcMatrices();
   }
 
-  get zAngle() {
+  public get zAngle() {
     return this._zAngle;
   }
-
-  set zAngle(v: number) {
+  public set zAngle(v: number) {
     this._zAngle = v;
 
     this.calcMatrices();
   }
 
-  calcMatrices() {
-    var xCos = Math.cos(this.xAngle * MathConsts.DEG_TO_RAD);
-    var yCos = Math.cos(this.yAngle * MathConsts.DEG_TO_RAD);
-    var zCos = Math.cos(this.zAngle * MathConsts.DEG_TO_RAD);
-    var xSin = Math.sin(this.xAngle * MathConsts.DEG_TO_RAD);
-    var ySin = Math.sin(this.yAngle * MathConsts.DEG_TO_RAD);
-    var zSin = Math.sin(this.zAngle * MathConsts.DEG_TO_RAD);
+  private calcMatrices() {
+    let xCos = Math.cos(this.xAngle * MathConsts.DEG_TO_RAD);
+    let yCos = Math.cos(this.yAngle * MathConsts.DEG_TO_RAD);
+    let zCos = Math.cos(this.zAngle * MathConsts.DEG_TO_RAD);
+    let xSin = Math.sin(this.xAngle * MathConsts.DEG_TO_RAD);
+    let ySin = Math.sin(this.yAngle * MathConsts.DEG_TO_RAD);
+    let zSin = Math.sin(this.zAngle * MathConsts.DEG_TO_RAD);
 
     this.x1matrix = ySin * xSin * zSin + yCos * zCos;
     this.y1matrix = xCos * zSin;
@@ -88,7 +85,7 @@ class RotatePoint {
     this.z3matrix = yCos * xCos;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing source module!');
     }
@@ -96,11 +93,11 @@ class RotatePoint {
     return this.sourceModule.getValue(
       (this.x1matrix * x) + (this.y1matrix * y) + (this.z1matrix * z),
       (this.x2matrix * x) + (this.y2matrix * y) + (this.z2matrix * z),
-      (this.x3matrix * x) + (this.y3matrix * y) + (this.z3matrix * z)
+      (this.x3matrix * x) + (this.y3matrix * y) + (this.z3matrix * z),
     );
   }
 
-  setAngles(xAngle, yAngle, zAngle) {
+  public setAngles(xAngle: number, yAngle: number, zAngle: number) {
     this.xAngle = xAngle;
     this.yAngle = yAngle;
     this.zAngle = zAngle;

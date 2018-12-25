@@ -1,4 +1,3 @@
-
 class ScalePoint {
   public static DEFAULT_SCALE_POINT_X = 1.0;
   public static DEFAULT_SCALE_POINT_Y = 1.0;
@@ -9,24 +8,20 @@ class ScalePoint {
   private yScale: number;
   private zScale: number;
 
-  constructor(sourceModule, xScale, yScale, zScale) {
+  constructor(sourceModule?: any, xScale?: number, yScale?: number, zScale?: number) {
     this.sourceModule = sourceModule || null;
     this.xScale = xScale || ScalePoint.DEFAULT_SCALE_POINT_X;
     this.yScale = yScale || ScalePoint.DEFAULT_SCALE_POINT_Y;
     this.zScale = zScale || ScalePoint.DEFAULT_SCALE_POINT_Z;
   }
 
-  setScales(xScale, yScale, zScale) {
-    xScale = parseFloat(xScale);
-    yScale = parseFloat(yScale);
-    zScale = parseFloat(zScale);
-
+  public setScales(xScale: number, yScale: number, zScale: number) {
     this.xScale = xScale;
     this.yScale = yScale;
     this.zScale = zScale;
   }
 
-  getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing source module!');
     }
@@ -34,7 +29,7 @@ class ScalePoint {
     return this.sourceModule.getValue(
       x * this.xScale,
       y * this.yScale,
-      z * this.zScale
+      z * this.zScale,
     );
   }
 }

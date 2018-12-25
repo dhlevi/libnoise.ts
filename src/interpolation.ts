@@ -6,7 +6,7 @@ const Interpolation = {
    * The alpha value should range from 0.0 to 1.0.  If the alpha value is
    * 0.0, this function returns @a n1.  If the alpha value is 1.0, this
    * function returns @a n2.
-   * 
+   *
    * @param n0 The value before the first value.
    * @param n1 The first value.
    * @param n2 The second value.
@@ -24,13 +24,13 @@ const Interpolation = {
     return (p * a * a * a + q * a * a + r * a + s);
   },
 
-  /** 
+  /**
    * Performs linear interpolation between two values.
    *
    * The alpha value should range from 0.0 to 1.0.  If the alpha value is
    * 0.0, this function returns @a n0.  If the alpha value is 1.0, this
    * function returns @a n1.
-   * 
+   *
    * @param n0 The first value.
    * @param n1 The second value.
    * @param a The alpha value.
@@ -60,7 +60,7 @@ const Interpolation = {
    * The second derivative of a quintic S-curve is zero at `a = 0.0` and `a = 1.0`
    *
    * @param a The value to map onto a quintic S-curve. Should range from 0.0 to 1.0.
-   * 
+   *
    * @returns The mapped value.
    */
   quinticSCurve(a: number) {
@@ -68,7 +68,7 @@ const Interpolation = {
     let a4 = (a3 * a);
     let a5 = (a4 * a);
     return ((6.0 * a5) - (15.0 * a4) + (10.0 * a3));
-  }
+  },
 };
 
 export default Interpolation;

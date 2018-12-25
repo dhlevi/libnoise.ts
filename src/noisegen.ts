@@ -2,7 +2,6 @@ import Interpolation from '@app/interpolation';
 import VectorTable from '@app/vectortable';
 
 const NoiseGen = {
-
   // Constants
   X_NOISE_GEN: 1619,
   Y_NOISE_GEN: 31337,
@@ -10,6 +9,7 @@ const NoiseGen = {
   SEED_NOISE_GEN: 1013,
   SHIFT_NOISE_GEN: 8,
 
+  // @TODO enum
   /**
    * Generates coherent noise quickly.  When a coherent-noise function with
    * NoiseGen.prototype quality setting is used to generate a bump-map image, there are
@@ -40,7 +40,7 @@ const NoiseGen = {
   intValueNoise3D(x: number, y: number, z: number, seed: number) {
     // All constants are primes and must remain prime in order for this noise
     // function to work correctly.
-    var n = ((
+    let n = ((
       NoiseGen.X_NOISE_GEN * x
       + NoiseGen.Y_NOISE_GEN * y
       + NoiseGen.Z_NOISE_GEN * z
@@ -54,7 +54,7 @@ const NoiseGen = {
   },
 
   // @TODO won't seed cause `intValueNoise3D` to crap out if it's undefined?
-  valueNoise3D(x: number, y: number, z: number, seed = undefined) {
+  valueNoise3D(x: number, y: number, z: number, seed?: number) {
     return 1.0 - (NoiseGen.intValueNoise3D(x, y, z, seed) / 1073741824.0);
   },
 
@@ -62,7 +62,7 @@ const NoiseGen = {
     // Randomly generate a gradient vector given the integer coordinates of the
     // input value.  This implementation generates a random number and uses it
     // as an index into a normalized-vector lookup table.
-    var vectorIndex = (
+    let vectorIndex = (
       NoiseGen.X_NOISE_GEN * ix +
       NoiseGen.Y_NOISE_GEN * iy +
       NoiseGen.Z_NOISE_GEN * iz +
@@ -72,15 +72,15 @@ const NoiseGen = {
     vectorIndex ^= (vectorIndex >> NoiseGen.SHIFT_NOISE_GEN);
     vectorIndex &= 0xff;
 
-    var xvGradient = VectorTable[(vectorIndex << 2)];
-    var yvGradient = VectorTable[(vectorIndex << 2) + 1];
-    var zvGradient = VectorTable[(vectorIndex << 2) + 2];
+    let xvGradient = VectorTable[(vectorIndex << 2)];
+    let yvGradient = VectorTable[(vectorIndex << 2) + 1];
+    let zvGradient = VectorTable[(vectorIndex << 2) + 2];
 
     // Set up us another vector equal to the distance between the two vectors
     // passed to this function.
-    var xvPoint = (fx - ix);
-    var yvPoint = (fy - iy);
-    var zvPoint = (fz - iz);
+    let xvPoint = (fx - ix);
+    let yvPoint = (fy - iy);
+    let zvPoint = (fz - iz);
 
     // Now compute the dot product of the gradient vector with the distance
     // vector.  The resulting value is gradient noise.  Apply a scaling value
@@ -92,7 +92,7 @@ const NoiseGen = {
     ) * 2.12;
   },
 
-  coherentNoise3D(x: number, y: number, z: number, seed: number = 1, quality: number = NoiseGen.QUALITY_STD, func) {
+  coherentNoise3D(x: number, y: number, z: number, _seed: number = 1, quality: number = NoiseGen.QUALITY_STD, func) {
     if (!func) {
       throw new Error('Must provide proper interpolation function!');
     }
@@ -103,16 +103,16 @@ const NoiseGen = {
 
     // Create a unit-length cube aligned along an integer boundary.  This cube
     // surrounds the input point.
-    var x0 = (x > 0.0 ? xi : x - 1);
-    var x1 = x0 + 1;
-    var y0 = (y > 0.0 ? yi : y - 1);
-    var y1 = y0 + 1;
-    var z0 = (z > 0.0 ? zi : z - 1);
-    var z1 = z0 + 1;
+    let x0 = (x > 0.0 ? xi : x - 1);
+    let x1 = x0 + 1;
+    let y0 = (y > 0.0 ? yi : y - 1);
+    let y1 = y0 + 1;
+    let z0 = (z > 0.0 ? zi : z - 1);
+    let z1 = z0 + 1;
 
     // Map the difference between the coordinates of the input value and the
     // coordinates of the cube's outer-lower-left vertex onto an S-curve.
-    var xs = 0, ys = 0, zs = 0;
+    let xs = 0, ys = 0, zs = 0;
 
     switch (quality) {
 
@@ -141,14 +141,14 @@ const NoiseGen = {
     return func(x0, y0, z0, x1, y1, z1, xs, ys, zs);
   },
 
-  valueCoherentNoise3D(x, y, z, seed, quality) {
-    return NoiseGen.coherentNoise3D(x, y, z, seed, quality, function (x0, y0, z0, x1, y1, z1, xs, ys, zs) {
+  valueCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number) {
+    return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
       // Now calculate the noise values at each vertex of the cube.  To generate
       // the coherent-noise value at the input point, interpolate these eight
       // noise values using the S-curve value as the interpolant (trilinear
       // interpolation.)
-      var n0, n1, ix0, ix1, iy0, iy1;
+      let n0, n1, ix0, ix1, iy0, iy1;
 
       n0 = NoiseGen.valueNoise3D(x0, y0, z0, seed);
       n1 = NoiseGen.valueNoise3D(x1, y0, z0, seed);
@@ -170,14 +170,14 @@ const NoiseGen = {
     });
   },
 
-  gradientCoherentNoise3D(x, y, z, seed, quality) {
-    return NoiseGen.coherentNoise3D(x, y, z, seed, quality, function (x0, y0, z0, x1, y1, z1, xs, ys, zs) {
+  gradientCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number) {
+    return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
       // Now calculate the noise values at each vertex of the cube.  To generate
       // the coherent-noise value at the input point, interpolate these eight
       // noise values using the S-curve value as the interpolant (trilinear
       // interpolation.)
-      var n0, n1, ix0, ix1, iy0, iy1;
+      let n0, n1, ix0, ix1, iy0, iy1;
 
       n0 = NoiseGen.gradientNoise3D(x, y, z, x0, y0, z0, seed);
       n1 = NoiseGen.gradientNoise3D(x, y, z, x1, y0, z0, seed);
@@ -196,7 +196,7 @@ const NoiseGen = {
 
       return Interpolation.linear(iy0, iy1, zs);
     });
-  }
+  },
 };
 
 export default NoiseGen;

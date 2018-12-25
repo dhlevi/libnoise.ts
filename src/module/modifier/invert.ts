@@ -1,15 +1,13 @@
 class Invert {
   private sourceModule: any;
 
-  constructor(sourceModule) {
+  constructor(sourceModule?: any) {
     this.sourceModule = sourceModule || null;
   }
 
-  public getValue(x, y, z) {
+  public getValue(x: number, y: number, z: number) {
     if (!this.sourceModule) {
-
       throw new Error('Invalid or missing source module!');
-
     }
 
     return -this.sourceModule.getValue(x, y, z);

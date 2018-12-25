@@ -7,7 +7,7 @@ const MathFuncs = {
     }
 
     return n;
-  }
+  },
 };
 
 export default MathFuncs;

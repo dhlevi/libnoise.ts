@@ -1,11 +1,11 @@
 class Plane {
   private sourceModule: any;
 
-  constructor(sourceModule) {
+  constructor(sourceModule?: any) {
     this.sourceModule = sourceModule || null;
   }
 
-  getValue(x, y) {
+  public getValue(x: number, y: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing module!');
     }

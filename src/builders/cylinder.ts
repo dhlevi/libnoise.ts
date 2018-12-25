@@ -1,5 +1,5 @@
-import NoiseMap from '@app/noisemap';
 import Cylinder from '@app/model/cylinder';
+import NoiseMap from '@app/noisemap';
 
 class NoiseMapBuilderCylinder {
   private sourceModule: any;
@@ -11,7 +11,7 @@ class NoiseMapBuilderCylinder {
   private _upperAngleBound: number;
   private _upperHeightBound: number;
 
-  constructor(sourceModule, width: number, height: number) {
+  constructor(sourceModule?: any, width?: number, height?: number) {
     this.sourceModule = sourceModule || null;
     this.width = width || 256;
     this.height = height || 256;
@@ -24,10 +24,10 @@ class NoiseMapBuilderCylinder {
     this.noiseMap = new NoiseMap(this.width, this.height);
   }
 
-  get lowerAngleBound() {
+  public get lowerAngleBound() {
     return this._lowerAngleBound;
   }
-  set lowerAngleBound(v) {
+  public set lowerAngleBound(v: number) {
     if (v >= this.upperAngleBound) {
       throw new Error('Lower bound cannot equal or exceed upper bound!');
     }
@@ -35,10 +35,10 @@ class NoiseMapBuilderCylinder {
     this._lowerAngleBound = v;
   }
 
-  get lowerHeightBound() {
+  public get lowerHeightBound() {
     return this._lowerHeightBound;
   }
-  set lowerHeightBound(v) {
+  public set lowerHeightBound(v: number) {
     if (v >= this.upperHeightBound) {
       throw new Error('Lower bound cannot equal or exceed upper bound!');
     }
@@ -46,10 +46,10 @@ class NoiseMapBuilderCylinder {
     this._lowerHeightBound = v;
   }
 
-  get upperAngleBound() {
+  public get upperAngleBound() {
     return this._upperAngleBound;
   }
-  set upperAngleBound(v) {
+  public set upperAngleBound(v: number) {
     if (v <= this.upperAngleBound) {
       throw new Error('Upper bound cannot equal or exceed upper bound!');
     }
@@ -57,10 +57,10 @@ class NoiseMapBuilderCylinder {
     this._upperAngleBound = v;
   }
 
-  get upperHeightBound() {
+  public get upperHeightBound() {
     return this._upperHeightBound;
   }
-  set upperHeightBound(v) {
+  public set upperHeightBound(v: number) {
     if (v <= this.upperHeightBound) {
       throw new Error('Upper bound cannot equal or exceed upper bound!');
     }
@@ -68,27 +68,24 @@ class NoiseMapBuilderCylinder {
     this._upperHeightBound = v;
   }
 
-  build() {
-
+  public build() {
     if (!this.sourceModule) {
-
       throw new Error('Invalid or missing module!');
-
     }
 
     // Create the cylinder model.
-    var cylinder = new Cylinder(this.sourceModule);
-    var xDelta = (this.upperAngleBound - this.lowerAngleBound) / this.width;
-    var yDelta = (this.upperHeightBound - this.lowerHeightBound) / this.height;
-    var curAngle = this.lowerAngleBound;
-    var curHeight = this.lowerHeightBound;
+    let cylinder = new Cylinder(this.sourceModule);
+    let xDelta = (this.upperAngleBound - this.lowerAngleBound) / this.width;
+    let yDelta = (this.upperHeightBound - this.lowerHeightBound) / this.height;
+    let curAngle = this.lowerAngleBound;
+    let curHeight = this.lowerHeightBound;
 
     // Fill every point in the noise map with the output values from the model.
-    for (var y = 0; y < this.height; y++) {
+    for (let y = 0; y < this.height; y++) {
 
       curAngle = this.lowerAngleBound;
 
-      for (var x = 0; x < this.width; x++) {
+      for (let x = 0; x < this.width; x++) {
 
         this.noiseMap.setValue(x, y, cylinder.getValue(curAngle, curHeight));
 
@@ -103,7 +100,7 @@ class NoiseMapBuilderCylinder {
     return this.noiseMap;
   }
 
-  setBounds(lowerAngleBound, lowerHeightBound, upperAngleBound, upperHeightBound) {
+  public setBounds(lowerAngleBound: number, lowerHeightBound: number, upperAngleBound: number, upperHeightBound: number) {
     this.lowerAngleBound = lowerAngleBound;
     this.lowerHeightBound = lowerHeightBound;
     this.upperAngleBound = upperAngleBound;

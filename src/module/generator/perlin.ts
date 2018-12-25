@@ -1,8 +1,7 @@
-import NoiseGen from '@app/noisegen';
 import MathFuncs from '@app/mathfuncs';
+import NoiseGen from '@app/noisegen';
 
 class Perlin {
-
   public static DEFAULT_PERLIN_FREQUENCY = 1.0;
   public static DEFAULT_PERLIN_LACUNARITY = 2.0;
   public static DEFAULT_PERLIN_OCTAVE_COUNT = 6;
@@ -17,7 +16,7 @@ class Perlin {
   public seed: number;
   public quality: number;
 
-  constructor(frequency?, lacunarity?, octaves?, persist?, seed?, quality?) {
+  constructor(frequency?: number, lacunarity?: number, octaves?: number, persist?: number, seed?: number, quality?: number) {
     this.frequency = frequency || Perlin.DEFAULT_PERLIN_FREQUENCY;
     this.lacunarity = lacunarity || Perlin.DEFAULT_PERLIN_LACUNARITY;
     this.octaves = octaves || Perlin.DEFAULT_PERLIN_OCTAVE_COUNT;
@@ -26,19 +25,19 @@ class Perlin {
     this.quality = quality || NoiseGen.QUALITY_STD;
   }
 
-  getValue(x, y, z) {
-
-    var nx, ny, nz;
-    var value = 0.0;
-    var signal = 0.0;
-    var persist = 1.0;
+  public getValue(x: number, y: number, z: number) {
+    let nx;
+    let ny;
+    let nz;
+    let value = 0.0;
+    let signal = 0.0;
+    let persist = 1.0;
 
     x = (x * this.frequency);
     y = (y * this.frequency);
     z = (z * this.frequency);
 
-    for (var octave = 0; octave < this.octaves; octave++) {
-
+    for (let octave = 0; octave < this.octaves; octave++) {
       // Make sure that these floating-point values have the same range as a 32-
       // bit integer so that we can pass them to the coherent-noise functions.
       nx = MathFuncs.makeInt32Range(x);
