@@ -9,6 +9,7 @@
     "build": "npm run ts-node -- scripts/build.ts",
     "build--clean": "npm run ts-node -- scripts/build--clean.ts",
     "lint": "tslint --project .",
+    "test": "npm run ts-node -- scripts/test.ts",
     "deploy": "npm run ts-node -- scripts/deploy.ts --dry-run"
   },
   "repository": {
@@ -28,11 +29,15 @@
   },
   "homepage": "https://github.com/peabnuts123/libnoise.ts#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
     "@types/lodash": "^4.14.119",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.18",
     "@types/rimraf": "^2.0.2",
     "@types/semver": "^5.5.0",
+    "chai": "^4.2.0",
     "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
     "npm-registry": "^0.1.13",
     "rimraf": "^2.6.2",
     "semver": "^5.6.0",

@@ -6,6 +6,7 @@ import getBaseBuildConstants, { IBuildConstantsBase } from './getBaseBuildConsta
 import getJson from './getJson';
 import rewriteImports from './rewriteImports';
 import spawnProcess from './spawnProcess';
+import test from './test';
 
 export {
   build,
@@ -16,4 +17,5 @@ export {
   getJson,
   rewriteImports,
   spawnProcess,
+  test,
 };

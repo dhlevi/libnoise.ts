@@ -1,1 +1,5 @@
-console.log("@TODO write tests. Probably add mocha chai");
+import { test } from './util';
+
+(async () => {
+  await test();
+})();
