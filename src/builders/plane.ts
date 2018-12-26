@@ -31,6 +31,10 @@ class NoiseMapBuilderPlane {
     return this._lowerXBound;
   }
   public set lowerXBound(v: number) {
+    if (v >= this.upperXBound) {
+      throw new Error('Lower X bound cannot be equal to or exceed upper X bound!');
+    }
+
     this._lowerXBound = v;
   }
 
@@ -38,6 +42,10 @@ class NoiseMapBuilderPlane {
     return this._lowerYBound;
   }
   public set lowerYBound(v: number) {
+    if (v >= this.upperYBound) {
+      throw new Error('Lower Y bound cannot be equal to or exceed upper Y bound!');
+    }
+
     this._lowerYBound = v;
   }
 
@@ -45,6 +53,10 @@ class NoiseMapBuilderPlane {
     return this._upperXBound;
   }
   public set upperXBound(v: number) {
+    if (v <= this.lowerXBound) {
+      throw new Error('Upper X bound cannot be equal to or less than lower X bound!');
+    }
+
     this._upperXBound = v;
   }
 
@@ -52,6 +64,10 @@ class NoiseMapBuilderPlane {
     return this._upperYBound;
   }
   public set upperYBound(v: number) {
+    if (v <= this.lowerYBound) {
+      throw new Error('Upper Y bound cannot be equal to or less than lower Y bound!');
+    }
+
     this._upperYBound = v;
   }
 

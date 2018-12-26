@@ -29,7 +29,7 @@ class NoiseMapBuilderCylinder {
   }
   public set lowerAngleBound(v: number) {
     if (v >= this.upperAngleBound) {
-      throw new Error('Lower bound cannot equal or exceed upper bound!');
+      throw new Error('Lower angle bound cannot be equal to or exceed upper angle bound!');
     }
 
     this._lowerAngleBound = v;
@@ -40,7 +40,7 @@ class NoiseMapBuilderCylinder {
   }
   public set lowerHeightBound(v: number) {
     if (v >= this.upperHeightBound) {
-      throw new Error('Lower bound cannot equal or exceed upper bound!');
+      throw new Error('Lower angle height cannot be equal to or exceed upper angle height!');
     }
 
     this._lowerHeightBound = v;
@@ -50,8 +50,8 @@ class NoiseMapBuilderCylinder {
     return this._upperAngleBound;
   }
   public set upperAngleBound(v: number) {
-    if (v <= this.upperAngleBound) {
-      throw new Error('Upper bound cannot equal or exceed upper bound!');
+    if (v <= this.lowerAngleBound) {
+      throw new Error('Upper angle bound cannot be equal to or less than lower angle bound!');
     }
 
     this._upperAngleBound = v;
@@ -61,8 +61,8 @@ class NoiseMapBuilderCylinder {
     return this._upperHeightBound;
   }
   public set upperHeightBound(v: number) {
-    if (v <= this.upperHeightBound) {
-      throw new Error('Upper bound cannot equal or exceed upper bound!');
+    if (v <= this.lowerHeightBound) {
+      throw new Error('Upper angle height cannot be equal to or less than lower angle height!');
     }
 
     this._upperHeightBound = v;

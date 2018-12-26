@@ -7,7 +7,7 @@ class NoiseMapBuilderSphere {
   private height: number;
   private noiseMap: NoiseMap;
   private _eastLonBound: number;
-  private _northLatbound: number;
+  private _northLatBound: number;
   private _southLatBound: number;
   private _westLonBound: number;
 
@@ -16,10 +16,10 @@ class NoiseMapBuilderSphere {
     this.width = width || 256;
     this.height = height || 256;
 
-    this.northLatBound = 0.0;
-    this.southLatBound = 0.0;
-    this.eastLonBound = 0.0;
-    this.westLonBound = 0.0;
+    this._northLatBound = 0.0;
+    this._southLatBound = 0.0;
+    this._eastLonBound = 0.0;
+    this._westLonBound = 0.0;
 
     this.noiseMap = new NoiseMap(this.width, this.height);
   }
@@ -29,21 +29,21 @@ class NoiseMapBuilderSphere {
   }
   public set eastLonBound(v: number) {
     if (v <= this.westLonBound) {
-      throw new Error('Lower bound cannot equal or exceed east bound!');
+      throw new Error('East longitudinal bound cannot be equal to or less than west longitudinal bound!');
     }
 
     this._eastLonBound = v;
   }
 
   public get northLatBound() {
-    return this._northLatbound;
+    return this._northLatBound;
   }
   public set northLatBound(v: number) {
     if (v <= this.southLatBound) {
-      throw new Error('Lower bound cannot equal or exceed east bound!');
+      throw new Error('North latitudinal bound cannot be equal to or less than south latitudinal bound!');
     }
 
-    this._northLatbound = v;
+    this._northLatBound = v;
   }
 
   public get southLatBound() {
@@ -51,10 +51,10 @@ class NoiseMapBuilderSphere {
   }
   public set southLatBound(v: number) {
     if (v >= this.northLatBound) {
-      throw new Error('Lower bound cannot equal or exceed east bound!');
+      throw new Error('South latitudinal bound cannot be equal to or exceed north latitudinal bound!');
     }
 
-    this._westLonBound = v;
+    this._southLatBound = v;
   }
 
   public get westLonBound() {
@@ -62,9 +62,7 @@ class NoiseMapBuilderSphere {
   }
   public set westLonBound(v: number) {
     if (v >= this.eastLonBound) {
-
-      throw new Error('Lower bound cannot equal or exceed east bound!');
-
+      throw new Error('West longitudinal bound cannot be equal to or exceed east longitudinal bound!');
     }
 
     this._westLonBound = v;
