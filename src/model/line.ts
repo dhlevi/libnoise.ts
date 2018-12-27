@@ -24,6 +24,7 @@ class Line {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing module!');
     }
+    // @TODO probably validate 0 < p < 1
 
     let value = this.sourceModule.getValue(
       (this.x1 - this.x0) * p + this.x0,

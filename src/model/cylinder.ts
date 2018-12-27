@@ -7,6 +7,7 @@ class Cylinder {
     this.sourceModule = sourceModule || null;
   }
 
+  // @TODO rename to `angleDegrees`
   public getValue(angle: number, y: number) {
     if (!this.sourceModule) {
       throw new Error('Invalid or missing module!');
