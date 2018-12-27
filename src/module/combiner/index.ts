@@ -1,13 +1,13 @@
-import add from './add';
-import max from './max';
-import min from './min';
-import multiply from './multiply';
-import power from './power';
+import Add from './add';
+import Max from './max';
+import Min from './min';
+import Multiply from './multiply';
+import Power from './power';
 
 export {
-  add,
-  max,
-  min,
-  multiply,
-  power,
+  Add,
+  Max,
+  Min,
+  Multiply,
+  Power,
 };

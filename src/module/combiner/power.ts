@@ -6,7 +6,7 @@ class Power {
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (!(this.sourceModules.length < 2)) {
+    if (this.sourceModules.length < 2) {
       throw new Error('Invalid or missing source module!');
     }
 
