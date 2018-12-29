@@ -26,9 +26,9 @@ class Voronoi {
 
     let xPos, yPos, zPos, xDist, yDist, zDist, dist;
 
-    let xi = (x);
-    let yi = (y);
-    let zi = (z);
+    let xi = Math.floor(x);
+    let yi = Math.floor(y);
+    let zi = Math.floor(z);
     let xInt = (x > 0.0 ? xi : xi - 1);
     let yInt = (y > 0.0 ? yi : yi - 1);
     let zInt = (z > 0.0 ? zi : zi - 1);

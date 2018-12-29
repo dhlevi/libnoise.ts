@@ -32,6 +32,8 @@ class Terrace {
   }
 
   private insertAtPos(insertionPos: number, value: number) {
+    insertionPos = Math.floor(insertionPos);
+
     // Make room for the new control point at the specified position within
     // the control point array.  The position is determined by the value of
     // the control point; the control points must be sorted by value within

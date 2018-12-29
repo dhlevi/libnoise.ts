@@ -1,6 +1,7 @@
 import Interpolation from '@app/interpolation';
 import VectorTable from '@app/vectortable';
 
+// @TODO type-definition
 const NoiseGen = {
   // Constants
   X_NOISE_GEN: 1619,
@@ -38,15 +39,19 @@ const NoiseGen = {
   QUALITY_BEST: 2,
 
   intValueNoise3D(x: number, y: number, z: number, seed: number) {
+    x = Math.floor(x);
+    y = Math.floor(y);
+    z = Math.floor(z);
+    seed = Math.floor(seed);
+
     // All constants are primes and must remain prime in order for this noise
     // function to work correctly.
-    let n = ((
+    let n = Math.floor((
       NoiseGen.X_NOISE_GEN * x
       + NoiseGen.Y_NOISE_GEN * y
       + NoiseGen.Z_NOISE_GEN * z
       + NoiseGen.SEED_NOISE_GEN * seed)
-      & 0x7fffffff
-    );
+      & 0x7fffffff);
 
     n = (n >> 13) ^ n;
 
@@ -55,18 +60,18 @@ const NoiseGen = {
 
   // @TODO won't seed cause `intValueNoise3D` to crap out if it's undefined?
   valueNoise3D(x: number, y: number, z: number, seed?: number) {
-    return 1.0 - (NoiseGen.intValueNoise3D(x, y, z, seed) / 1073741824.0);
+    return 1.0 - (NoiseGen.intValueNoise3D(Math.floor(x), Math.floor(y), Math.floor(z), Math.floor(seed)) / 1073741824.0);
   },
 
   gradientNoise3D(fx: number, fy: number, fz: number, ix: number, iy: number, iz: number, seed: number = 1) {
     // Randomly generate a gradient vector given the integer coordinates of the
     // input value.  This implementation generates a random number and uses it
     // as an index into a normalized-vector lookup table.
-    let vectorIndex = (
+    let vectorIndex = Math.floor(
       NoiseGen.X_NOISE_GEN * ix +
       NoiseGen.Y_NOISE_GEN * iy +
       NoiseGen.Z_NOISE_GEN * iz +
-      NoiseGen.SEED_NOISE_GEN * seed
+      NoiseGen.SEED_NOISE_GEN * seed,
     ) & 0xffffffff;
 
     vectorIndex ^= (vectorIndex >> NoiseGen.SHIFT_NOISE_GEN);
@@ -92,14 +97,28 @@ const NoiseGen = {
     ) * 2.12;
   },
 
-  coherentNoise3D(x: number, y: number, z: number, _seed: number = 1, quality: number = NoiseGen.QUALITY_STD, func) {
+  // @TODO remove `seed` param, it is not used. Or maybe it should be?
+  coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?) {
     if (!func) {
       throw new Error('Must provide proper interpolation function!');
     }
 
-    let xi = x;
-    let yi = y;
-    let zi = z;
+    // @TODO convert these default values to overloads
+    if (!seed) {
+      seed = 1;
+    } else {
+      seed = Math.floor(seed);
+    }
+
+    if (!quality) {
+      quality = NoiseGen.QUALITY_STD;
+    } else {
+      quality = Math.floor(quality);
+    }
+
+    let xi = Math.floor(x);
+    let yi = Math.floor(y);
+    let zi = Math.floor(z);
 
     // Create a unit-length cube aligned along an integer boundary.  This cube
     // surrounds the input point.

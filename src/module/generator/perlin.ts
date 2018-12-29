@@ -26,9 +26,7 @@ class Perlin {
   }
 
   public getValue(x: number, y: number, z: number) {
-    let nx;
-    let ny;
-    let nz;
+    let nx, ny, nz;
     let value = 0.0;
     let signal = 0.0;
     let persist = 1.0;

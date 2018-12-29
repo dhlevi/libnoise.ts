@@ -29,6 +29,8 @@ class Curve {
   }
 
   private insertAtPos(position: number, input: number, output: number) {
+    position = Math.floor(position);
+
     // Make room for the new control point at the specified position within
     // the control point array.  The position is determined by the value of
     // the control point; the control points must be sorted by value within
