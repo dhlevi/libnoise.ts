@@ -11,5 +11,10 @@
     "**/bower_components": true,
     "_publish/**": true,
     "_build/**": true,
-  }
+  },
+  "cSpell.words": [
+    "Checkerboard",
+    "LACUNARITY",
+    "Perlin"
+  ]
 }
