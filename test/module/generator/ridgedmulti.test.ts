@@ -48,7 +48,7 @@ describe('module/generator/ridgedmulti', () => {
 
     // Assert
     expect(updatedLacunarity).to.equal(newValue);
-  })
+  });
 });
 
 function createMockModule() {

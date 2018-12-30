@@ -3,7 +3,7 @@ import { describe, it } from 'mocha';
 
 import { Voronoi } from '@app/module/generator';
 
-describe('module/generator/Voronoi', () => {
+describe('module/generator/voronoi', () => {
   it("can construct successfully", () => {
     // Setup
     const frequency = 2;
