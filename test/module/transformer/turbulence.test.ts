@@ -70,7 +70,7 @@ describe('module/transformer/turbulence', () => {
     // Assert
     expect(updatedValue).to.equal(newValue);
   });
-  
+
   it("setting roughness updates correctly", () => {
     // Setup
     const mockModule = createMockModule();
