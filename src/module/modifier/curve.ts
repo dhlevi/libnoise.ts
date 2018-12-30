@@ -10,22 +10,22 @@ class Curve {
     this.controlPoints = controlPoints || [];
   }
 
-  // @TODO dear lord, please no array comparison
-  public findInsertionPos(value: number[] | number) {
-    let position: number;
-    for (position = 0; position < this.controlPoints.length; position++) {
-      if (value < this.controlPoints[position]) {
-        // We found the array index in which to insert the new control point.
-        // Exit now.
-        break;
-      } else if (value === this.controlPoints[position]) {
-        // Each control point is required to contain a unique value, so throw
-        // an exception.
-        throw new Error('Invalid parameter');
+  private findInsertionPos(value: number[]) {
+    // Iterate through list to find first controlPoint larger than new value
+    //  and insert right before that
+    for (let i = 0; i < this.controlPoints.length; i++) {
+      const controlPoint = this.controlPoints[i];
+      if (controlPoint[0] === value[0] && controlPoint[1] === value[1]) {
+        // Inserting control point that already exists
+        throw new Error(`Cannot insert control point [${value.join(',')}]: control point already exists`);
+      } else if (controlPoint[0] > value[0] || (controlPoint[0] === value[0] && controlPoint[1] > value[1])) {
+        // We've found our insertion pos
+        return i;
       }
     }
 
-    return position;
+    // Did not find any points greater than the new one, insert this last
+    return this.controlPoints.length;
   }
 
   private insertAtPos(position: number, input: number, output: number) {
@@ -62,7 +62,7 @@ class Curve {
     // Find the insertion point for the new control point and insert the new
     // point at that position.  The control point array will remain sorted by
     // input value.
-    this.insertAtPos(this.findInsertionPos(input), input, output);
+    this.insertAtPos(this.findInsertionPos([input, output]), input, output);
   }
 
   public getValue(x: number, y: number, z: number) {

@@ -12,23 +12,22 @@ class Terrace {
     this.invert = invert || false;
   }
 
-  private findInsertionPos(value) {
-    value = parseFloat(value);
-
-    let insertionPos;
-    for (insertionPos = 0; insertionPos < this.controlPoints.length; insertionPos++) {
-      if (value < this.controlPoints[insertionPos]) {
-        // We found the array index in which to insert the new control point.
-        // Exit now.
-        break;
-      } else if (value === this.controlPoints[insertionPos]) {
-        // Each control point is required to contain a unique value, so throw
-        // an exception.
-        throw new Error('Invalid parameter');
+  private findInsertionPos(value: number) {
+    // Iterate through list to find first controlPoint larger than new value
+    //  and insert right before that
+    for (let i = 0; i < this.controlPoints.length; i++) {
+      const controlPoint = this.controlPoints[i];
+      if (controlPoint === value) {
+        // Inserting control point that already exists
+        throw new Error(`Cannot insert control point ${value}: control point already exists`);
+      } else if (controlPoint > value) {
+        // We've found our insertion pos
+        return i;
       }
     }
 
-    return insertionPos;
+    // Did not find any points greater than the new one, insert this last
+    return this.controlPoints.length;
   }
 
   private insertAtPos(insertionPos: number, value: number) {
