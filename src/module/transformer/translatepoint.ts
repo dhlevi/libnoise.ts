@@ -1,8 +1,8 @@
 class TranslatePoint {
   private sourceModule: any;
-  private translateX: number;
-  private translateY: number;
-  private translateZ: number;
+  public translateX: number;
+  public translateY: number;
+  public translateZ: number;
 
   constructor(sourceModule?: any, translateX?: number, translateY?: number, translateZ?: number) {
     this.sourceModule = sourceModule || null;

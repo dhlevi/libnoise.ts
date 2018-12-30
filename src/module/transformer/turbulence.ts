@@ -8,7 +8,8 @@ class Turbulence {
   private xDistortModule: Perlin;
   private yDistortModule: Perlin;
   private zDistortModule: Perlin;
-  private power: number;
+
+  public power: number;
 
   constructor(sourceModule?: any, frequency?: number, power?: number, roughness?: number, seed?: number) {
     this.xDistortModule = new Perlin();

@@ -4,9 +4,9 @@ class ScalePoint {
   public static DEFAULT_SCALE_POINT_Z = 1.0;
 
   private sourceModule: any;
-  private xScale: number;
-  private yScale: number;
-  private zScale: number;
+  public xScale: number;
+  public yScale: number;
+  public zScale: number;
 
   constructor(sourceModule?: any, xScale?: number, yScale?: number, zScale?: number) {
     this.sourceModule = sourceModule || null;
