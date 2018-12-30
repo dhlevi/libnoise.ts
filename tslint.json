@@ -5,7 +5,6 @@
   ],
   "jsRules": {},
   "rules": {
-    "no-unused-variable": true,
     "no-console": false,
     "quotemark": false,
     "prefer-const": false,
