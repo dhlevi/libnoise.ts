@@ -4,7 +4,7 @@ import { describe, it } from 'mocha';
 import { Const } from '@app/module/generator';
 import { Clamp } from '@app/module/modifier';
 
-describe('module/combiner/clamp', () => {
+describe('module/modifier/clamp', () => {
   it("can construct successfully", () => {
     // Setup
     const value = 2;

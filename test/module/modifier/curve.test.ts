@@ -4,7 +4,7 @@ import { describe, it } from 'mocha';
 import { Const } from '@app/module/generator';
 import { Curve } from '@app/module/modifier';
 
-describe('module/combiner/curve', () => {
+describe('module/modifier/curve', () => {
   it("can construct successfully", () => {
     // Setup
     const value = 2;

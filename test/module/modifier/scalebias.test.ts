@@ -4,7 +4,7 @@ import { describe, it } from 'mocha';
 import { Const } from '@app/module/generator';
 import { ScaleBias } from '@app/module/modifier';
 
-describe('module/combiner/scalebias', () => {
+describe('module/modifier/scalebias', () => {
   it("can construct successfully", () => {
     // Setup
     const value = 2;

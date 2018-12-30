@@ -4,7 +4,7 @@ import { describe, it } from 'mocha';
 import { Const } from '@app/module/generator';
 import { Exponent } from '@app/module/modifier';
 
-describe('module/combiner/exponent', () => {
+describe('module/modifier/exponent', () => {
   it("can construct successfully", () => {
     // Setup
     const value = 2;

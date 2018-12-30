@@ -4,7 +4,7 @@ import { describe, it } from 'mocha';
 import { Const } from '@app/module/generator';
 import { Invert } from '@app/module/modifier';
 
-describe('module/combiner/invert', () => {
+describe('module/modifier/invert', () => {
   it("can construct successfully", () => {
     // Setup
     const value = 2;
