@@ -18,3 +18,4 @@ This is a fork that ports the code to TypeScript and modernises things a bit. Th
   - rename createMock___() functions to createMockModule()
   - go through and format code
   - Align property and variable names with libnoise
+  - Probably make script utils less modular and just call themselves
