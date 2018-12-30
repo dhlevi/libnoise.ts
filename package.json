@@ -7,9 +7,10 @@
     "debug": "npm run ts-node -- src/index.ts",
     "ts-node": "ts-node -r tsconfig-paths/register --project scripts/tsconfig.json",
     "build": "npm run ts-node -- scripts/build.ts",
-    "build--clean": "npm run ts-node -- scripts/build--clean.ts",
+    "build:clean": "npm run ts-node -- scripts/build--clean.ts",
     "lint": "tslint --project .",
     "test": "npm run ts-node -- scripts/test.ts",
+    "test:coverage": "nyc report --reporter=\"text\" && nyc report --reporter=\"text-summary\"",
     "deploy": "npm run ts-node -- scripts/deploy.ts --dry-run"
   },
   "repository": {
@@ -39,8 +40,10 @@
     "lodash": "^4.17.11",
     "mocha": "^5.2.0",
     "npm-registry": "^0.1.13",
+    "nyc": "^13.1.0",
     "rimraf": "^2.6.2",
     "semver": "^5.6.0",
+    "source-map-support": "^0.5.9",
     "strip-json-comments": "^2.0.1",
     "ts-node": "^7.0.1",
     "tsconfig-paths": "^3.7.0",

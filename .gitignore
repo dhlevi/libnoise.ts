@@ -1,3 +1,5 @@
 node_modules/
 _build/
 _publish/
+coverage
+.nyc_output

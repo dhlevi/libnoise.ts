@@ -7,7 +7,7 @@ export default async function build(buildConstants: IBuildConstantsBase) {
 
   try {
     // Clean previous build before building
-    console.log(await execAsync(`npm run build--clean`));
+    console.log(await execAsync(`npm run build:clean`));
 
     // Compile typescript
     console.log(await execAsync(`tsc --project .`, true));

@@ -1,0 +1,20 @@
+{
+  "include": [
+    "src/**/*.ts"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "exclude": [
+    "**/*.d.ts"
+  ],
+  "reporter": [
+    "html"
+  ],
+  "require": [
+    "ts-node/register",
+    "tsconfig-paths/register",
+    "source-map-support/register"
+  ],
+  "all": false
+}
