@@ -13,7 +13,7 @@ class NoiseMap {
     return this._height;
   }
   public set height(v: number) {
-    if (v < 0) {
+    if (v <= 0) {
       throw new Error('Height must be greater than zero.');
     }
 
@@ -24,7 +24,7 @@ class NoiseMap {
     return this._width;
   }
   public set width(v: number) {
-    if (v < 0) {
+    if (v <= 0) {
       throw new Error('Width must be greater than zero.');
     }
 
