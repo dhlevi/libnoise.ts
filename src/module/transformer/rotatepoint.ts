@@ -1,12 +1,12 @@
 import MathConsts from '@app/mathconsts';
+import Module from '@app/module';
+import TransformerModule from './TransformerModule';
 
-
-class RotatePoint {
+class RotatePoint extends TransformerModule {
   public static DEFAULT_ROTATE_X = 0.0;
   public static DEFAULT_ROTATE_Y = 0.0;
   public static DEFAULT_ROTATE_Z = 0.0;
 
-  private sourceModule: any;
   // @TODO dear lord make a matrix class
   private x1matrix: number;
   private x2matrix: number;
@@ -21,7 +21,9 @@ class RotatePoint {
   private _yAngle: number;
   private _zAngle: number;
 
-  constructor(sourceModule?: any, xAngle?: number, yAngle?: number, zAngle?: number) {
+  constructor(sourceModule: Module, xAngle?: number, yAngle?: number, zAngle?: number) {
+    super(sourceModule);
+
     this.x1matrix = null;
     this.x2matrix = null;
     this.x3matrix = null;
@@ -31,7 +33,6 @@ class RotatePoint {
     this.z1matrix = null;
     this.z2matrix = null;
     this.z3matrix = null;
-    this.sourceModule = sourceModule || null;
     this.xAngle = xAngle || RotatePoint.DEFAULT_ROTATE_X;
     this.yAngle = yAngle || RotatePoint.DEFAULT_ROTATE_Y;
     this.zAngle = zAngle || RotatePoint.DEFAULT_ROTATE_Z;
@@ -86,10 +87,6 @@ class RotatePoint {
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing source module!');
-    }
-
     return this.sourceModule.getValue(
       (this.x1matrix * x) + (this.y1matrix * y) + (this.z1matrix * z),
       (this.x2matrix * x) + (this.y2matrix * y) + (this.z2matrix * z),

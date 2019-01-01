@@ -1,17 +1,20 @@
+import Module from '@app/module';
 import Perlin from '@app/module/generator/perlin';
+import TransformerModule from './TransformerModule';
 
-class Turbulence {
+class Turbulence extends TransformerModule {
   public static DEFAULT_TURBULENCE_POWER = 1.0;
   public static DEFAULT_TURBULENCE_ROUGHNESS = 3;
 
-  private sourceModule: any;
   private xDistortModule: Perlin;
   private yDistortModule: Perlin;
   private zDistortModule: Perlin;
 
   public power: number;
 
-  constructor(sourceModule?: any, frequency?: number, power?: number, roughness?: number, seed?: number) {
+  constructor(sourceModule: Module, frequency?: number, power?: number, roughness?: number, seed?: number) {
+    super(sourceModule);
+
     this.xDistortModule = new Perlin();
     this.yDistortModule = new Perlin();
     this.zDistortModule = new Perlin();
@@ -50,10 +53,6 @@ class Turbulence {
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing source module!');
-    }
-
     // Get the values from the three Perlin noise modules and
     // add each value to each coordinate of the input value.  There are also
     // some offsets added to the coordinates of the input values.  This prevents

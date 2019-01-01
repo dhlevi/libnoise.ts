@@ -22,27 +22,6 @@ describe('module/transformer/translatepoint', () => {
     expect(testFunc).not.to.throw();
   });
 
-  it("calling getValue without a sourceModule throws an error", () => {
-    // Setup
-    const x = 10;
-    const y = 10;
-    const z = 10;
-    const xTranslate = 10;
-    const yTranslate = 20;
-    const zTranslate = 30;
-
-    // Test
-    const mockModule = new TranslatePoint(null, xTranslate, yTranslate, zTranslate);
-
-    // Test
-    const testFunc = () => {
-      mockModule.getValue(x, y, z);
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
-
   it("calling getValue returns a number", () => {
     // Setup
     const x = 10;
