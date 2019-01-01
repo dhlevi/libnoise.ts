@@ -19,21 +19,6 @@ describe('model/plane', () => {
     expect(testFunc).not.to.throw();
   });
 
-  it("calling getValue without a sourceModule throws an error", () => {
-    // Setup
-    const x = 10;
-    const y = 10;
-    const mockModule = new Plane();
-
-    // Test
-    const testFunc = () => {
-      mockModule.getValue(x, y);
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
-
   it("calling getValue returns a number", () => {
     // Setup
     const x = 10;

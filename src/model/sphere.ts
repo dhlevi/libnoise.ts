@@ -1,17 +1,8 @@
 import MathConsts from '@app/mathconsts';
+import Model from './Model';
 
-class Sphere {
-  private sourceModule: any;
-
-  constructor(sourceModule?: any) {
-    this.sourceModule = sourceModule || null;
-  }
-
+class Sphere extends Model {
   public getValue(lat: number, lon: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing module!');
-    }
-
     let r: number = Math.cos(MathConsts.DEG_TO_RAD * lat);
 
     return this.sourceModule.getValue(

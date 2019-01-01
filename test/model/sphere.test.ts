@@ -19,21 +19,6 @@ describe('model/sphere', () => {
     expect(testFunc).not.to.throw();
   });
 
-  it("calling getValue without a sourceModule throws an error", () => {
-    // Setup
-    const lat = 10;
-    const lon = 10;
-    const mockModule = new Sphere();
-
-    // Test
-    const testFunc = () => {
-      mockModule.getValue(lat, lon);
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
-
   it("calling getValue returns a number", () => {
     // Setup
     const lat = 10;

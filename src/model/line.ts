@@ -1,5 +1,7 @@
-class Line {
-  private sourceModule: any;
+import Module from '@app/module';
+import Model from './Model';
+
+class Line extends Model {
   private attenuate: boolean;
   // @TODO convert to a matrix
   private x0: number;
@@ -9,7 +11,9 @@ class Line {
   private z0: number;
   private z1: number;
 
-  constructor(sourceModule?: any) {
+  constructor(sourceModule: Module) {
+    super(sourceModule);
+
     this.attenuate = true;
     this.x0 = 0.0;
     this.x1 = 1.0;
@@ -17,13 +21,9 @@ class Line {
     this.y1 = 1.0;
     this.z0 = 0.0;
     this.z1 = 1.0;
-    this.sourceModule = sourceModule || null;
   }
 
   public getValue(p: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing module!');
-    }
     // @TODO probably validate 0 < p < 1
 
     let value = this.sourceModule.getValue(

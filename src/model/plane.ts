@@ -1,15 +1,7 @@
-class Plane {
-  private sourceModule: any;
+import Model from './Model';
 
-  constructor(sourceModule?: any) {
-    this.sourceModule = sourceModule || null;
-  }
-
+class Plane extends Model {
   public getValue(x: number, y: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing module!');
-    }
-
     return this.sourceModule.getValue(x, 0, y);
   }
 }

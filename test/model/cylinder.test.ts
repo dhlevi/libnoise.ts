@@ -19,21 +19,6 @@ describe('model/cylinder', () => {
     expect(testFunc).not.to.throw();
   });
 
-  it("calling getValue without a sourceModule throws an error", () => {
-    // Setup
-    const angle = 45;
-    const y = 10;
-    const mockModule = new Cylinder();
-
-    // Test
-    const testFunc = () => {
-      mockModule.getValue(angle, y);
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
-
   it("calling getValue returns a number", () => {
     // Setup
     const angle = 45;
