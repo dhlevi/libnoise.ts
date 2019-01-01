@@ -1,27 +1,21 @@
 import Cylinder from '@app/model/cylinder';
+import Module from '@app/module';
 import NoiseMap from '@app/noisemap';
+import Builder from './Builder';
 
-class NoiseMapBuilderCylinder {
-  private sourceModule: any;
-  private width: number;
-  private height: number;
-  private noiseMap: NoiseMap;
+class NoiseMapBuilderCylinder extends Builder {
   private _lowerAngleBound: number;
   private _lowerHeightBound: number;
   private _upperAngleBound: number;
   private _upperHeightBound: number;
 
-  constructor(sourceModule?: any, width?: number, height?: number) {
-    this.sourceModule = sourceModule || null;
-    this.width = width || 256;
-    this.height = height || 256;
+  constructor(sourceModule: Module, width: number = 256, height: number = 256) {
+    super(sourceModule, width, height);
 
     this.lowerAngleBound = 0.0;
     this.lowerHeightBound = 0.0;
     this.upperAngleBound = 1.0;
     this.upperHeightBound = 1.0;
-
-    this.noiseMap = new NoiseMap(this.width, this.height);
   }
 
   public get lowerAngleBound() {
@@ -68,11 +62,7 @@ class NoiseMapBuilderCylinder {
     this._upperHeightBound = v;
   }
 
-  public build() {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing module!');
-    }
-
+  public build(): NoiseMap {
     // Create the cylinder model.
     let cylinder = new Cylinder(this.sourceModule);
     let xDelta = (this.upperAngleBound - this.lowerAngleBound) / this.width;
@@ -82,19 +72,14 @@ class NoiseMapBuilderCylinder {
 
     // Fill every point in the noise map with the output values from the model.
     for (let y = 0; y < this.height; y++) {
-
       curAngle = this.lowerAngleBound;
 
       for (let x = 0; x < this.width; x++) {
-
         this.noiseMap.setValue(x, y, cylinder.getValue(curAngle, curHeight));
-
         curAngle += xDelta;
-
       }
 
       curHeight += yDelta;
-
     }
 
     return this.noiseMap;

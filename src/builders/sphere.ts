@@ -1,27 +1,21 @@
 import Sphere from '@app/model/sphere';
+import Module from '@app/module';
 import NoiseMap from '@app/noisemap';
+import Builder from './Builder';
 
-class NoiseMapBuilderSphere {
-  private sourceModule: any;
-  private width: number;
-  private height: number;
-  private noiseMap: NoiseMap;
+class NoiseMapBuilderSphere extends Builder {
   private _eastLonBound: number;
   private _northLatBound: number;
   private _southLatBound: number;
   private _westLonBound: number;
 
-  constructor(sourceModule?: any, width?: number, height?: number) {
-    this.sourceModule = sourceModule || null;
-    this.width = width || 256;
-    this.height = height || 256;
+  constructor(sourceModule: Module, width: number = 256, height: number = 256) {
+    super(sourceModule, width, height);
 
     this._northLatBound = 0.0;
     this._southLatBound = 0.0;
     this._eastLonBound = 0.0;
     this._westLonBound = 0.0;
-
-    this.noiseMap = new NoiseMap(this.width, this.height);
   }
 
   public get eastLonBound() {
@@ -68,11 +62,7 @@ class NoiseMapBuilderSphere {
     this._westLonBound = v;
   }
 
-  public build() {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing module!');
-    }
-
+  public build(): NoiseMap {
     // Create the cylinder model.
     let sphere = new Sphere(this.sourceModule);
     let xDelta = (this.eastLonBound - this.westLonBound) / this.width;

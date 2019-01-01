@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 import { Cylinder } from '@app/builders';
+import Module from '@app/module';
 import { Const } from '@app/module/generator';
 import NoiseMap from '@app/noisemap';
 
@@ -184,24 +185,11 @@ describe("builders/cylinder", () => {
     // Assert
     expect(noiseMap).not.to.be.null;
   });
-
-  it("calling build with missing source module throws an error", () => {
-    // Setup
-    const mockModule: Cylinder = new Cylinder();
-
-    // Test
-    const testFunc = () => {
-      mockModule.build();
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
 });
 
 function createMockCylinder(): Cylinder {
   const value: number = 2;
-  const sourceModule: any = new Const(value);
+  const sourceModule: Module = new Const(value);
   const width: number = 10;
   const height: number = 10;
 

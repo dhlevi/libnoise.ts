@@ -1,30 +1,25 @@
 import Interpolation from '@app/interpolation';
 import Plane from '@app/model/plane';
+import Module from '@app/module';
 import NoiseMap from '@app/noisemap';
+import Builder from './Builder';
 
-class NoiseMapBuilderPlane {
-  private sourceModule: any;
-  private width: number;
-  private height: number;
+class NoiseMapBuilderPlane extends Builder {
   private seamless: boolean;
-  private noiseMap: NoiseMap;
   private _lowerXBound: number;
   private _lowerYBound: number;
   private _upperXBound: number;
   private _upperYBound: number;
 
-  constructor(sourceModule?: any, width?: number, height?: number, seamless?: boolean) {
-    this.sourceModule = sourceModule || null;
-    this.width = width || 256;
-    this.height = height || 256;
-    this.seamless = seamless || false;
+  constructor(sourceModule: Module, width: number = 256, height: number = 256, seamless: boolean = false) {
+    super(sourceModule, width, height);
+
+    this.seamless = seamless;
 
     this.lowerXBound = 0.0;
     this.lowerYBound = 0.0;
     this.upperXBound = 1.0;
     this.upperYBound = 1.0;
-
-    this.noiseMap = new NoiseMap(this.width, this.height);
   }
 
   public get lowerXBound() {
@@ -71,20 +66,13 @@ class NoiseMapBuilderPlane {
     this._upperYBound = v;
   }
 
-  public build() {
+  public build(): NoiseMap {
     let xExtent = this.upperXBound - this.lowerXBound;
     let yExtent = this.upperYBound - this.lowerYBound;
 
+    // @TODO is this possible? seems to be covered by validation in setters
     if (xExtent < 0 || yExtent < 0) {
-
       throw new Error('Invalid bounds!');
-
-    }
-
-    if (!this.sourceModule) {
-
-      throw new Error('Invalid or missing module!');
-
     }
 
     // Create the plane model.

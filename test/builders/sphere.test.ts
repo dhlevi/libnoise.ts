@@ -184,19 +184,6 @@ describe("builders/sphere", () => {
     // Assert
     expect(noiseMap).not.to.be.null;
   });
-
-  it("calling build with missing source module throws an error", () => {
-    // Setup
-    const mockModule = new Sphere();
-
-    // Test
-    const testFunc = () => {
-      mockModule.build();
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
 });
 
 function createMockSphere() {
