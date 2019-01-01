@@ -1,17 +1,16 @@
-class Exponent {
-  private sourceModule: any;
+import Module from '@app/module';
+import ModifierModule from './ModifierModule';
+
+class Exponent extends ModifierModule {
   private exponent: number;
 
-  constructor(sourceModule?: any, exponent?: number) {
-    this.sourceModule = sourceModule || null;
+  constructor(sourceModule: Module, exponent?: number) {
+    super(sourceModule);
+
     this.exponent = exponent || 1;
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing source module!');
-    }
-
     return Math.pow(Math.abs((this.sourceModule.getValue(x, y, z) + 1.0) / 2.0), this.exponent) * 2.0 - 1.0;
   }
 }

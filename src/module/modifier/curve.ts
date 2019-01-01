@@ -1,11 +1,14 @@
 import Interpolation from '@app/interpolation';
 import Misc from '@app/misc';
+import Module from '@app/module';
+import ModifierModule from './ModifierModule';
 
-class Curve {
-  private sourceModule: any;
+class Curve extends ModifierModule {
   private controlPoints: number[][]; // @TODO write a tuple interface - is an array of pairs
 
-  constructor(sourceModule?: any, controlPoints?: number[][]) {
+  constructor(sourceModule: Module, controlPoints?: number[][]) {
+    super(sourceModule);
+
     this.sourceModule = sourceModule || null;
     this.controlPoints = controlPoints || [];
   }
@@ -66,10 +69,6 @@ class Curve {
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing source module!');
-    }
-
     if (this.controlPoints.length < 4) {
       throw new Error('Insufficient number of control points!');
     }

@@ -1,15 +1,7 @@
-class Abs {
-  private sourceModule: any;
+import ModifierModule from './ModifierModule';
 
-  constructor(sourceModule?: any) {
-    this.sourceModule = sourceModule || null;
-  }
-
-  public getValue(x: number, y: number, z: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing source module!');
-    }
-
+class Abs extends ModifierModule {
+  public getValue(x: number, y: number, z: number): number {
     return Math.abs(this.sourceModule.getValue(x, y, z));
   }
 }

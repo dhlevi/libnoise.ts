@@ -1,13 +1,15 @@
 import Interpolation from '@app/interpolation';
 import Misc from '@app/misc';
+import Module from '@app/module';
+import ModifierModule from './ModifierModule';
 
-class Terrace {
-  private sourceModule: any;
+class Terrace extends ModifierModule {
   private controlPoints: number[];
   private invert: boolean;
 
-  constructor(sourceModule?: any, controlPoints?: number[], invert?: boolean) {
-    this.sourceModule = sourceModule || null;
+  constructor(sourceModule: Module, controlPoints?: number[], invert?: boolean) {
+    super(sourceModule);
+
     this.controlPoints = controlPoints || [];
     this.invert = invert || false;
   }
@@ -68,10 +70,6 @@ class Terrace {
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing source module!');
-    }
-
     // Get the output value from the source module.
     let sourceModuleValue = this.sourceModule.getValue(x, y, z);
 

@@ -1,13 +1,14 @@
 import Misc from '@app/misc';
+import Module from '@app/module';
+import ModifierModule from './ModifierModule';
 
-
-class Clamp {
-  private sourceModule: any;
+class Clamp extends ModifierModule {
   private _lowerBound: number;
   private _upperBound: number;
 
-  constructor(sourceModule?: any, lowerBound?: number, upperBound?: number) {
-    this.sourceModule = sourceModule || null;
+  constructor(sourceModule: Module, lowerBound?: number, upperBound?: number) {
+    super(sourceModule);
+
     this.lowerBound = lowerBound || null;
     this.upperBound = upperBound || null;
   }
@@ -35,10 +36,6 @@ class Clamp {
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (!this.sourceModule) {
-      throw new Error('Invalid or missing source module!');
-    }
-
     return Misc.clampValue(this.sourceModule.getValue(x, y, z), this.lowerBound, this.upperBound);
   }
 
