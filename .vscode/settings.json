@@ -15,6 +15,9 @@
   "cSpell.words": [
     "Checkerboard",
     "LACUNARITY",
-    "Perlin"
+    "Perlin",
+    "noisemap",
+    "ridgedmulti",
+    "voronoi"
   ]
 }

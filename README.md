@@ -6,16 +6,16 @@
 This is a fork that ports the code to TypeScript and modernises things a bit. This library can be used with both Node.js and web projects.
 
 ## Backlog
-  - Move all this common logic into an interface
-  - Write some tests
-  - Explicit return types of functions
-  - Re-enable strict type checking
   - Make less constructor stuff optional
-  - Audit npm
+  - Go through and format code
+  - Explicit return types on functions
   - Reconcile public/private members against libnoise source
+  - Re-enable strict type checking
+  - Audit npm
   - JSDOC public methods
   - Remove random // SETUP and // TEST comments from createMock___() functions
-  - rename createMock___() functions to createMockModule()
-  - go through and format code
+  - Rename createMock___() functions to createMockModule()
   - Align property and variable names with libnoise
   - Probably make script utils less modular and just call themselves
+  - Probably remove dependency on src/types folder
+  - Test base classes?
