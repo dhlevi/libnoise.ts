@@ -1,9 +1,13 @@
-class Const {
+import GeneratorModule from './GeneratorModule';
+
+class Const extends GeneratorModule {
   public static DEFAULT_CONST_VALUE: number = 0.0;
 
   private value: number;
 
   constructor(v?: number) {
+    super();
+
     this.value = v || Const.DEFAULT_CONST_VALUE;
   }
 

@@ -1,7 +1,8 @@
 import MathFuncs from '@app/mathfuncs';
 import NoiseGen from '@app/noisegen';
+import GeneratorModule from './GeneratorModule';
 
-class Billow {
+class Billow extends GeneratorModule {
   public static DEFAULT_BILLOW_FREQUENCY = 1.0;
   public static DEFAULT_BILLOW_LACUNARITY = 2.0;
   public static DEFAULT_BILLOW_OCTAVE_COUNT = 6;
@@ -17,6 +18,8 @@ class Billow {
   public quality: number;
 
   constructor(frequency?: number, lacunarity?: number, octaves?: number, persist?: number, seed?: number, quality?: number) {
+    super();
+
     this.frequency = frequency || Billow.DEFAULT_BILLOW_FREQUENCY;
     this.lacunarity = lacunarity || Billow.DEFAULT_BILLOW_LACUNARITY;
     this.octaves = octaves || Billow.DEFAULT_BILLOW_OCTAVE_COUNT;

@@ -1,7 +1,8 @@
 import MathFuncs from '@app/mathfuncs';
 import NoiseGen from '@app/noisegen';
+import GeneratorModule from './GeneratorModule';
 
-class Perlin {
+class Perlin extends GeneratorModule {
   public static DEFAULT_PERLIN_FREQUENCY = 1.0;
   public static DEFAULT_PERLIN_LACUNARITY = 2.0;
   public static DEFAULT_PERLIN_OCTAVE_COUNT = 6;
@@ -17,6 +18,8 @@ class Perlin {
   public quality: number;
 
   constructor(frequency?: number, lacunarity?: number, octaves?: number, persist?: number, seed?: number, quality?: number) {
+    super();
+
     this.frequency = frequency || Perlin.DEFAULT_PERLIN_FREQUENCY;
     this.lacunarity = lacunarity || Perlin.DEFAULT_PERLIN_LACUNARITY;
     this.octaves = octaves || Perlin.DEFAULT_PERLIN_OCTAVE_COUNT;

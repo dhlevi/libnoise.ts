@@ -1,9 +1,13 @@
-class Spheres {
+import GeneratorModule from './GeneratorModule';
+
+class Spheres extends GeneratorModule {
   public static DEFAULT_SPHERES_FREQUENCY = 4.0;
 
   private frequency: number;
 
   constructor(frequency?: number) {
+    super();
+
     this.frequency = frequency || Spheres.DEFAULT_SPHERES_FREQUENCY;
   }
 

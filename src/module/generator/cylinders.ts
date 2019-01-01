@@ -1,9 +1,13 @@
-class Cylinders {
+import GeneratorModule from './GeneratorModule';
+
+class Cylinders extends GeneratorModule {
   public static DEFAULT_CYLINDERS_FREQUENCY = 1.0;
 
   private frequency: number;
 
   constructor(frequency?: number) {
+    super();
+
     this.frequency = frequency || Cylinders.DEFAULT_CYLINDERS_FREQUENCY;
   }
 

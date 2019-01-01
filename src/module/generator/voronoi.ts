@@ -1,7 +1,8 @@
 import MathConsts from '@app/mathconsts';
 import NoiseGen from '@app/noisegen';
+import GeneratorModule from './GeneratorModule';
 
-class Voronoi {
+class Voronoi extends GeneratorModule {
   public static DEFAULT_VORONOI_DISPLACEMENT = 1.0;
   public static DEFAULT_VORONOI_FREQUENCY = 1.0;
   public static DEFAULT_VORONOI_SEED = 0;
@@ -12,6 +13,8 @@ class Voronoi {
   private seed: number;
 
   constructor(frequency?: number, displacement?: number, distance?: boolean, seed?: number) {
+    super();
+
     this.frequency = frequency || Voronoi.DEFAULT_VORONOI_FREQUENCY;
     this.displacement = displacement || Voronoi.DEFAULT_VORONOI_DISPLACEMENT;
     this.distance = distance || false;

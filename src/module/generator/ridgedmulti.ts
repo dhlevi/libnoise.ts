@@ -1,8 +1,9 @@
 import MathFuncs from '@app/mathfuncs';
 import Misc from '@app/misc';
 import NoiseGen from '@app/noisegen';
+import GeneratorModule from './GeneratorModule';
 
-class RidgedMulti {
+class RidgedMulti extends GeneratorModule {
 
   public static DEFAULT_RIDGED_FREQUENCY = 1.0;
   public static DEFAULT_RIDGED_LACUNARITY = 2.0;
@@ -22,6 +23,8 @@ class RidgedMulti {
   private weights: number[];
 
   constructor(frequency?: number, lacunarity?: number, octaves?: number, seed?: number, quality?: number, offset?: number, gain?: number) {
+    super();
+
     this.frequency = frequency || RidgedMulti.DEFAULT_RIDGED_FREQUENCY;
     this.lacunarity = lacunarity || RidgedMulti.DEFAULT_RIDGED_LACUNARITY;
     this.octaves = octaves || RidgedMulti.DEFAULT_RIDGED_OCTAVE_COUNT;
