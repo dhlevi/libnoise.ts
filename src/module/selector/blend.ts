@@ -1,27 +1,21 @@
 import Interpolation from '@app/interpolation';
+import Module from '@app/module';
+import SelectorModule from './SelectorModule';
 
 
-class Blend {
-  private sourceModules: any[];
-  private controlModule: any | null;
+class Blend extends SelectorModule {
+  private controlModule: Module;
 
-  constructor(sourceModules?: any, controlModule?: any) {
-    this.sourceModules = sourceModules || [];
-    this.controlModule = controlModule || null;
+  constructor(sourceModuleA: Module, sourceModuleB: Module, controlModule: Module) {
+    super(sourceModuleA, sourceModuleB);
+
+    this.controlModule = controlModule;
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (this.sourceModules.length < 2) {
-      throw new Error('Invalid or missing source module(s)!');
-    }
-
-    if (!this.controlModule) {
-      throw new Error('Invalid or missing control module!');
-    }
-
     return Interpolation.linear(
-      this.sourceModules[0].getValue(x, y, z),
-      this.sourceModules[1].getValue(x, y, z),
+      this.sourceModuleA.getValue(x, y, z),
+      this.sourceModuleB.getValue(x, y, z),
       (this.controlModule.getValue(x, y, z) + 1.0) / 2.0,
     );
   }

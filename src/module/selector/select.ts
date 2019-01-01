@@ -1,19 +1,22 @@
-import Interpolation from '@app/interpolation';
 
-class Select {
+import Interpolation from '@app/interpolation';
+import Module from '@app/module';
+import SelectorModule from './SelectorModule';
+
+class Select extends SelectorModule {
   public static DEFAULT_SELECT_EDGE_FALLOFF = 0.0;
   public static DEFAULT_SELECT_LOWER_BOUND = -1.0;
   public static DEFAULT_SELECT_UPPER_BOUND = 1.0;
 
-  private sourceModules: any[];
-  private controlModule: any | null;
+  private controlModule: Module;
   private _edge: number;
   private _lowerBound: number;
   private _upperBound: number;
 
-  constructor(sourceModules?: any, controlModule?: any, edge?: number, lowerBound?: number, upperBound?: number) {
-    this.sourceModules = sourceModules || [];
-    this.controlModule = controlModule || null;
+  constructor(sourceModuleA: Module, sourceModuleB: Module, controlModule: Module, edge?: number, lowerBound?: number, upperBound?: number) {
+    super(sourceModuleA, sourceModuleB);
+
+    this.controlModule = controlModule;
     this.edge = edge || Select.DEFAULT_SELECT_EDGE_FALLOFF;
     this.lowerBound = lowerBound || Select.DEFAULT_SELECT_LOWER_BOUND;
     this.upperBound = upperBound || Select.DEFAULT_SELECT_UPPER_BOUND;
@@ -58,14 +61,6 @@ class Select {
   }
 
   public getValue(x: number, y: number, z: number) {
-    if (this.sourceModules.length < 2) {
-      throw new Error('Invalid or missing source module(s)!');
-    }
-
-    if (!this.controlModule) {
-      throw new Error('Invalid or missing control module!');
-    }
-
     let lowerCurve, upperCurve;
     let controlValue = this.controlModule.getValue(x, y, z);
 
@@ -75,7 +70,7 @@ class Select {
 
         // The output value from the control module is below the selector
         // threshold; return the output value from the first source module.
-        return this.sourceModules[0].getValue(x, y, z);
+        return this.sourceModuleA.getValue(x, y, z);
 
       } else if (controlValue < (this.lowerBound + this.edge)) {
 
@@ -86,8 +81,8 @@ class Select {
         upperCurve = (this.lowerBound + this.edge);
 
         return Interpolation.linear(
-          this.sourceModules[0].getValue(x, y, z),
-          this.sourceModules[1].getValue(x, y, z),
+          this.sourceModuleA.getValue(x, y, z),
+          this.sourceModuleB.getValue(x, y, z),
           Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve)),
         );
 
@@ -95,7 +90,7 @@ class Select {
 
         // The output value from the control module is within the selector
         // threshold; return the output value from the second source module.
-        return this.sourceModules[1].getValue(x, y, z);
+        return this.sourceModuleB.getValue(x, y, z);
 
       } else if (controlValue < (this.upperBound + this.edge)) {
 
@@ -106,8 +101,8 @@ class Select {
         upperCurve = (this.upperBound + this.edge);
 
         return Interpolation.linear(
-          this.sourceModules[1].getValue(x, y, z),
-          this.sourceModules[0].getValue(x, y, z),
+          this.sourceModuleB.getValue(x, y, z),
+          this.sourceModuleA.getValue(x, y, z),
           Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve)),
         );
 
@@ -115,13 +110,13 @@ class Select {
 
       // Output value from the control module is above the selector threshold;
       // return the output value from the first source module.
-      return this.sourceModules[0].getValue(x, y, z);
+      return this.sourceModuleA.getValue(x, y, z);
 
     } else {
 
       return (controlValue < this.lowerBound || controlValue > this.upperBound)
-        ? this.sourceModules[0].getValue(x, y, z)
-        : this.sourceModules[1].getValue(x, y, z);
+        ? this.sourceModuleA.getValue(x, y, z)
+        : this.sourceModuleB.getValue(x, y, z);
 
     }
   }

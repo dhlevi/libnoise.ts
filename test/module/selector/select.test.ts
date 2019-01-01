@@ -19,81 +19,11 @@ describe('module/selector/select', () => {
 
     // Test
     const testFunc = () => {
-      new Select([sourceModuleA, sourceModuleB], controlModule, edgeFalloff, lowerBound, upperBound);
+      new Select(sourceModuleA, sourceModuleB, controlModule, edgeFalloff, lowerBound, upperBound);
     };
 
     // Assert
     expect(testFunc).not.to.throw();
-  });
-
-  it("calling getValue with 0 sourceModules throws an error", () => {
-    // Setup
-    const x = 10;
-    const y = 10;
-    const z = 10;
-    const controlValue = 0.5;
-    const controlModule = new Const(controlValue);
-    const edgeFalloff = 1;
-    const lowerBound = -0.5;
-    const upperBound = 0.5;
-
-    const mockModule = new Select([], controlModule, edgeFalloff, lowerBound, upperBound);
-
-    // Test
-    const testFunc = () => {
-      mockModule.getValue(x, y, z);
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
-
-  it("calling getValue with 1 sourceModule throws an error", () => {
-    // Setup
-    const x = 10;
-    const y = 10;
-    const z = 10;
-    const sourceValueA = 2;
-    const sourceModuleA = new Const(sourceValueA);
-    const controlValue = 0.5;
-    const controlModule = new Const(controlValue);
-    const edgeFalloff = 1;
-    const lowerBound = -0.5;
-    const upperBound = 0.5;
-
-    const mockModule = new Select([sourceModuleA], controlModule, edgeFalloff, lowerBound, upperBound);
-
-    // Test
-    const testFunc = () => {
-      mockModule.getValue(x, y, z);
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
-  });
-
-  it("calling getValue with no controlModule throws an error", () => {
-    // Setup
-    const x = 10;
-    const y = 10;
-    const z = 10;
-    const sourceValueA = 2;
-    const sourceModuleA = new Const(sourceValueA);
-    const sourceValueB = 2;
-    const sourceModuleB = new Const(sourceValueB);
-    const edgeFalloff = 1;
-    const lowerBound = -0.5;
-    const upperBound = 0.5;
-
-    const mockModule = new Select([sourceModuleA, sourceModuleB], null, edgeFalloff, lowerBound, upperBound);
-
-    // Test
-    const testFunc = () => {
-      mockModule.getValue(x, y, z);
-    };
-
-    // Assert
-    expect(testFunc).to.throw();
   });
 
   it("calling getValue returns a number", () => {
@@ -190,5 +120,5 @@ function createMockModule() {
   const upperBound = 0.5;
 
   // Test
-  return new Select([sourceModuleA, sourceModuleB], controlModule, edgeFalloff, lowerBound, upperBound);
+  return new Select(sourceModuleA, sourceModuleB, controlModule, edgeFalloff, lowerBound, upperBound);
 }
