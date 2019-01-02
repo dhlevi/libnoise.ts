@@ -1,5 +1,5 @@
 import MathConsts from '@app/mathconsts';
-import Module from '@app/module';
+import Module from '@app/module/Module';
 import TransformerModule from './TransformerModule';
 
 class RotatePoint extends TransformerModule {

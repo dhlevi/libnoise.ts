@@ -1,4 +1,4 @@
-import Module from '@app/module';
+import Module from '@app/module/Module';
 import TransformerModule from './TransformerModule';
 
 class TranslatePoint extends TransformerModule {

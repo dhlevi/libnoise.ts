@@ -1,4 +1,4 @@
-import Module from "@app/module";
+import Module from "@app/module/Module";
 
 export default abstract class CombinerModule extends Module {
   public sourceModuleA: Module;

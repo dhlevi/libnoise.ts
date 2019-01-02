@@ -1,4 +1,4 @@
-import Module from '@app/module';
+import Module from '@app/module/Module';
 import ModifierModule from './ModifierModule';
 
 class Exponent extends ModifierModule {

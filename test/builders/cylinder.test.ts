@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 import { Cylinder } from '@app/builders';
-import Module from '@app/module';
 import { Const } from '@app/module/generator';
+import Module from '@app/module/Module';
 import NoiseMap from '@app/noisemap';
 
 describe("builders/cylinder", () => {

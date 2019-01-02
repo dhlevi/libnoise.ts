@@ -1,6 +1,6 @@
 
 import Interpolation from '@app/interpolation';
-import Module from '@app/module';
+import Module from '@app/module/Module';
 import SelectorModule from './SelectorModule';
 
 class Select extends SelectorModule {

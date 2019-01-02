@@ -1,4 +1,4 @@
-import Module from '@app/module';
+import Module from '@app/module/Module';
 import Model from './Model';
 
 class Line extends Model {

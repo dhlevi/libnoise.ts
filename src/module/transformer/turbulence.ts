@@ -1,5 +1,5 @@
-import Module from '@app/module';
 import Perlin from '@app/module/generator/perlin';
+import Module from '@app/module/Module';
 import TransformerModule from './TransformerModule';
 
 class Turbulence extends TransformerModule {

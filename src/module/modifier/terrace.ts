@@ -1,5 +1,5 @@
 import Interpolation from '@app/interpolation';
-import Module from '@app/module';
+import Module from '@app/module/Module';
 import { clamp } from '@app/util';
 import ModifierModule from './ModifierModule';
 

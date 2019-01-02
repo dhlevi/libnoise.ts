@@ -1,6 +1,6 @@
 import Interpolation from '@app/interpolation';
 import Plane from '@app/model/plane';
-import Module from '@app/module';
+import Module from '@app/module/Module';
 import NoiseMap from '@app/noisemap';
 import Builder from './Builder';
 

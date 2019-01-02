@@ -1,4 +1,4 @@
-import Module from "@app/module";
+import Module from "@app/module/Module";
 import NoiseMap from "@app/noisemap";
 
 export default abstract class Builder {
