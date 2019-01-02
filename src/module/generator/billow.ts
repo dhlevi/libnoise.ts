@@ -41,7 +41,6 @@ class Billow extends GeneratorModule {
     z = (z * this.frequency);
 
     for (let octave = 0; octave < this.octaves; octave++) {
-
       // Make sure that these floating-point values have the same range as a 32-
       // bit integer so that we can pass them to the coherent-noise functions.
       nx = MathFuncs.makeInt32Range(x);
@@ -57,7 +56,6 @@ class Billow extends GeneratorModule {
       y *= this.lacunarity;
       z *= this.lacunarity;
       persist *= this.persist;
-
     }
 
     return value + 0.5;

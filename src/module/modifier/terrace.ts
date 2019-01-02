@@ -42,17 +42,11 @@ class Terrace extends ModifierModule {
     let newControlPoints = [];
 
     for (let i = 0; i < this.controlPoints.length; i++) {
-
       if (i < insertionPos) {
-
         newControlPoints[i] = this.controlPoints[i];
-
       } else {
-
         newControlPoints[i + 1] = this.controlPoints[i];
-
       }
-
     }
 
     this.controlPoints = newControlPoints;
@@ -75,7 +69,7 @@ class Terrace extends ModifierModule {
 
     // Find the first element in the control point array that has a value
     // larger than the output value from the source module.
-    let indexPos;
+    let indexPos: number;
     for (indexPos = 0; indexPos < this.controlPoints.length; indexPos++) {
       if (sourceModuleValue < this.controlPoints[indexPos]) {
         break;
@@ -92,9 +86,7 @@ class Terrace extends ModifierModule {
     // smallest value of the control point array), get the value of the nearest
     // control point and exit now.
     if (index0 === index1) {
-
       return this.controlPoints[index1];
-
     }
 
     // Compute the alpha value used for linear interpolation.

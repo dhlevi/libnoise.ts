@@ -46,11 +46,9 @@ class RidgedMulti extends GeneratorModule {
     this.weights = [];
 
     for (let i = 0; i < RidgedMulti.RIDGED_MAX_OCTAVE; i++) {
-
       // Compute weight for each frequency.
       this.weights[i] = Math.pow(frequency, -h);
       frequency *= this.lacunarity;
-
     }
   }
 

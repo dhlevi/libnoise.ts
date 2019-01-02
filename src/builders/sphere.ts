@@ -72,19 +72,15 @@ class NoiseMapBuilderSphere extends Builder {
 
     // Fill every point in the noise map with the output values from the model.
     for (let y = 0; y < this.height; y++) {
-
       curLon = this.westLonBound;
 
       for (let x = 0; x < this.width; x++) {
-
         this.noiseMap.setValue(x, y, sphere.getValue(curLat, curLon));
 
         curLon += xDelta;
-
       }
 
       curLat += yDelta;
-
     }
 
     return this.noiseMap;

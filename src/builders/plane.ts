@@ -86,17 +86,12 @@ class NoiseMapBuilderPlane extends Builder {
 
     // Fill every point in the noise map with the output values from the model.
     for (let y = 0; y < this.height; y++) {
-
       curX = this.lowerXBound;
 
       for (let x = 0; x < this.width; x++) {
-
         if (!this.seamless) {
-
           value = plane.getValue(curX, curY);
-
         } else {
-
           xBlend = 1.0 - ((curX - this.lowerXBound) / xExtent);
 
           value = Interpolation.linear(
@@ -117,11 +112,9 @@ class NoiseMapBuilderPlane extends Builder {
         this.noiseMap.setValue(x, y, value);
 
         curX += xDelta;
-
       }
 
       curY += yDelta;
-
     }
 
     return this.noiseMap;

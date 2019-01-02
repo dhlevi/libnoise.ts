@@ -45,9 +45,7 @@ class Voronoi extends GeneratorModule {
     // through each of the nearby cubes until we find a cube with a seed point
     // that is closest to the specified position.
     for (let zCur = zInt - 2; zCur <= zInt + 2; zCur++) {
-
       for (let yCur = yInt - 2; yCur <= yInt + 2; yCur++) {
-
         for (let xCur = xInt - 2; xCur <= xInt + 2; xCur++) {
           // Calculate the position and distance to the seed point inside of
           // this unit cube.
@@ -60,30 +58,23 @@ class Voronoi extends GeneratorModule {
           dist = (xDist * xDist + yDist * yDist + zDist * zDist);
 
           if (dist < minDist) {
-
             // This seed point is closer to any others found so far, so record
             // this seed point.
             minDist = dist;
             xCandidate = xPos;
             yCandidate = yPos;
             zCandidate = zPos;
-
           }
-
         }
-
       }
-
     }
 
     if (this.distance) {
-
       // Determine the distance to the nearest seed point.
       xDist = xCandidate - x;
       yDist = yCandidate - y;
       zDist = zCandidate - z;
       value = (Math.sqrt(xDist * xDist + yDist * yDist + zDist * zDist)) * MathConsts.SQRT_3 - 1.0;
-
     }
 
     // Return the calculated distance with the displacement value applied.

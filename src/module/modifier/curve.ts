@@ -41,17 +41,11 @@ class Curve extends ModifierModule {
     let newControlPoints = [];
 
     for (let i = 0; i < this.controlPoints.length; i++) {
-
       if (i < position) {
-
         newControlPoints[i] = this.controlPoints[i];
-
       } else {
-
         newControlPoints[i + 1] = this.controlPoints[i];
-
       }
-
     }
 
     this.controlPoints = newControlPoints;

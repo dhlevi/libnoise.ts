@@ -134,7 +134,6 @@ const NoiseGen = {
     let xs = 0, ys = 0, zs = 0;
 
     switch (quality) {
-
       case NoiseGen.QUALITY_BEST:
         xs = Interpolation.quinticSCurve(x - x0);
         ys = Interpolation.quinticSCurve(y - y0);
@@ -153,7 +152,6 @@ const NoiseGen = {
         ys = y - y0;
         zs = z - z0;
         break;
-
     }
 
     // use provided function to interpolate

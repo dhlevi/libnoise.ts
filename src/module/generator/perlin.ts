@@ -54,7 +54,6 @@ class Perlin extends GeneratorModule {
       y *= this.lacunarity;
       z *= this.lacunarity;
       persist *= this.persist;
-
     }
 
     return value;

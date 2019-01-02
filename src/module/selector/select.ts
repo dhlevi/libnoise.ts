@@ -65,15 +65,11 @@ class Select extends SelectorModule {
     let controlValue = this.controlModule.getValue(x, y, z);
 
     if (this.edge > 0.0) {
-
       if (controlValue < (this.lowerBound - this.edge)) {
-
         // The output value from the control module is below the selector
         // threshold; return the output value from the first source module.
         return this.sourceModuleA.getValue(x, y, z);
-
       } else if (controlValue < (this.lowerBound + this.edge)) {
-
         // The output value from the control module is near the lower end of the
         // selector threshold and within the smooth curve. Interpolate between
         // the output values from the first and second source modules.
@@ -85,15 +81,11 @@ class Select extends SelectorModule {
           this.sourceModuleB.getValue(x, y, z),
           Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve)),
         );
-
       } else if (controlValue < (this.upperBound - this.edge)) {
-
         // The output value from the control module is within the selector
         // threshold; return the output value from the second source module.
         return this.sourceModuleB.getValue(x, y, z);
-
       } else if (controlValue < (this.upperBound + this.edge)) {
-
         // The output value from the control module is near the upper end of the
         // selector threshold and within the smooth curve. Interpolate between
         // the output values from the first and second source modules.
@@ -105,19 +97,15 @@ class Select extends SelectorModule {
           this.sourceModuleA.getValue(x, y, z),
           Interpolation.cubicSCurve((controlValue - lowerCurve) / (upperCurve - lowerCurve)),
         );
-
       }
 
       // Output value from the control module is above the selector threshold;
       // return the output value from the first source module.
       return this.sourceModuleA.getValue(x, y, z);
-
     } else {
-
       return (controlValue < this.lowerBound || controlValue > this.upperBound)
         ? this.sourceModuleA.getValue(x, y, z)
         : this.sourceModuleB.getValue(x, y, z);
-
     }
   }
 }
