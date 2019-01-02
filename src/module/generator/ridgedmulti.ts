@@ -1,6 +1,5 @@
-import MathFuncs from '@app/mathfuncs';
 import NoiseGen from '@app/noisegen';
-import { clamp } from '@app/util';
+import { clamp, makeInt32Range } from '@app/util';
 import GeneratorModule from './GeneratorModule';
 
 class RidgedMulti extends GeneratorModule {
@@ -68,9 +67,9 @@ class RidgedMulti extends GeneratorModule {
     for (let octave = 0; octave < this.octaves; octave++) {
       // Make sure that these floating-point values have the same range as a 32-
       // bit integer so that we can pass them to the coherent-noise functions.
-      nx = MathFuncs.makeInt32Range(x);
-      ny = MathFuncs.makeInt32Range(y);
-      nz = MathFuncs.makeInt32Range(z);
+      nx = makeInt32Range(x);
+      ny = makeInt32Range(y);
+      nz = makeInt32Range(z);
 
       // Get the coherent-noise value.
       seed = (this.seed + octave) & 0x7fffffff;

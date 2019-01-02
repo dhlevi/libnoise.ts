@@ -1,5 +1,5 @@
-import MathFuncs from '@app/mathfuncs';
 import NoiseGen from '@app/noisegen';
+import { makeInt32Range } from '@app/util';
 import GeneratorModule from './GeneratorModule';
 
 class Perlin extends GeneratorModule {
@@ -41,9 +41,9 @@ class Perlin extends GeneratorModule {
     for (let octave = 0; octave < this.octaves; octave++) {
       // Make sure that these floating-point values have the same range as a 32-
       // bit integer so that we can pass them to the coherent-noise functions.
-      nx = MathFuncs.makeInt32Range(x);
-      ny = MathFuncs.makeInt32Range(y);
-      nz = MathFuncs.makeInt32Range(z);
+      nx = makeInt32Range(x);
+      ny = makeInt32Range(y);
+      nz = makeInt32Range(z);
 
       // Get the coherent-noise value from the input value and add it to the final result.
       signal = NoiseGen.gradientCoherentNoise3D(nx, ny, nz, ((this.seed + octave) & 0xffffffff), this.quality);

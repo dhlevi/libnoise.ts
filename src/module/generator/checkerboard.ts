@@ -1,12 +1,12 @@
-import MathFuncs from '@app/mathfuncs';
+import { makeInt32Range } from '@app/util';
 import GeneratorModule from './GeneratorModule';
 
 
 class Checkerboard extends GeneratorModule {
   public getValue(x: number, y: number, z: number): number {
-    let ix = Math.floor(MathFuncs.makeInt32Range(x));
-    let iy = Math.floor(MathFuncs.makeInt32Range(y));
-    let iz = Math.floor(MathFuncs.makeInt32Range(z));
+    let ix = Math.floor(makeInt32Range(x));
+    let iy = Math.floor(makeInt32Range(y));
+    let iz = Math.floor(makeInt32Range(z));
 
     return (ix & 1 ^ iy & 1 ^ iz & 1) ? -1.0 : 1.0;
   }
