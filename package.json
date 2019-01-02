@@ -2,7 +2,7 @@
   "name": "libnoise-ts",
   "version": "0.1.0",
   "description": "A port of libnoise, modernised and ported to TypeScript",
-  "main": "index.js",
+  "main": "@TODO",
   "scripts": {
     "debug": "npm run ts-node -- src/index.ts",
     "ts-node": "ts-node -r tsconfig-paths/register --project scripts/tsconfig.json",
