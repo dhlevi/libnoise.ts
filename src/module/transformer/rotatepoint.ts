@@ -8,31 +8,22 @@ class RotatePoint extends TransformerModule {
   public static DEFAULT_ROTATE_Z = 0.0;
 
   // @TODO dear lord make a matrix class
-  private x1matrix: number;
-  private x2matrix: number;
-  private x3matrix: number;
-  private y1matrix: number;
-  private y2matrix: number;
-  private y3matrix: number;
-  private z1matrix: number;
-  private z2matrix: number;
-  private z3matrix: number;
-  private _xAngle: number;
-  private _yAngle: number;
-  private _zAngle: number;
+  private x1matrix: number = 0;
+  private x2matrix: number = 0;
+  private x3matrix: number = 0;
+  private y1matrix: number = 0;
+  private y2matrix: number = 0;
+  private y3matrix: number = 0;
+  private z1matrix: number = 0;
+  private z2matrix: number = 0;
+  private z3matrix: number = 0;
+  private _xAngle: number = RotatePoint.DEFAULT_ROTATE_X;
+  private _yAngle: number = RotatePoint.DEFAULT_ROTATE_Y;
+  private _zAngle: number = RotatePoint.DEFAULT_ROTATE_Z;
 
   constructor(sourceModule: Module, xAngle?: number, yAngle?: number, zAngle?: number) {
     super(sourceModule);
 
-    this.x1matrix = null;
-    this.x2matrix = null;
-    this.x3matrix = null;
-    this.y1matrix = null;
-    this.y2matrix = null;
-    this.y3matrix = null;
-    this.z1matrix = null;
-    this.z2matrix = null;
-    this.z3matrix = null;
     this.xAngle = xAngle || RotatePoint.DEFAULT_ROTATE_X;
     this.yAngle = yAngle || RotatePoint.DEFAULT_ROTATE_Y;
     this.zAngle = zAngle || RotatePoint.DEFAULT_ROTATE_Z;

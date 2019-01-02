@@ -1,22 +1,12 @@
 import Cylinder from '@app/model/cylinder';
-import Module from '@app/module';
 import NoiseMap from '@app/noisemap';
 import Builder from './Builder';
 
 class NoiseMapBuilderCylinder extends Builder {
-  private _lowerAngleBound: number;
-  private _lowerHeightBound: number;
-  private _upperAngleBound: number;
-  private _upperHeightBound: number;
-
-  constructor(sourceModule: Module, width: number = 256, height: number = 256) {
-    super(sourceModule, width, height);
-
-    this.lowerAngleBound = 0.0;
-    this.lowerHeightBound = 0.0;
-    this.upperAngleBound = 1.0;
-    this.upperHeightBound = 1.0;
-  }
+  private _lowerAngleBound: number = 0;
+  private _lowerHeightBound: number = 0;
+  private _upperAngleBound: number = 1;
+  private _upperHeightBound: number = 1;
 
   public get lowerAngleBound() {
     return this._lowerAngleBound;

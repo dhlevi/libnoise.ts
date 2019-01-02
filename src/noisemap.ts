@@ -1,11 +1,14 @@
 class NoiseMap {
+  public static readonly DEFAULT_NOISEMAP_HEIGHT = 1;
+  public static readonly DEFAULT_NOISEMAP_WIDTH = 1;
+
   private map: number[];
-  private _height: number;
-  private _width: number;
+  private _height: number = NoiseMap.DEFAULT_NOISEMAP_HEIGHT;
+  private _width: number = NoiseMap.DEFAULT_NOISEMAP_WIDTH;
 
   constructor(w?: number, h?: number) {
-    this.width = w || 1;
-    this.height = h || 1;
+    this.width = w || NoiseMap.DEFAULT_NOISEMAP_WIDTH;
+    this.height = h || NoiseMap.DEFAULT_NOISEMAP_HEIGHT;
     this.map = [];
   }
 

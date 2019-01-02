@@ -4,7 +4,6 @@ import NoiseGen from '@app/noisegen';
 import GeneratorModule from './GeneratorModule';
 
 class RidgedMulti extends GeneratorModule {
-
   public static DEFAULT_RIDGED_FREQUENCY = 1.0;
   public static DEFAULT_RIDGED_LACUNARITY = 2.0;
   public static DEFAULT_RIDGED_OCTAVE_COUNT = 6;
@@ -19,8 +18,8 @@ class RidgedMulti extends GeneratorModule {
   private quality: number;
   private offset: number;
   private gain: number;
-  private _lacunarity: number;
-  private weights: number[];
+  private _lacunarity: number = RidgedMulti.DEFAULT_RIDGED_LACUNARITY;
+  private weights: number[] = [];
 
   constructor(frequency?: number, lacunarity?: number, octaves?: number, seed?: number, quality?: number, offset?: number, gain?: number) {
     super();

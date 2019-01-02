@@ -3,14 +3,17 @@ import Module from '@app/module';
 import ModifierModule from './ModifierModule';
 
 class Clamp extends ModifierModule {
-  private _lowerBound: number;
-  private _upperBound: number;
+  public static DEFAULT_CLAMP_LOWER_BOUND = -1;
+  public static DEFAULT_CLAMP_UPPER_BOUND = 1;
+
+  private _lowerBound: number = Clamp.DEFAULT_CLAMP_LOWER_BOUND;
+  private _upperBound: number = Clamp.DEFAULT_CLAMP_UPPER_BOUND;
 
   constructor(sourceModule: Module, lowerBound?: number, upperBound?: number) {
     super(sourceModule);
 
-    this.lowerBound = lowerBound || null;
-    this.upperBound = upperBound || null;
+    this.lowerBound = lowerBound || Clamp.DEFAULT_CLAMP_LOWER_BOUND;
+    this.upperBound = upperBound || Clamp.DEFAULT_CLAMP_UPPER_BOUND;
   }
 
   public get lowerBound() {

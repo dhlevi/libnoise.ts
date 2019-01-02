@@ -8,7 +8,6 @@ This is a fork that ports the code to TypeScript and modernises things a bit. Th
 ## Backlog
   - Explicit return types on functions
   - Reconcile public/private members against libnoise source
-  - Re-enable strict type checking
   - Audit npm
   - JSDOC public methods
   - Remove random // SETUP and // TEST comments from createMock___() functions
@@ -23,3 +22,4 @@ This is a fork that ports the code to TypeScript and modernises things a bit. Th
   - Write a main module lol
   - Add types for array-based structures
   - Real enums for enum types
+  - Add `readonly` to public static defaults

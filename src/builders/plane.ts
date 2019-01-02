@@ -6,20 +6,15 @@ import Builder from './Builder';
 
 class NoiseMapBuilderPlane extends Builder {
   private seamless: boolean;
-  private _lowerXBound: number;
-  private _lowerYBound: number;
-  private _upperXBound: number;
-  private _upperYBound: number;
+  private _lowerXBound: number = 0;
+  private _lowerYBound: number = 0;
+  private _upperXBound: number = 1;
+  private _upperYBound: number = 1;
 
   constructor(sourceModule: Module, width: number = 256, height: number = 256, seamless: boolean = false) {
     super(sourceModule, width, height);
 
     this.seamless = seamless;
-
-    this.lowerXBound = 0.0;
-    this.lowerYBound = 0.0;
-    this.upperXBound = 1.0;
-    this.upperYBound = 1.0;
   }
 
   public get lowerXBound() {

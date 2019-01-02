@@ -9,9 +9,9 @@ class Select extends SelectorModule {
   public static DEFAULT_SELECT_UPPER_BOUND = 1.0;
 
   private controlModule: Module;
-  private _edge: number;
-  private _lowerBound: number;
-  private _upperBound: number;
+  private _edge: number = Select.DEFAULT_SELECT_EDGE_FALLOFF;
+  private _lowerBound: number = Select.DEFAULT_SELECT_LOWER_BOUND;
+  private _upperBound: number = Select.DEFAULT_SELECT_UPPER_BOUND;
 
   constructor(sourceModuleA: Module, sourceModuleB: Module, controlModule: Module, edge?: number, lowerBound?: number, upperBound?: number) {
     super(sourceModuleA, sourceModuleB);

@@ -1,6 +1,9 @@
 import Interpolation from '@app/interpolation';
 import VectorTable from '@app/vectortable';
 
+// Type definitions
+type CoherentNoiseCallback = (x0: number, y0: number, z0: number, x1: number, y1: number, z1: number, xs: number, ys: number, zs: number) => number;
+
 // @TODO type-definition
 const NoiseGen = {
   // Constants
@@ -59,7 +62,7 @@ const NoiseGen = {
   },
 
   // @TODO won't seed cause `intValueNoise3D` to crap out if it's undefined?
-  valueNoise3D(x: number, y: number, z: number, seed?: number) {
+  valueNoise3D(x: number, y: number, z: number, seed: number = 0) {
     return 1.0 - (NoiseGen.intValueNoise3D(Math.floor(x), Math.floor(y), Math.floor(z), Math.floor(seed)) / 1073741824.0);
   },
 
@@ -98,7 +101,7 @@ const NoiseGen = {
   },
 
   // @TODO remove `seed` param, it is not used. Or maybe it should be?
-  coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?) {
+  coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?: CoherentNoiseCallback) {
     if (!func) {
       throw new Error('Must provide proper interpolation function!');
     }
