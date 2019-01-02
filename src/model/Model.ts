@@ -1,4 +1,4 @@
-import Module from "@app/module/Module";
+import Module from '@app/module/Module';
 
 export default abstract class Model {
   public sourceModule: Module;

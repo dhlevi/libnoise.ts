@@ -1,4 +1,4 @@
-import CombinerModule from "./CombinerModule";
+import CombinerModule from './CombinerModule';
 
 class Add extends CombinerModule {
   public getValue(x: number, y: number, z: number): number {

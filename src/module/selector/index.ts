@@ -1,5 +1,5 @@
-import Blend from "./blend";
-import Select from "./select";
+import Blend from './blend';
+import Select from './select';
 import SelectorModule from './SelectorModule';
 
 export {
