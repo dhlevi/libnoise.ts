@@ -1,4 +1,4 @@
-# libnoise.js
+# libnoise.ts
 
 ### Original project (by [jmcneese](https://github.com/jmcneese/libnoise.js)):
 > A (mostly) direct port of C++ [libnoise](http://libnoise.sourceforge.net/index.html) for CommonJS/Node.js
@@ -17,5 +17,7 @@ This is a fork that ports the code to TypeScript and modernises things a bit. Th
   - Rename createMock___() functions to createMockModule()
   - Align property and variable names with libnoise
   - Probably make script utils less modular and just call themselves
+  
   - Probably remove dependency on src/types folder
   - Test base classes?
+  - Consider re-adding javascript-esque validation for npm consumption
