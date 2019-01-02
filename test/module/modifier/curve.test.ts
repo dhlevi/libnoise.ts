@@ -3,17 +3,18 @@ import { describe, it } from 'mocha';
 
 import { Const } from '@app/module/generator';
 import { Curve } from '@app/module/modifier';
+import { Tuple } from '@app/util';
 
 describe('module/modifier/curve', () => {
   it("can construct successfully", () => {
     // Setup
     const value = 2;
     const sourceModule = new Const(value);
-    const controlPoints: number[][] = [
-      [0, 0],
-      [0, 1],
-      [1, 0],
-      [1, 1],
+    const controlPoints: Tuple<number>[] = [
+      new Tuple(0, 0),
+      new Tuple(0, 1),
+      new Tuple(1, 0),
+      new Tuple(1, 1),
     ];
 
     // Test
@@ -46,10 +47,10 @@ describe('module/modifier/curve', () => {
     const z = 10;
     const value = 2;
     const sourceModule = new Const(value);
-    const controlPoints: number[][] = [
-      [0, 0],
-      [0, 1],
-      [1, 0],
+    const controlPoints: Tuple<number>[] = [
+      new Tuple(0, 0),
+      new Tuple(0, 1),
+      new Tuple(1, 0),
     ];
 
     const mockModule = new Curve(sourceModule, controlPoints);
@@ -80,11 +81,11 @@ describe('module/modifier/curve', () => {
     // Setup
     const value = 2;
     const sourceModule = new Const(value);
-    const mockControlPoint = [1, 1];
-    const controlPoints: number[][] = [
-      [0, 0],
-      [0, 1],
-      [1, 0],
+    const mockControlPoint = new Tuple(1, 1);
+    const controlPoints: Tuple<number>[] = [
+      new Tuple(0, 0),
+      new Tuple(0, 1),
+      new Tuple(1, 0),
       mockControlPoint,
     ];
 
@@ -92,7 +93,7 @@ describe('module/modifier/curve', () => {
 
     // Test
     const testFunc = () => {
-      mockModule.addControlPoint(mockControlPoint[0], mockControlPoint[1]);
+      mockModule.addControlPoint(mockControlPoint.item1, mockControlPoint.item2);
     };
 
     // Assert
@@ -103,11 +104,11 @@ describe('module/modifier/curve', () => {
 function createMockModule(): Curve {
   const value = 2;
   const sourceModule = new Const(value);
-  const controlPoints: number[][] = [
-    [0, 0],
-    [0, 1],
-    [1, 0],
-    [1, 1],
+  const controlPoints: Tuple<number>[] = [
+    new Tuple(0, 0),
+    new Tuple(0, 1),
+    new Tuple(1, 0),
+    new Tuple(1, 1),
   ];
 
   return new Curve(sourceModule, controlPoints);

@@ -1,27 +1,28 @@
 import Interpolation from '@app/interpolation';
 import Misc from '@app/misc';
 import Module from '@app/module';
+import { Tuple } from '@app/util';
 import ModifierModule from './ModifierModule';
 
 class Curve extends ModifierModule {
-  private controlPoints: number[][]; // @TODO write a tuple interface - is an array of pairs
+  private controlPoints: Tuple<number>[];
 
-  constructor(sourceModule: Module, controlPoints?: number[][]) {
+  constructor(sourceModule: Module, controlPoints?: Tuple<number>[]) {
     super(sourceModule);
 
     this.sourceModule = sourceModule || null;
     this.controlPoints = controlPoints || [];
   }
 
-  private findInsertionPos(value: number[]): number {
+  private findInsertionPos(value: Tuple<number>): number {
     // Iterate through list to find first controlPoint larger than new value
     //  and insert right before that
     for (let i = 0; i < this.controlPoints.length; i++) {
       const controlPoint = this.controlPoints[i];
-      if (controlPoint[0] === value[0] && controlPoint[1] === value[1]) {
+      if (controlPoint.item1 === value.item1 && controlPoint.item2 === value.item2) {
         // Inserting control point that already exists
-        throw new Error(`Cannot insert control point [${value.join(',')}]: control point already exists`);
-      } else if (controlPoint[0] > value[0] || (controlPoint[0] === value[0] && controlPoint[1] > value[1])) {
+        throw new Error(`Cannot insert control point ${value.toString()}: control point already exists`);
+      } else if (controlPoint.item1 > value.item1 || (controlPoint.item1 === value.item1 && controlPoint.item2 > value.item2)) {
         // We've found our insertion pos
         return i;
       }
@@ -52,14 +53,14 @@ class Curve extends ModifierModule {
 
     // Now that we've made room for the new control point within the array,
     // add the new control point.
-    this.controlPoints[position] = [input, output];
+    this.controlPoints[position] = new Tuple(input, output);
   }
 
   public addControlPoint(input: number, output: number): void {
     // Find the insertion point for the new control point and insert the new
     // point at that position.  The control point array will remain sorted by
     // input value.
-    this.insertAtPos(this.findInsertionPos([input, output]), input, output);
+    this.insertAtPos(this.findInsertionPos(new Tuple(input, output)), input, output);
   }
 
   public getValue(x: number, y: number, z: number): number {
@@ -74,7 +75,7 @@ class Curve extends ModifierModule {
     // larger than the output value from the source module.
     let indexPos: number;
     for (indexPos = 0; indexPos < this.controlPoints.length; indexPos++) {
-      if (value < this.controlPoints[indexPos][0]) {
+      if (value < this.controlPoints[indexPos].item1) {
         break;
       }
     }
@@ -91,20 +92,20 @@ class Curve extends ModifierModule {
     // smallest input value of the control point array), get the corresponding
     // output value of the nearest control point and exit now.
     if (index1 === index2) {
-      return this.controlPoints[index1][1];
+      return this.controlPoints[index1].item2;
     }
 
     // Compute the alpha value used for cubic interpolation.
-    let input0 = this.controlPoints[index1][0];
-    let input1 = this.controlPoints[index2][0];
+    let input0 = this.controlPoints[index1].item1;
+    let input1 = this.controlPoints[index2].item1;
     let alpha = (value - input0) / (input1 - input0);
 
     // Now perform the cubic interpolation given the alpha value.
     return Interpolation.cubic(
-      this.controlPoints[index0][1],
-      this.controlPoints[index1][1],
-      this.controlPoints[index2][1],
-      this.controlPoints[index3][1],
+      this.controlPoints[index0].item2,
+      this.controlPoints[index1].item2,
+      this.controlPoints[index2].item2,
+      this.controlPoints[index3].item2,
       alpha,
     );
   }
