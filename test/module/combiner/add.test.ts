@@ -26,7 +26,7 @@ describe('module/combiner/add', () => {
     const x = 10;
     const y = 10;
     const z = 10;
-    const mockModule = createMockAdd();
+    const mockModule = createMockModule();
 
     // Test
     const value = mockModule.getValue(x, y, z);
@@ -36,7 +36,7 @@ describe('module/combiner/add', () => {
   });
 });
 
-function createMockAdd(): Add {
+function createMockModule(): Add {
   const valueA = 2;
   const valueB = 3;
   const sourceModuleA = new Const(valueA);

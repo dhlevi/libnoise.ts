@@ -35,6 +35,5 @@ describe('module/generator/cylinders', () => {
 function createMockModule(): Cylinders {
   const frequency = 2;
 
-  // Test
   return new Cylinders(frequency);
 }

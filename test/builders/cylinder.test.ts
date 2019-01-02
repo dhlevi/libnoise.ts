@@ -25,7 +25,7 @@ describe("builders/cylinder", () => {
 
   it("lowerAngleBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
 
     // Test
     let lowerAngleBound: number = mockModule.lowerAngleBound;
@@ -36,7 +36,7 @@ describe("builders/cylinder", () => {
 
   it("setting lowerAngleBound updates correctly", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -49,7 +49,7 @@ describe("builders/cylinder", () => {
 
   it("setting lowerAngleBound to a value higher than upperAngleBound throws an error", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = mockModule.upperAngleBound + 1;
 
     // Test
@@ -63,7 +63,7 @@ describe("builders/cylinder", () => {
 
   it("lowerHeightBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
 
     // Test
     let lowerHeightBound: number = mockModule.lowerHeightBound;
@@ -74,7 +74,7 @@ describe("builders/cylinder", () => {
 
   it("setting lowerHeightBound updates correctly", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -87,7 +87,7 @@ describe("builders/cylinder", () => {
 
   it("setting lowerHeightBound to a value higher than upperHeightBound throws an error", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = mockModule.upperHeightBound + 1;
 
     // Test
@@ -101,7 +101,7 @@ describe("builders/cylinder", () => {
 
   it("upperAngleBound defaults to 1", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
 
     // Test
     let upperAngleBound: number = mockModule.upperAngleBound;
@@ -112,7 +112,7 @@ describe("builders/cylinder", () => {
 
   it("setting upperAngleBound updates correctly", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -125,7 +125,7 @@ describe("builders/cylinder", () => {
 
   it("setting upperAngleBound to a value lower than lowerAngleBound throws an error", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = mockModule.lowerAngleBound - 1;
 
     // Test
@@ -139,7 +139,7 @@ describe("builders/cylinder", () => {
 
   it("upperHeightBound defaults to 1", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
 
     // Test
     let upperHeightBound: number = mockModule.upperHeightBound;
@@ -150,7 +150,7 @@ describe("builders/cylinder", () => {
 
   it("setting upperHeightBound updates correctly", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -163,7 +163,7 @@ describe("builders/cylinder", () => {
 
   it("setting upperHeightBound to a value lower than lowerHeightBound throws an error", () => {
     // Setup
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
     const newValue = mockModule.lowerHeightBound - 1;
 
     // Test
@@ -177,7 +177,7 @@ describe("builders/cylinder", () => {
 
   it("calling build returns a noise map", () => {
     // Setup
-    const mockModule: Cylinder = createMockCylinder();
+    const mockModule: Cylinder = createMockModule();
 
     // Test
     const noiseMap: NoiseMap = mockModule.build();
@@ -187,7 +187,7 @@ describe("builders/cylinder", () => {
   });
 });
 
-function createMockCylinder(): Cylinder {
+function createMockModule(): Cylinder {
   const value: number = 2;
   const sourceModule: Module = new Const(value);
   const width: number = 10;

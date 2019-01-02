@@ -24,7 +24,7 @@ describe("builders/sphere", () => {
 
   it("westLonBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
 
     // Test
     let westLonBound: number = mockModule.westLonBound;
@@ -35,7 +35,7 @@ describe("builders/sphere", () => {
 
   it("setting westLonBound updates correctly", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = -0.5;
 
     // Test
@@ -48,7 +48,7 @@ describe("builders/sphere", () => {
 
   it("setting westLonBound to a value higher than eastLonBound throws an error", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = mockModule.eastLonBound + 1;
 
     // Test
@@ -62,7 +62,7 @@ describe("builders/sphere", () => {
 
   it("southLatBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
 
     // Test
     let southLatBound: number = mockModule.southLatBound;
@@ -73,7 +73,7 @@ describe("builders/sphere", () => {
 
   it("setting southLatBound updates correctly", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = -0.5;
 
     // Test
@@ -86,7 +86,7 @@ describe("builders/sphere", () => {
 
   it("setting southLatBound to a value higher than northLatBound throws an error", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = mockModule.northLatBound + 1;
 
     // Test
@@ -100,7 +100,7 @@ describe("builders/sphere", () => {
 
   it("eastLonBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
 
     // Test
     let eastLonBound: number = mockModule.eastLonBound;
@@ -111,7 +111,7 @@ describe("builders/sphere", () => {
 
   it("setting eastLonBound updates correctly", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -124,7 +124,7 @@ describe("builders/sphere", () => {
 
   it("setting eastLonBound to a value lower than westLonBound throws an error", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = mockModule.westLonBound - 1;
 
     // Test
@@ -138,7 +138,7 @@ describe("builders/sphere", () => {
 
   it("northLatBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
 
     // Test
     let northLatBound: number = mockModule.northLatBound;
@@ -149,7 +149,7 @@ describe("builders/sphere", () => {
 
   it("setting northLatBound updates correctly", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -162,7 +162,7 @@ describe("builders/sphere", () => {
 
   it("setting northLatBound to a value lower than southLatBound throws an error", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
     const newValue = mockModule.southLatBound - 1;
 
     // Test
@@ -176,7 +176,7 @@ describe("builders/sphere", () => {
 
   it("calling build returns a noise map", () => {
     // Setup
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
 
     // Test
     const noiseMap: NoiseMap = mockModule.build();
@@ -186,13 +186,11 @@ describe("builders/sphere", () => {
   });
 });
 
-function createMockSphere(): Sphere {
+function createMockModule(): Sphere {
   const value: number = 2;
   const sourceModule = new Const(value);
   const width: number = 10;
   const height: number = 10;
-
-
 
   return new Sphere(sourceModule, width, height);
 }

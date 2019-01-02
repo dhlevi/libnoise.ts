@@ -69,12 +69,10 @@ describe('module/modifier/terrace', () => {
 });
 
 function createMockModule(): Terrace {
-  // Setup
   const value = 2;
   const sourceModule = new Const(value);
   const controlPoints: number[] = [1, 2, 3, 4];
   const invert = false;
 
-  // Test
   return new Terrace(sourceModule, controlPoints, invert);
 }

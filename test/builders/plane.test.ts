@@ -25,7 +25,7 @@ describe("builders/plane", () => {
 
   it("lowerXBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
 
     // Test
     let lowerXBound: number = mockModule.lowerXBound;
@@ -36,7 +36,7 @@ describe("builders/plane", () => {
 
   it("setting lowerXBound updates correctly", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -49,7 +49,7 @@ describe("builders/plane", () => {
 
   it("setting lowerXBound to a value higher than upperXBound throws an error", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = mockModule.upperXBound + 1;
 
     // Test
@@ -63,7 +63,7 @@ describe("builders/plane", () => {
 
   it("lowerYBound defaults to 0", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
 
     // Test
     let lowerYBound: number = mockModule.lowerYBound;
@@ -74,7 +74,7 @@ describe("builders/plane", () => {
 
   it("setting lowerYBound updates correctly", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -87,7 +87,7 @@ describe("builders/plane", () => {
 
   it("setting lowerYBound to a value higher than upperYBound throws an error", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = mockModule.upperYBound + 1;
 
     // Test
@@ -101,7 +101,7 @@ describe("builders/plane", () => {
 
   it("upperXBound defaults to 1", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
 
     // Test
     let upperXBound: number = mockModule.upperXBound;
@@ -112,7 +112,7 @@ describe("builders/plane", () => {
 
   it("setting upperXBound updates correctly", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -125,7 +125,7 @@ describe("builders/plane", () => {
 
   it("setting upperXBound to a value lower than lowerXBound throws an error", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = mockModule.lowerXBound - 1;
 
     // Test
@@ -139,7 +139,7 @@ describe("builders/plane", () => {
 
   it("upperYBound defaults to 1", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
 
     // Test
     let upperYBound: number = mockModule.upperYBound;
@@ -150,7 +150,7 @@ describe("builders/plane", () => {
 
   it("setting upperYBound updates correctly", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
@@ -163,7 +163,7 @@ describe("builders/plane", () => {
 
   it("setting upperYBound to a value lower than lowerYBound throws an error", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
     const newValue = mockModule.lowerYBound - 1;
 
     // Test
@@ -177,7 +177,7 @@ describe("builders/plane", () => {
 
   it("calling build returns a noise map", () => {
     // Setup
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
 
     // Test
     const noiseMap: NoiseMap = mockModule.build();
@@ -187,8 +187,7 @@ describe("builders/plane", () => {
   });
 });
 
-function createMockPlane(): Plane {
-  // Setup
+function createMockModule(): Plane {
   const value: number = 2;
   const sourceModule = new Const(value);
   const width: number = 10;

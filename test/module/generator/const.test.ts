@@ -32,6 +32,5 @@ describe('module/generator/const', () => {
 function createMockModule(): Const {
   const value = 2;
 
-  // Test
   return new Const(value);
 }

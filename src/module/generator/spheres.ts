@@ -1,7 +1,7 @@
 import GeneratorModule from './GeneratorModule';
 
 class Spheres extends GeneratorModule {
-  public static DEFAULT_SPHERES_FREQUENCY = 4.0;
+  public static readonly DEFAULT_SPHERES_FREQUENCY = 4.0;
 
   private frequency: number;
 

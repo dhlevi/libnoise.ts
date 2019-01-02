@@ -58,13 +58,11 @@ describe('module/transformer/scalepoint', () => {
 });
 
 function createMockModule(): ScalePoint {
-  // Setup
   const sourceValue = 2;
   const sourceModule = new Const(sourceValue);
   const xScale = 10;
   const yScale = 20;
   const zScale = 30;
 
-  // Test
   return new ScalePoint(sourceModule, xScale, yScale, zScale);
 }

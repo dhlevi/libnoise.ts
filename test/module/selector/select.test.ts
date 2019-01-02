@@ -119,6 +119,5 @@ function createMockModule(): Select {
   const lowerBound = -0.5;
   const upperBound = 0.5;
 
-  // Test
   return new Select(sourceModuleA, sourceModuleB, controlModule, edgeFalloff, lowerBound, upperBound);
 }

@@ -3,9 +3,9 @@ import NoiseGen from '@app/noisegen';
 import GeneratorModule from './GeneratorModule';
 
 class Voronoi extends GeneratorModule {
-  public static DEFAULT_VORONOI_DISPLACEMENT = 1.0;
-  public static DEFAULT_VORONOI_FREQUENCY = 1.0;
-  public static DEFAULT_VORONOI_SEED = 0;
+  public static readonly DEFAULT_VORONOI_DISPLACEMENT = 1.0;
+  public static readonly DEFAULT_VORONOI_FREQUENCY = 1.0;
+  public static readonly DEFAULT_VORONOI_SEED = 0;
 
   private frequency: number;
   private displacement: number;

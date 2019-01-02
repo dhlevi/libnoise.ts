@@ -2,9 +2,9 @@ import Module from '@app/module';
 import TransformerModule from './TransformerModule';
 
 class ScalePoint extends TransformerModule {
-  public static DEFAULT_SCALE_POINT_X = 1.0;
-  public static DEFAULT_SCALE_POINT_Y = 1.0;
-  public static DEFAULT_SCALE_POINT_Z = 1.0;
+  public static readonly DEFAULT_SCALE_POINT_X = 1.0;
+  public static readonly DEFAULT_SCALE_POINT_Y = 1.0;
+  public static readonly DEFAULT_SCALE_POINT_Z = 1.0;
 
   public xScale: number;
   public yScale: number;

@@ -3,9 +3,9 @@ import Module from '@app/module';
 import TransformerModule from './TransformerModule';
 
 class RotatePoint extends TransformerModule {
-  public static DEFAULT_ROTATE_X = 0.0;
-  public static DEFAULT_ROTATE_Y = 0.0;
-  public static DEFAULT_ROTATE_Z = 0.0;
+  public static readonly DEFAULT_ROTATE_X = 0.0;
+  public static readonly DEFAULT_ROTATE_Y = 0.0;
+  public static readonly DEFAULT_ROTATE_Z = 0.0;
 
   // @TODO dear lord make a matrix class
   private x1matrix: number = 0;

@@ -4,9 +4,9 @@ import Module from '@app/module';
 import SelectorModule from './SelectorModule';
 
 class Select extends SelectorModule {
-  public static DEFAULT_SELECT_EDGE_FALLOFF = 0.0;
-  public static DEFAULT_SELECT_LOWER_BOUND = -1.0;
-  public static DEFAULT_SELECT_UPPER_BOUND = 1.0;
+  public static readonly DEFAULT_SELECT_EDGE_FALLOFF = 0.0;
+  public static readonly DEFAULT_SELECT_LOWER_BOUND = -1.0;
+  public static readonly DEFAULT_SELECT_UPPER_BOUND = 1.0;
 
   private controlModule: Module;
   private _edge: number = Select.DEFAULT_SELECT_EDGE_FALLOFF;

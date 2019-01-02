@@ -3,12 +3,12 @@ import NoiseGen from '@app/noisegen';
 import GeneratorModule from './GeneratorModule';
 
 class Billow extends GeneratorModule {
-  public static DEFAULT_BILLOW_FREQUENCY = 1.0;
-  public static DEFAULT_BILLOW_LACUNARITY = 2.0;
-  public static DEFAULT_BILLOW_OCTAVE_COUNT = 6;
-  public static DEFAULT_BILLOW_PERSISTENCE = 0.5;
-  public static DEFAULT_BILLOW_SEED = 0;
-  public static BILLOW_MAX_OCTAVE = 30;
+  public static readonly DEFAULT_BILLOW_FREQUENCY = 1.0;
+  public static readonly DEFAULT_BILLOW_LACUNARITY = 2.0;
+  public static readonly DEFAULT_BILLOW_OCTAVE_COUNT = 6;
+  public static readonly DEFAULT_BILLOW_PERSISTENCE = 0.5;
+  public static readonly DEFAULT_BILLOW_SEED = 0;
+  public static readonly BILLOW_MAX_OCTAVE = 30;
 
   public frequency: number;
   public lacunarity: number;

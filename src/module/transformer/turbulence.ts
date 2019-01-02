@@ -3,8 +3,8 @@ import Perlin from '@app/module/generator/perlin';
 import TransformerModule from './TransformerModule';
 
 class Turbulence extends TransformerModule {
-  public static DEFAULT_TURBULENCE_POWER = 1.0;
-  public static DEFAULT_TURBULENCE_ROUGHNESS = 3;
+  public static readonly DEFAULT_TURBULENCE_POWER = 1.0;
+  public static readonly DEFAULT_TURBULENCE_ROUGHNESS = 3;
 
   private xDistortModule: Perlin;
   private yDistortModule: Perlin;

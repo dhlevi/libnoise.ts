@@ -4,13 +4,13 @@ import NoiseGen from '@app/noisegen';
 import GeneratorModule from './GeneratorModule';
 
 class RidgedMulti extends GeneratorModule {
-  public static DEFAULT_RIDGED_FREQUENCY = 1.0;
-  public static DEFAULT_RIDGED_LACUNARITY = 2.0;
-  public static DEFAULT_RIDGED_OCTAVE_COUNT = 6;
-  public static DEFAULT_RIDGED_SEED = 0;
-  public static DEFAULT_RIDGED_OFFSET = 1.0;
-  public static DEFAULT_RIDGED_GAIN = 2.0;
-  public static RIDGED_MAX_OCTAVE = 30;
+  public static readonly DEFAULT_RIDGED_FREQUENCY = 1.0;
+  public static readonly DEFAULT_RIDGED_LACUNARITY = 2.0;
+  public static readonly DEFAULT_RIDGED_OCTAVE_COUNT = 6;
+  public static readonly DEFAULT_RIDGED_SEED = 0;
+  public static readonly DEFAULT_RIDGED_OFFSET = 1.0;
+  public static readonly DEFAULT_RIDGED_GAIN = 2.0;
+  public static readonly RIDGED_MAX_OCTAVE = 30;
 
   private frequency: number;
   private octaves: number;

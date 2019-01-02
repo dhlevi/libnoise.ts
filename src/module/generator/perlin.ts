@@ -3,12 +3,12 @@ import NoiseGen from '@app/noisegen';
 import GeneratorModule from './GeneratorModule';
 
 class Perlin extends GeneratorModule {
-  public static DEFAULT_PERLIN_FREQUENCY = 1.0;
-  public static DEFAULT_PERLIN_LACUNARITY = 2.0;
-  public static DEFAULT_PERLIN_OCTAVE_COUNT = 6;
-  public static DEFAULT_PERLIN_PERSISTENCE = 0.5;
-  public static DEFAULT_PERLIN_SEED = 0;
-  public static PERLIN_MAX_OCTAVE = 30;
+  public static readonly DEFAULT_PERLIN_FREQUENCY = 1.0;
+  public static readonly DEFAULT_PERLIN_LACUNARITY = 2.0;
+  public static readonly DEFAULT_PERLIN_OCTAVE_COUNT = 6;
+  public static readonly DEFAULT_PERLIN_PERSISTENCE = 0.5;
+  public static readonly DEFAULT_PERLIN_SEED = 0;
+  public static readonly PERLIN_MAX_OCTAVE = 30;
 
   public frequency: number;
   public lacunarity: number;

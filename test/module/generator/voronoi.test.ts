@@ -41,6 +41,5 @@ function createMockModule(): Voronoi {
   const distance = false;
   const seed = 18;
 
-  // Test
   return new Voronoi(frequency, displacement, distance, seed);
 }

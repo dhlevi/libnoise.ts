@@ -2,8 +2,8 @@ import Module from '@app/module';
 import ModifierModule from './ModifierModule';
 
 class ScaleBias extends ModifierModule {
-  public static DEFAULT_BIAS = 0.0;
-  public static DEFAULT_SCALE = 1.0;
+  public static readonly DEFAULT_BIAS = 0.0;
+  public static readonly DEFAULT_SCALE = 1.0;
 
   private scale: number;
   private bias: number;

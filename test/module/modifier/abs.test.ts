@@ -38,6 +38,5 @@ function createMockModule(): Abs {
   const value = 2;
   const sourceModule = new Const(value);
 
-  // Test
   return new Abs(sourceModule);
 }

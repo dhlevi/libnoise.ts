@@ -3,8 +3,8 @@ import Module from '@app/module';
 import ModifierModule from './ModifierModule';
 
 class Clamp extends ModifierModule {
-  public static DEFAULT_CLAMP_LOWER_BOUND = -1;
-  public static DEFAULT_CLAMP_UPPER_BOUND = 1;
+  public static readonly DEFAULT_CLAMP_LOWER_BOUND = -1;
+  public static readonly DEFAULT_CLAMP_UPPER_BOUND = 1;
 
   private _lowerBound: number = Clamp.DEFAULT_CLAMP_LOWER_BOUND;
   private _upperBound: number = Clamp.DEFAULT_CLAMP_UPPER_BOUND;

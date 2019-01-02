@@ -1,7 +1,7 @@
 import GeneratorModule from './GeneratorModule';
 
 class Const extends GeneratorModule {
-  public static DEFAULT_CONST_VALUE: number = 0.0;
+  public static readonly DEFAULT_CONST_VALUE: number = 0.0;
 
   private value: number;
 

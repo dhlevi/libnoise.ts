@@ -35,6 +35,5 @@ describe('module/generator/spheres', () => {
 function createMockModule(): Spheres {
   const frequency = 2;
 
-  // Test
   return new Spheres(frequency);
 }

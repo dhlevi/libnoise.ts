@@ -22,7 +22,7 @@ describe('model/line', () => {
   it("calling getValue returns a number", () => {
     // Setup
     const p = 0.6;
-    const mockModule = createMockLine();
+    const mockModule = createMockModule();
 
     // Test
     const value = mockModule.getValue(p);
@@ -32,11 +32,9 @@ describe('model/line', () => {
   });
 });
 
-function createMockLine(): Line {
-  // Setup
+function createMockModule(): Line {
   const value = 2;
   const sourceModule = new Const(value);
 
-  // Test
   return new Line(sourceModule);
 }

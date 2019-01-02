@@ -23,7 +23,7 @@ describe('model/plane', () => {
     // Setup
     const x = 10;
     const y = 10;
-    const mockModule = createMockPlane();
+    const mockModule = createMockModule();
 
     // Test
     const value = mockModule.getValue(x, y);
@@ -33,11 +33,9 @@ describe('model/plane', () => {
   });
 });
 
-function createMockPlane(): Plane {
-  // Setup
+function createMockModule(): Plane {
   const value = 2;
   const sourceModule = new Const(value);
 
-  // Test
   return new Plane(sourceModule);
 }

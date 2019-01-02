@@ -42,6 +42,5 @@ function createMockModule(): ScaleBias {
   const scale = 2;
   const bias = 2;
 
-  // Test
   return new ScaleBias(sourceModule, scale, bias);
 }

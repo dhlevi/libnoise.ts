@@ -97,13 +97,11 @@ describe('module/transformer/rotatepoint', () => {
 });
 
 function createMockModule(): RotatePoint {
-  // Setup
   const sourceValue = 2;
   const sourceModule = new Const(sourceValue);
   const xAngle = 10;
   const yAngle = 20;
   const zAngle = 30;
 
-  // Test
   return new RotatePoint(sourceModule, xAngle, yAngle, zAngle);
 }

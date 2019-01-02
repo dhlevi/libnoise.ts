@@ -23,7 +23,7 @@ describe('model/cylinder', () => {
     // Setup
     const angle = 45;
     const y = 10;
-    const mockModule = createMockCylinder();
+    const mockModule = createMockModule();
 
     // Test
     const value = mockModule.getValue(angle, y);
@@ -33,11 +33,9 @@ describe('model/cylinder', () => {
   });
 });
 
-function createMockCylinder(): Cylinder {
-  // Setup
+function createMockModule(): Cylinder {
   const value = 2;
   const sourceModule = new Const(value);
 
-  // Test
   return new Cylinder(sourceModule);
 }

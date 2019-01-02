@@ -41,7 +41,6 @@ describe('module/transformer/displace', () => {
 });
 
 function createMockModule(): Displace {
-  // Setup
   const sourceValue = 2;
   const sourceModule = new Const(sourceValue);
   const xValue = 1;
@@ -51,6 +50,5 @@ function createMockModule(): Displace {
   const zValue = 3;
   const zModule = new Const(zValue);
 
-  // Test
   return new Displace(sourceModule, xModule, yModule, zModule);
 }

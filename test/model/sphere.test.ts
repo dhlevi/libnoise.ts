@@ -23,7 +23,7 @@ describe('model/sphere', () => {
     // Setup
     const lat = 10;
     const lon = 10;
-    const mockModule = createMockSphere();
+    const mockModule = createMockModule();
 
     // Test
     const value = mockModule.getValue(lat, lon);
@@ -33,11 +33,9 @@ describe('model/sphere', () => {
   });
 });
 
-function createMockSphere(): Sphere {
-  // Setup
+function createMockModule(): Sphere {
   const value = 2;
   const sourceModule = new Const(value);
 
-  // Test
   return new Sphere(sourceModule);
 }
