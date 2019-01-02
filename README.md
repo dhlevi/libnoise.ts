@@ -6,8 +6,6 @@
 This is a fork that ports the code to TypeScript and modernises things a bit. This library can be used with both Node.js and web projects.
 
 ## Backlog
-  - Make less constructor stuff optional
-  - Go through and format code
   - Explicit return types on functions
   - Reconcile public/private members against libnoise source
   - Re-enable strict type checking
@@ -21,3 +19,7 @@ This is a fork that ports the code to TypeScript and modernises things a bit. Th
   - Probably remove dependency on src/types folder
   - Test base classes?
   - Consider re-adding javascript-esque validation for npm consumption
+  - @TODO
+  - Write a main module lol
+  - Add types for array-based structures
+  - Real enums for enum types
