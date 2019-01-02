@@ -38,7 +38,7 @@ describe('module/generator/billow', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Billow {
   const frequency = 2;
   const lacunarity = 3;
   const octaves = 5;

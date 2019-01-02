@@ -29,6 +29,6 @@ describe('module/generator/checkerboard', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Checkerboard {
   return new Checkerboard();
 }

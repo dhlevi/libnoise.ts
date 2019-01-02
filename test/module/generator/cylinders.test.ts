@@ -32,7 +32,7 @@ describe('module/generator/cylinders', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Cylinders {
   const frequency = 2;
 
   // Test

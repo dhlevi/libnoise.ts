@@ -21,7 +21,7 @@ class Voronoi extends GeneratorModule {
     this.seed = seed || Voronoi.DEFAULT_VORONOI_SEED;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     // This method could be more efficient by caching the seed values.
     x = (x * this.frequency);
     y = (y * this.frequency);

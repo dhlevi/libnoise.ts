@@ -36,7 +36,7 @@ describe('module/combiner/min', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Min {
   const valueA = 2;
   const valueB = 3;
   const sourceModuleA = new Const(valueA);

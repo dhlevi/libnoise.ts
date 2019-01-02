@@ -18,7 +18,7 @@ class NoiseMapBuilderSphere extends Builder {
     this._westLonBound = 0.0;
   }
 
-  public get eastLonBound() {
+  public get eastLonBound(): number {
     return this._eastLonBound;
   }
   public set eastLonBound(v: number) {
@@ -29,7 +29,7 @@ class NoiseMapBuilderSphere extends Builder {
     this._eastLonBound = v;
   }
 
-  public get northLatBound() {
+  public get northLatBound(): number {
     return this._northLatBound;
   }
   public set northLatBound(v: number) {
@@ -40,7 +40,7 @@ class NoiseMapBuilderSphere extends Builder {
     this._northLatBound = v;
   }
 
-  public get southLatBound() {
+  public get southLatBound(): number {
     return this._southLatBound;
   }
   public set southLatBound(v: number) {
@@ -51,7 +51,7 @@ class NoiseMapBuilderSphere extends Builder {
     this._southLatBound = v;
   }
 
-  public get westLonBound() {
+  public get westLonBound(): number {
     return this._westLonBound;
   }
   public set westLonBound(v: number) {
@@ -87,7 +87,7 @@ class NoiseMapBuilderSphere extends Builder {
 
   }
 
-  public setBounds(westLonBound: number, eastLonBound: number, southLatBound: number, northLatBound: number) {
+  public setBounds(westLonBound: number, eastLonBound: number, southLatBound: number, northLatBound: number): void {
     this.westLonBound = westLonBound;
     this.eastLonBound = eastLonBound;
     this.southLatBound = southLatBound;

@@ -3,7 +3,7 @@ import GeneratorModule from './GeneratorModule';
 
 
 class Checkerboard extends GeneratorModule {
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     let ix = Math.floor(MathFuncs.makeInt32Range(x));
     let iy = Math.floor(MathFuncs.makeInt32Range(y));
     let iz = Math.floor(MathFuncs.makeInt32Range(z));

@@ -90,7 +90,7 @@ describe('module/modifier/clamp', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Clamp {
   const value = 2;
   const lowerBound = 0;
   const upperBound = 1;

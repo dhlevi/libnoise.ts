@@ -8,7 +8,7 @@ class NoiseMapBuilderCylinder extends Builder {
   private _upperAngleBound: number = 1;
   private _upperHeightBound: number = 1;
 
-  public get lowerAngleBound() {
+  public get lowerAngleBound(): number {
     return this._lowerAngleBound;
   }
   public set lowerAngleBound(v: number) {
@@ -19,7 +19,7 @@ class NoiseMapBuilderCylinder extends Builder {
     this._lowerAngleBound = v;
   }
 
-  public get lowerHeightBound() {
+  public get lowerHeightBound(): number {
     return this._lowerHeightBound;
   }
   public set lowerHeightBound(v: number) {
@@ -30,7 +30,7 @@ class NoiseMapBuilderCylinder extends Builder {
     this._lowerHeightBound = v;
   }
 
-  public get upperAngleBound() {
+  public get upperAngleBound(): number {
     return this._upperAngleBound;
   }
   public set upperAngleBound(v: number) {
@@ -41,7 +41,7 @@ class NoiseMapBuilderCylinder extends Builder {
     this._upperAngleBound = v;
   }
 
-  public get upperHeightBound() {
+  public get upperHeightBound(): number {
     return this._upperHeightBound;
   }
   public set upperHeightBound(v: number) {
@@ -75,7 +75,7 @@ class NoiseMapBuilderCylinder extends Builder {
     return this.noiseMap;
   }
 
-  public setBounds(lowerAngleBound: number, lowerHeightBound: number, upperAngleBound: number, upperHeightBound: number) {
+  public setBounds(lowerAngleBound: number, lowerHeightBound: number, upperAngleBound: number, upperHeightBound: number): void {
     this.lowerAngleBound = lowerAngleBound;
     this.lowerHeightBound = lowerHeightBound;
     this.upperAngleBound = upperAngleBound;

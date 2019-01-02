@@ -14,7 +14,7 @@ class Displace extends TransformerModule {
     this.zModule = zModule;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     return this.sourceModule.getValue(
       x + this.xModule.getValue(x, y, z),
       y + this.yModule.getValue(x, y, z),

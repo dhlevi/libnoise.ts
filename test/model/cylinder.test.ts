@@ -33,7 +33,7 @@ describe('model/cylinder', () => {
   });
 });
 
-function createMockCylinder() {
+function createMockCylinder(): Cylinder {
   // Setup
   const value = 2;
   const sourceModule = new Const(value);

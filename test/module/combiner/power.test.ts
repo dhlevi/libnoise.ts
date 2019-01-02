@@ -36,7 +36,7 @@ describe('module/combiner/power', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Power {
   const valueA = 2;
   const valueB = 3;
   const sourceModuleA = new Const(valueA);

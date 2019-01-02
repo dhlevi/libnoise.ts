@@ -187,7 +187,7 @@ describe("builders/plane", () => {
   });
 });
 
-function createMockPlane() {
+function createMockPlane(): Plane {
   // Setup
   const value: number = 2;
   const sourceModule = new Const(value);

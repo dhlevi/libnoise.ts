@@ -2,7 +2,7 @@ import MathConsts from '@app/mathconsts';
 import Model from './Model';
 
 class Sphere extends Model {
-  public getValue(lat: number, lon: number) {
+  public getValue(lat: number, lon: number): number {
     let r: number = Math.cos(MathConsts.DEG_TO_RAD * lat);
 
     return this.sourceModule.getValue(

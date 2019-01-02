@@ -186,7 +186,7 @@ describe("builders/sphere", () => {
   });
 });
 
-function createMockSphere() {
+function createMockSphere(): Sphere {
   const value: number = 2;
   const sourceModule = new Const(value);
   const width: number = 10;

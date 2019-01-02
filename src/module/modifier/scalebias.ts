@@ -15,7 +15,7 @@ class ScaleBias extends ModifierModule {
     this.bias = bias || ScaleBias.DEFAULT_BIAS;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     return this.sourceModule.getValue(x, y, z) * this.scale + this.bias;
   }
 }

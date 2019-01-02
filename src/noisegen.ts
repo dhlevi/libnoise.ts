@@ -41,7 +41,7 @@ const NoiseGen = {
    */
   QUALITY_BEST: 2,
 
-  intValueNoise3D(x: number, y: number, z: number, seed: number) {
+  intValueNoise3D(x: number, y: number, z: number, seed: number): number {
     x = Math.floor(x);
     y = Math.floor(y);
     z = Math.floor(z);
@@ -61,12 +61,11 @@ const NoiseGen = {
     return ((n * (n * n * 60493 + 19990303) + 1376312589) & 0x7fffffff);
   },
 
-  // @TODO won't seed cause `intValueNoise3D` to crap out if it's undefined?
-  valueNoise3D(x: number, y: number, z: number, seed: number = 0) {
+  valueNoise3D(x: number, y: number, z: number, seed: number = 0): number {
     return 1.0 - (NoiseGen.intValueNoise3D(Math.floor(x), Math.floor(y), Math.floor(z), Math.floor(seed)) / 1073741824.0);
   },
 
-  gradientNoise3D(fx: number, fy: number, fz: number, ix: number, iy: number, iz: number, seed: number = 1) {
+  gradientNoise3D(fx: number, fy: number, fz: number, ix: number, iy: number, iz: number, seed: number = 1): number {
     // Randomly generate a gradient vector given the integer coordinates of the
     // input value.  This implementation generates a random number and uses it
     // as an index into a normalized-vector lookup table.
@@ -101,7 +100,7 @@ const NoiseGen = {
   },
 
   // @TODO remove `seed` param, it is not used. Or maybe it should be?
-  coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?: CoherentNoiseCallback) {
+  coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?: CoherentNoiseCallback): number {
     if (!func) {
       throw new Error('Must provide proper interpolation function!');
     }
@@ -161,7 +160,7 @@ const NoiseGen = {
     return func(x0, y0, z0, x1, y1, z1, xs, ys, zs);
   },
 
-  valueCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number) {
+  valueCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
     return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
       // Now calculate the noise values at each vertex of the cube.  To generate
@@ -190,7 +189,7 @@ const NoiseGen = {
     });
   },
 
-  gradientCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number) {
+  gradientCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
     return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
       // Now calculate the noise values at each vertex of the cube.  To generate

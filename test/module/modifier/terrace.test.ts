@@ -68,7 +68,7 @@ describe('module/modifier/terrace', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Terrace {
   // Setup
   const value = 2;
   const sourceModule = new Const(value);

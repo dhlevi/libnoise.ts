@@ -17,7 +17,7 @@ class NoiseMapBuilderPlane extends Builder {
     this.seamless = seamless;
   }
 
-  public get lowerXBound() {
+  public get lowerXBound(): number {
     return this._lowerXBound;
   }
   public set lowerXBound(v: number) {
@@ -28,7 +28,7 @@ class NoiseMapBuilderPlane extends Builder {
     this._lowerXBound = v;
   }
 
-  public get lowerYBound() {
+  public get lowerYBound(): number {
     return this._lowerYBound;
   }
   public set lowerYBound(v: number) {
@@ -39,7 +39,7 @@ class NoiseMapBuilderPlane extends Builder {
     this._lowerYBound = v;
   }
 
-  public get upperXBound() {
+  public get upperXBound(): number {
     return this._upperXBound;
   }
   public set upperXBound(v: number) {
@@ -50,7 +50,7 @@ class NoiseMapBuilderPlane extends Builder {
     this._upperXBound = v;
   }
 
-  public get upperYBound() {
+  public get upperYBound(): number {
     return this._upperYBound;
   }
   public set upperYBound(v: number) {
@@ -115,7 +115,7 @@ class NoiseMapBuilderPlane extends Builder {
     return this.noiseMap;
   }
 
-  public setBounds(lowerXBound: number, lowerYBound: number, upperXBound: number, upperYBound: number) {
+  public setBounds(lowerXBound: number, lowerYBound: number, upperXBound: number, upperYBound: number): void {
     this.upperXBound = upperXBound;
     this.upperYBound = upperYBound;
     this.lowerXBound = lowerXBound;

@@ -35,7 +35,7 @@ describe('module/modifier/exponent', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Exponent {
   const value = 2;
   const exponent = 2;
   const sourceModule = new Const(value);

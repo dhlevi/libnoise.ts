@@ -77,7 +77,7 @@ describe('module/transformer/turbulence', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Turbulence {
   const sourceValue = 2;
   const sourceModule = new Const(sourceValue);
   const frequency = 1.5;

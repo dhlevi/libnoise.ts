@@ -32,7 +32,7 @@ describe('module/generator/spheres', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Spheres {
   const frequency = 2;
 
   // Test

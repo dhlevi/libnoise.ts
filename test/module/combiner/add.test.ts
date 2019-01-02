@@ -36,7 +36,7 @@ describe('module/combiner/add', () => {
   });
 });
 
-function createMockAdd() {
+function createMockAdd(): Add {
   const valueA = 2;
   const valueB = 3;
   const sourceModuleA = new Const(valueA);

@@ -38,7 +38,7 @@ describe('module/selector/blend', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Blend {
   const sourceValueA = 2;
   const sourceModuleA = new Const(sourceValueA);
   const sourceValueB = 2;

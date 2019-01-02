@@ -35,7 +35,7 @@ describe('module/generator/voronoi', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Voronoi {
   const frequency = 2;
   const displacement = 1.5;
   const distance = false;

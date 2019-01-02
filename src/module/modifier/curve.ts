@@ -13,7 +13,7 @@ class Curve extends ModifierModule {
     this.controlPoints = controlPoints || [];
   }
 
-  private findInsertionPos(value: number[]) {
+  private findInsertionPos(value: number[]): number {
     // Iterate through list to find first controlPoint larger than new value
     //  and insert right before that
     for (let i = 0; i < this.controlPoints.length; i++) {
@@ -31,7 +31,7 @@ class Curve extends ModifierModule {
     return this.controlPoints.length;
   }
 
-  private insertAtPos(position: number, input: number, output: number) {
+  private insertAtPos(position: number, input: number, output: number): void {
     position = Math.floor(position);
 
     // Make room for the new control point at the specified position within
@@ -55,14 +55,14 @@ class Curve extends ModifierModule {
     this.controlPoints[position] = [input, output];
   }
 
-  public addControlPoint(input: number, output: number) {
+  public addControlPoint(input: number, output: number): void {
     // Find the insertion point for the new control point and insert the new
     // point at that position.  The control point array will remain sorted by
     // input value.
     this.insertAtPos(this.findInsertionPos([input, output]), input, output);
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     if (this.controlPoints.length < 4) {
       throw new Error('Insufficient number of control points!');
     }

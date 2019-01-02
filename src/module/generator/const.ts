@@ -11,8 +11,7 @@ class Const extends GeneratorModule {
     this.value = v || Const.DEFAULT_CONST_VALUE;
   }
 
-  // @TODO probably this will need unused parameters
-  public getValue() {
+  public getValue(): number {
     return this.value;
   }
 }

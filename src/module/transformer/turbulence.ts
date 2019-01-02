@@ -25,7 +25,7 @@ class Turbulence extends TransformerModule {
     this.seed = seed || Perlin.DEFAULT_PERLIN_SEED;
   }
 
-  public get frequency() {
+  public get frequency(): number {
     return this.xDistortModule.frequency;
   }
   public set frequency(v: number) {
@@ -34,7 +34,7 @@ class Turbulence extends TransformerModule {
     this.zDistortModule.frequency = v;
   }
 
-  public get roughness() {
+  public get roughness(): number {
     return this.xDistortModule.octaves;
   }
   public set roughness(v: number) {
@@ -43,7 +43,7 @@ class Turbulence extends TransformerModule {
     this.zDistortModule.octaves = v;
   }
 
-  public get seed() {
+  public get seed(): number {
     return this.xDistortModule.seed;
   }
   public set seed(v: number) {
@@ -52,7 +52,7 @@ class Turbulence extends TransformerModule {
     this.zDistortModule.seed = v + 2;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     // Get the values from the three Perlin noise modules and
     // add each value to each coordinate of the input value.  There are also
     // some offsets added to the coordinates of the input values.  This prevents

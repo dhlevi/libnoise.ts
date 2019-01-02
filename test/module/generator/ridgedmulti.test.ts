@@ -51,7 +51,7 @@ describe('module/generator/ridgedmulti', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): RidgedMulti {
   const frequency = 1;
   const lacunarity = 2;
   const octaves = 6;

@@ -36,7 +36,7 @@ describe('module/modifier/scalebias', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): ScaleBias {
   const value = 2;
   const sourceModule = new Const(value);
   const scale = 2;

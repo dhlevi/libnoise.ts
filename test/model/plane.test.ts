@@ -33,7 +33,7 @@ describe('model/plane', () => {
   });
 });
 
-function createMockPlane() {
+function createMockPlane(): Plane {
   // Setup
   const value = 2;
   const sourceModule = new Const(value);

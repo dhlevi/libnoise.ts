@@ -34,7 +34,7 @@ describe('module/modifier/abs', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Abs {
   const value = 2;
   const sourceModule = new Const(value);
 

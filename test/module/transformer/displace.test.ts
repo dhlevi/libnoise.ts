@@ -40,7 +40,7 @@ describe('module/transformer/displace', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Displace {
   // Setup
   const sourceValue = 2;
   const sourceModule = new Const(sourceValue);

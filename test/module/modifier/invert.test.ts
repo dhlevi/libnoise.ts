@@ -34,7 +34,7 @@ describe('module/modifier/invert', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Invert {
   const value = 2;
   const sourceModule = new Const(value);
 

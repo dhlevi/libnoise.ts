@@ -33,7 +33,7 @@ describe('model/sphere', () => {
   });
 });
 
-function createMockSphere() {
+function createMockSphere(): Sphere {
   // Setup
   const value = 2;
   const sourceModule = new Const(value);

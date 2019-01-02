@@ -12,7 +12,7 @@ class NoiseMap {
     this.map = [];
   }
 
-  public get height() {
+  public get height(): number {
     return this._height;
   }
   public set height(v: number) {
@@ -23,7 +23,7 @@ class NoiseMap {
     this._height = v;
   }
 
-  public get width() {
+  public get width(): number {
     return this._width;
   }
   public set width(v: number) {
@@ -34,26 +34,26 @@ class NoiseMap {
     this._width = v;
   }
 
-  public addValue(x: number, y: number, v: number) {
+  public addValue(x: number, y: number, v: number): void {
     let value = this.getValue(x, y) || 0;
 
     this.setValue(x, y, value + v);
   }
 
-  public getValue(x: number, y: number) {
+  public getValue(x: number, y: number): number {
     return this.map[y * this.width + x];
   }
 
-  public setSize(w: number, h: number) {
+  public setSize(w: number, h: number): void {
     this.width = w;
     this.height = h;
   }
 
-  public setValue(x: number, y: number, v: number) {
+  public setValue(x: number, y: number, v: number): void {
     this.map[y * this.width + x] = v;
   }
 
-  public subtractValue(x: number, y: number, v: number) {
+  public subtractValue(x: number, y: number, v: number): void {
     let value = this.getValue(x, y) || 0;
 
     this.setValue(x, y, value - v);

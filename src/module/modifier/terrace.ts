@@ -14,7 +14,7 @@ class Terrace extends ModifierModule {
     this.invert = invert || false;
   }
 
-  private findInsertionPos(value: number) {
+  private findInsertionPos(value: number): number {
     // Iterate through list to find first controlPoint larger than new value
     //  and insert right before that
     for (let i = 0; i < this.controlPoints.length; i++) {
@@ -32,7 +32,7 @@ class Terrace extends ModifierModule {
     return this.controlPoints.length;
   }
 
-  private insertAtPos(insertionPos: number, value: number) {
+  private insertAtPos(insertionPos: number, value: number): void {
     insertionPos = Math.floor(insertionPos);
 
     // Make room for the new control point at the specified position within
@@ -56,14 +56,14 @@ class Terrace extends ModifierModule {
     this.controlPoints[insertionPos] = value;
   }
 
-  public addControlPoint(value: number) {
+  public addControlPoint(value: number): void {
     // Find the insertion point for the new control point and insert the new
     // point at that position.  The control point array will remain sorted by
     // value.
     this.insertAtPos(this.findInsertionPos(value), value);
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     // Get the output value from the source module.
     let sourceModuleValue = this.sourceModule.getValue(x, y, z);
 

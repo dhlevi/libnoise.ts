@@ -36,7 +36,7 @@ describe('module/combiner/multiply', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Multiply {
   const valueA = 2;
   const valueB = 3;
   const sourceModuleA = new Const(valueA);

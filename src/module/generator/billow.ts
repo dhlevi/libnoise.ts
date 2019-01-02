@@ -28,7 +28,7 @@ class Billow extends GeneratorModule {
     this.quality = quality || NoiseGen.QUALITY_STD;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     let nx;
     let ny;
     let nz;

@@ -108,7 +108,7 @@ describe('module/selector/select', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Select {
   const sourceValueA = 2;
   const sourceModuleA = new Const(sourceValueA);
   const sourceValueB = 2;

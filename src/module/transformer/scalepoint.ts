@@ -18,13 +18,13 @@ class ScalePoint extends TransformerModule {
     this.zScale = zScale || ScalePoint.DEFAULT_SCALE_POINT_Z;
   }
 
-  public setScales(xScale: number, yScale: number, zScale: number) {
+  public setScales(xScale: number, yScale: number, zScale: number): void {
     this.xScale = xScale;
     this.yScale = yScale;
     this.zScale = zScale;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     return this.sourceModule.getValue(
       x * this.xScale,
       y * this.yScale,

@@ -1,5 +1,5 @@
 const Misc = {
-  clampValue(value: number, lowerBound: number, upperBound: number) {
+  clampValue(value: number, lowerBound: number, upperBound: number): number {
     if (value < lowerBound) {
       return lowerBound;
     } else if (value > upperBound) {
@@ -9,7 +9,7 @@ const Misc = {
     }
   },
 
-  exponentFilter(value: number, cover: number, sharpness: number) {
+  exponentFilter(value: number, cover: number, sharpness: number): number {
     let c = value - (255 - cover);
 
     if (c < 0) {
@@ -19,12 +19,13 @@ const Misc = {
     return 255 - Math.floor(Math.pow(sharpness, c) * 255);
   },
 
-  normalizeValue(value: number, lowerBound: number, upperBound: number) {
+  normalizeValue(value: number, lowerBound: number, upperBound: number): number {
     return (value - lowerBound) / (upperBound - lowerBound);
   },
 
   // @TODO overload instead of this mess
-  swapValues(a: any | any[], b?: any) {
+  // @TODO tuple type again
+  swapValues(a: any | any[], b?: any): number[] {
     if (Array.isArray(a)) {
       a = a[0];
       b = a[1];

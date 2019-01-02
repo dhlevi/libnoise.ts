@@ -23,7 +23,7 @@ class Line extends Model {
     this.z1 = 1.0;
   }
 
-  public getValue(p: number) {
+  public getValue(p: number): number {
     // @TODO probably validate 0 < p < 1
 
     let value = this.sourceModule.getValue(

@@ -16,7 +16,7 @@ class Clamp extends ModifierModule {
     this.upperBound = upperBound || Clamp.DEFAULT_CLAMP_UPPER_BOUND;
   }
 
-  public get lowerBound() {
+  public get lowerBound(): number {
     return this._lowerBound;
   }
   public set lowerBound(v: number) {
@@ -27,7 +27,7 @@ class Clamp extends ModifierModule {
     this._lowerBound = v;
   }
 
-  public get upperBound() {
+  public get upperBound(): number {
     return this._upperBound;
   }
   public set upperBound(v: number) {
@@ -38,11 +38,11 @@ class Clamp extends ModifierModule {
     this._upperBound = v;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     return Misc.clampValue(this.sourceModule.getValue(x, y, z), this.lowerBound, this.upperBound);
   }
 
-  public setBounds(lowerBound: number, upperBound: number) {
+  public setBounds(lowerBound: number, upperBound: number): void {
     this.upperBound = upperBound;
     this.lowerBound = lowerBound;
   }

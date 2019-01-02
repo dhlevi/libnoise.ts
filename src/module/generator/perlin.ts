@@ -28,7 +28,7 @@ class Perlin extends GeneratorModule {
     this.quality = quality || NoiseGen.QUALITY_STD;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     let nx, ny, nz;
     let value = 0.0;
     let signal = 0.0;

@@ -31,7 +31,7 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
-  public get xAngle() {
+  public get xAngle(): number {
     return this._xAngle;
   }
   public set xAngle(v: number) {
@@ -40,7 +40,7 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
-  public get yAngle() {
+  public get yAngle(): number {
     return this._yAngle;
   }
   public set yAngle(v: number) {
@@ -49,7 +49,7 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
-  public get zAngle() {
+  public get zAngle(): number {
     return this._zAngle;
   }
   public set zAngle(v: number) {
@@ -58,7 +58,7 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
-  private calcMatrices() {
+  private calcMatrices(): void {
     let xCos = Math.cos(this.xAngle * MathConsts.DEG_TO_RAD);
     let yCos = Math.cos(this.yAngle * MathConsts.DEG_TO_RAD);
     let zCos = Math.cos(this.zAngle * MathConsts.DEG_TO_RAD);
@@ -77,7 +77,7 @@ class RotatePoint extends TransformerModule {
     this.z3matrix = yCos * xCos;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     return this.sourceModule.getValue(
       (this.x1matrix * x) + (this.y1matrix * y) + (this.z1matrix * z),
       (this.x2matrix * x) + (this.y2matrix * y) + (this.z2matrix * z),
@@ -85,7 +85,7 @@ class RotatePoint extends TransformerModule {
     );
   }
 
-  public setAngles(xAngle: number, yAngle: number, zAngle: number) {
+  public setAngles(xAngle: number, yAngle: number, zAngle: number): void {
     this.xAngle = xAngle;
     this.yAngle = yAngle;
     this.zAngle = zAngle;

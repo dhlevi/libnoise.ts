@@ -12,7 +12,7 @@ class Blend extends SelectorModule {
     this.controlModule = controlModule;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     return Interpolation.linear(
       this.sourceModuleA.getValue(x, y, z),
       this.sourceModuleB.getValue(x, y, z),

@@ -100,7 +100,7 @@ describe('module/modifier/curve', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Curve {
   const value = 2;
   const sourceModule = new Const(value);
   const controlPoints: number[][] = [

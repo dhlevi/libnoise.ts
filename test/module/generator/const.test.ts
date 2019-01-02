@@ -29,7 +29,7 @@ describe('module/generator/const', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Const {
   const value = 2;
 
   // Test

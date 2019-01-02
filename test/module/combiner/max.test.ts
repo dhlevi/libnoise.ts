@@ -36,7 +36,7 @@ describe('module/combiner/max', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Max {
   const valueA = 2;
   const valueB = 3;
   const sourceModuleA = new Const(valueA);

@@ -14,13 +14,13 @@ class TranslatePoint extends TransformerModule {
     this.translateZ = translateZ || 0;
   }
 
-  public setTranslation(x: number, y: number, z: number) {
+  public setTranslation(x: number, y: number, z: number): void {
     this.translateX = x;
     this.translateY = y;
     this.translateZ = z;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     return this.sourceModule.getValue(
       x + this.translateX,
       y + this.translateY,

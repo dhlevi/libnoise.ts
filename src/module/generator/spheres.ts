@@ -11,7 +11,7 @@ class Spheres extends GeneratorModule {
     this.frequency = frequency || Spheres.DEFAULT_SPHERES_FREQUENCY;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     x = (x * this.frequency);
     y = (y * this.frequency);
     z = (z * this.frequency);

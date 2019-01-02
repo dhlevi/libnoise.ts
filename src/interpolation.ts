@@ -16,7 +16,7 @@ const Interpolation = {
    * @returns The interpolated value.
    *
    */
-  cubic(n0: number, n1: number, n2: number, n3: number, a: number) {
+  cubic(n0: number, n1: number, n2: number, n3: number, a: number): number {
     let p = ((n3 - n2) - (n0 - n1));
     let q = ((n0 - n1) - p);
     let r = (n2 - n0);
@@ -37,7 +37,7 @@ const Interpolation = {
    *
    * @returns The interpolated value.
    */
-  linear(n0: number, n1: number, a: number) {
+  linear(n0: number, n1: number, a: number): number {
     return ((1.0 - a) * (n0)) + (a * (n1));
   },
 
@@ -49,7 +49,7 @@ const Interpolation = {
    *
    * @returns The mapped value.
    */
-  cubicSCurve(a: number) {
+  cubicSCurve(a: number): number {
     return (a * a * (3.0 - 2.0 * a));
   },
 
@@ -63,7 +63,7 @@ const Interpolation = {
    *
    * @returns The mapped value.
    */
-  quinticSCurve(a: number) {
+  quinticSCurve(a: number): number {
     let a3 = (a * a * a);
     let a4 = (a3 * a);
     let a5 = (a4 * a);

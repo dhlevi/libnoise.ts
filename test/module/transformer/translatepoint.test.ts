@@ -56,7 +56,7 @@ describe('module/transformer/translatepoint', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): TranslatePoint {
   const sourceValue = 2;
   const sourceModule = new Const(sourceValue);
   const xTranslate = 10;

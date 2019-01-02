@@ -96,7 +96,7 @@ describe('module/transformer/rotatepoint', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): RotatePoint {
   // Setup
   const sourceValue = 2;
   const sourceModule = new Const(sourceValue);

@@ -22,7 +22,7 @@ class Select extends SelectorModule {
     this.upperBound = upperBound || Select.DEFAULT_SELECT_UPPER_BOUND;
   }
 
-  public get edge() {
+  public get edge(): number {
     return this._edge;
   }
   public set edge(v: number) {
@@ -33,7 +33,7 @@ class Select extends SelectorModule {
     this._edge = (v > half) ? half : v;
   }
 
-  public get lowerBound() {
+  public get lowerBound(): number {
     return this._lowerBound;
   }
   public set lowerBound(v: number) {
@@ -44,7 +44,7 @@ class Select extends SelectorModule {
     this._lowerBound = v;
   }
 
-  public get upperBound() {
+  public get upperBound(): number {
     return this._upperBound;
   }
   public set upperBound(v: number) {
@@ -55,12 +55,12 @@ class Select extends SelectorModule {
     this._upperBound = v;
   }
 
-  public setBounds(lower: number, upper: number) {
+  public setBounds(lower: number, upper: number): void {
     this.upperBound = upper;
     this.lowerBound = lower;
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     let lowerCurve, upperCurve;
     let controlValue = this.controlModule.getValue(x, y, z);
 

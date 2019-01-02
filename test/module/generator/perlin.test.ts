@@ -38,7 +38,7 @@ describe('module/generator/perlin', () => {
   });
 });
 
-function createMockModule() {
+function createMockModule(): Perlin {
   const frequency = 1;
   const lacunarity = 2;
   const octaves = 6;

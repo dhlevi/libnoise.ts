@@ -33,7 +33,7 @@ class RidgedMulti extends GeneratorModule {
     this.gain = gain || RidgedMulti.DEFAULT_RIDGED_GAIN;
   }
 
-  public get lacunarity() {
+  public get lacunarity(): number {
     return this._lacunarity;
   }
   public set lacunarity(v: number) {
@@ -51,7 +51,7 @@ class RidgedMulti extends GeneratorModule {
     }
   }
 
-  public getValue(x: number, y: number, z: number) {
+  public getValue(x: number, y: number, z: number): number {
     let nx;
     let ny;
     let nz;

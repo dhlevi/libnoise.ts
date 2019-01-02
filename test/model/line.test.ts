@@ -32,7 +32,7 @@ describe('model/line', () => {
   });
 });
 
-function createMockLine() {
+function createMockLine(): Line {
   // Setup
   const value = 2;
   const sourceModule = new Const(value);
