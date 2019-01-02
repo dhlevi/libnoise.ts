@@ -1,7 +1,6 @@
 import Interpolation from '@app/interpolation';
-import Misc from '@app/misc';
 import Module from '@app/module';
-import { Tuple } from '@app/util';
+import { clamp, Tuple } from '@app/util';
 import ModifierModule from './ModifierModule';
 
 class Curve extends ModifierModule {
@@ -82,10 +81,10 @@ class Curve extends ModifierModule {
 
     // Find the four nearest control points so that we can perform cubic
     // interpolation.
-    let index0 = Misc.clampValue(indexPos - 2, 0, this.controlPoints.length - 1);
-    let index1 = Misc.clampValue(indexPos - 1, 0, this.controlPoints.length - 1);
-    let index2 = Misc.clampValue(indexPos, 0, this.controlPoints.length - 1);
-    let index3 = Misc.clampValue(indexPos + 1, 0, this.controlPoints.length - 1);
+    let index0 = clamp(indexPos - 2, 0, this.controlPoints.length - 1);
+    let index1 = clamp(indexPos - 1, 0, this.controlPoints.length - 1);
+    let index2 = clamp(indexPos, 0, this.controlPoints.length - 1);
+    let index3 = clamp(indexPos + 1, 0, this.controlPoints.length - 1);
 
     // If some control points are missing (which occurs if the value from the
     // source module is greater than the largest input value or less than the

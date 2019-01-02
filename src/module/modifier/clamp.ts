@@ -1,5 +1,5 @@
-import Misc from '@app/misc';
 import Module from '@app/module';
+import { clamp } from '@app/util';
 import ModifierModule from './ModifierModule';
 
 class Clamp extends ModifierModule {
@@ -39,7 +39,7 @@ class Clamp extends ModifierModule {
   }
 
   public getValue(x: number, y: number, z: number): number {
-    return Misc.clampValue(this.sourceModule.getValue(x, y, z), this.lowerBound, this.upperBound);
+    return clamp(this.sourceModule.getValue(x, y, z), this.lowerBound, this.upperBound);
   }
 
   public setBounds(lowerBound: number, upperBound: number): void {

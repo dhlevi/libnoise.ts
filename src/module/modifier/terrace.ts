@@ -1,6 +1,6 @@
 import Interpolation from '@app/interpolation';
-import Misc from '@app/misc';
 import Module from '@app/module';
+import { clamp } from '@app/util';
 import ModifierModule from './ModifierModule';
 
 class Terrace extends ModifierModule {
@@ -78,8 +78,8 @@ class Terrace extends ModifierModule {
 
     // Find the two nearest control points so that we can map their values
     // onto a quadratic curve.
-    let index0 = Misc.clampValue(indexPos - 1, 0, this.controlPoints.length - 1);
-    let index1 = Misc.clampValue(indexPos, 0, this.controlPoints.length - 1);
+    let index0 = clamp(indexPos - 1, 0, this.controlPoints.length - 1);
+    let index1 = clamp(indexPos, 0, this.controlPoints.length - 1);
 
     // If some control points are missing (which occurs if the output value from
     // the source module is greater than the largest value or less than the

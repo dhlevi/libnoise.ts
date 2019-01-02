@@ -1,6 +1,6 @@
 import MathFuncs from '@app/mathfuncs';
-import Misc from '@app/misc';
 import NoiseGen from '@app/noisegen';
+import { clamp } from '@app/util';
 import GeneratorModule from './GeneratorModule';
 
 class RidgedMulti extends GeneratorModule {
@@ -92,7 +92,7 @@ class RidgedMulti extends GeneratorModule {
       weight = signal * this.gain;
 
       // Clamp value to within 0 and 1
-      weight = Misc.clampValue(weight, 0.0, 1.0);
+      weight = clamp(weight, 0.0, 1.0);
 
       // Add the signal to the output value.
       value += (signal * this.weights[octave]);
