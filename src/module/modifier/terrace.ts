@@ -95,11 +95,10 @@ class Terrace extends ModifierModule {
     let alpha = (sourceModuleValue - value0) / (value1 - value0);
 
     if (this.invert) {
-      let swapped = Misc.swapValues([value0, value1]);
-
       alpha -= 1.0;
-      value0 = swapped[0];
-      value1 = swapped[1];
+      let swap = value0;
+      value0 = value1;
+      value1 = swap;
     }
 
     // Squaring the alpha produces the terrace effect.

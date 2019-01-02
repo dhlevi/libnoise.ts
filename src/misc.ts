@@ -22,17 +22,6 @@ const Misc = {
   normalizeValue(value: number, lowerBound: number, upperBound: number): number {
     return (value - lowerBound) / (upperBound - lowerBound);
   },
-
-  // @TODO overload instead of this mess
-  // @TODO tuple type again
-  swapValues(a: any | any[], b?: any): number[] {
-    if (Array.isArray(a)) {
-      a = a[0];
-      b = a[1];
-    }
-
-    return [b, a];
-  },
 };
 
 export default Misc;
