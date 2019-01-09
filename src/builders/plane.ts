@@ -4,19 +4,52 @@ import Module from '@app/module/Module';
 import NoiseMap from '@app/noisemap';
 import Builder from './Builder';
 
+/**
+ * Builds a planar noise map.
+ *
+ * This class builds a noise map by filling it with coherent-noise values
+ * generated from the surface of a plane.
+ *
+ * This class describes these input values using (x, y) coordinates.
+ * Their z coordinates are always 0.0.
+ *
+ * The application must provide the lower and upper x coordinate bounds
+ * of the noise map, in units, and the lower and upper y coordinate
+ * bounds of the noise map, in units.
+ *
+ * To make a tileable noise map with no seams at the edges, set `seamless` to true.
+ */
+// @TODO refactor y coordinates into z coordinates
 class NoiseMapBuilderPlane extends Builder {
-  private seamless: boolean;
+  /**
+   * A flag that enables or disables seamless tiling.
+   *
+   * Enabling seamless tiling builds a noise map with no seams at the
+   * edges.  This allows the noise map to be tileable.
+   */
+  public seamless: boolean;
   private _lowerXBound: number = 0;
   private _lowerYBound: number = 0;
   private _upperXBound: number = 1;
   private _upperYBound: number = 1;
 
+  /**
+   * @param sourceModule The source module
+   * @param width The width of the destination noise map, in points
+   * @param height The height of the destination noise map, in points
+   * @param seamless A flag that enables or disables seamless tiling
+   */
   constructor(sourceModule: Module, width: number = 256, height: number = 256, seamless: boolean = false) {
     super(sourceModule, width, height);
 
     this.seamless = seamless;
   }
 
+  /**
+   * The lower x boundary of the noise map, in units.
+   *
+   * The lower x boundary must be less than the upper x boundary.
+   */
   public get lowerXBound(): number {
     return this._lowerXBound;
   }
@@ -28,6 +61,11 @@ class NoiseMapBuilderPlane extends Builder {
     this._lowerXBound = v;
   }
 
+  /**
+   * The lower y boundary of the noise map, in units.
+   *
+   * The lower y boundary must be less than the upper y boundary.
+   */
   public get lowerYBound(): number {
     return this._lowerYBound;
   }
@@ -39,6 +77,11 @@ class NoiseMapBuilderPlane extends Builder {
     this._lowerYBound = v;
   }
 
+  /**
+   * The upper x boundary of the noise map, in units.
+   *
+   * The upper x boundary must be greater than the lower x boundary.
+   */
   public get upperXBound(): number {
     return this._upperXBound;
   }
@@ -50,6 +93,11 @@ class NoiseMapBuilderPlane extends Builder {
     this._upperXBound = v;
   }
 
+  /**
+   * The upper y boundary of the noise map, in units.
+   *
+   * The upper y boundary must be greater than the lower y boundary.
+   */
   public get upperYBound(): number {
     return this._upperYBound;
   }
@@ -115,6 +163,14 @@ class NoiseMapBuilderPlane extends Builder {
     return this.noiseMap;
   }
 
+  /**
+   * Sets the boundaries of the planar noise map.
+   *
+   * @param lowerXBound The lower x boundary of the noise map, in units.
+   * @param lowerYBound The lower y boundary of the noise map, in units.
+   * @param upperXBound The upper x boundary of the noise map, in units.
+   * @param upperYBound The upper y boundary of the noise map, in units.
+   */
   public setBounds(lowerXBound: number, lowerYBound: number, upperXBound: number, upperYBound: number): void {
     this.upperXBound = upperXBound;
     this.upperYBound = upperYBound;
