@@ -15,6 +15,8 @@ This is a fork that ports the code to TypeScript and modernises things a bit. Th
   - Probably remove dependency on src/types folder
   - Consider re-adding javascript-esque validation for npm consumption
   - Resolve @TODOs
-  - Write a main module lol
   - Add types for array-based structures
   - Real enums for enum types
+  - Re-align parameter orders with original library
+  - Rename params to match libnoise
+  - Set license
