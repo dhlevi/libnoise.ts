@@ -46,8 +46,8 @@ describe('module/selector/select', () => {
     const mockModule = createMockModule();
 
     // Test
-    mockModule.edge = newEdgeValue;
-    const updatedEdgeValue = mockModule.edge;
+    mockModule.edgeFalloff = newEdgeValue;
+    const updatedEdgeValue = mockModule.edgeFalloff;
 
     // Assert
     expect(updatedEdgeValue).to.equal(newEdgeValue);
