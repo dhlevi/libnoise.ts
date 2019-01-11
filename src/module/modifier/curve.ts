@@ -3,9 +3,34 @@ import Module from '@app/module/Module';
 import { clamp, Tuple } from '@app/util';
 import ModifierModule from './ModifierModule';
 
+/**
+ * Noise module that maps the output value from a source module onto an
+ * arbitrary function curve.
+ *
+ * This noise module maps the output value from the source module onto an
+ * application-defined curve.  This curve is defined by a number of
+ * *control points*; each control point has an *input value*
+ * that maps to an *output value*.
+ *
+ * To add the control points to this curve, call the addControlPoint()
+ * method.
+ *
+ * Since this curve is a cubic spline, an application must add a minimum
+ * of four control points to the curve.  If this is not done, the
+ * getValue() method fails.  Each control point can have any input and
+ * output value, although no two control points can have the same input
+ * value.  There is no limit to the number of control points that can be
+ * added to the curve.
+ *
+ * This noise module requires one source module.
+ */
 class Curve extends ModifierModule {
   private controlPoints: Tuple<number>[];
 
+  /**
+   * @param sourceModule The noise module that is used to generate the output values.
+   * @param controlPoints Initial control points array.
+   */
   constructor(sourceModule: Module, controlPoints?: Tuple<number>[]) {
     super(sourceModule);
 
@@ -13,6 +38,21 @@ class Curve extends ModifierModule {
     this.controlPoints = controlPoints || [];
   }
 
+  /**
+   * Determines the array index in which to insert the control point
+   * into the internal control point array.
+   *
+   * By inserting the control point at the returned array index, this
+   * class ensures that the control point array is sorted by input
+   * value.  The code that maps a value onto the curve requires a
+   * sorted control point array.
+   *
+   * @param inputValue The input value of the control point.
+   *
+   * @returns The array index in which to insert the control point.
+   *
+   * @TODO rewrite this logic based on source
+   */
   private findInsertionPos(value: Tuple<number>): number {
     // Iterate through list to find first controlPoint larger than new value
     //  and insert right before that
@@ -31,6 +71,23 @@ class Curve extends ModifierModule {
     return this.controlPoints.length;
   }
 
+  /**
+   * Inserts the control point at the specified position in the
+   * internal control point array.
+   *
+   * @param position The zero-based array position in which to insert the control point.
+   * @param input The input value stored in the control point.
+   * @param output The output value stored in the control point.
+   *
+   * To make room for this new control point, this method reallocates
+   * the control point array and shifts all control points occurring
+   * after the insertion position up by one.
+   *
+   * Because the curve mapping algorithm used by this noise module
+   * requires that all control points in the array must be sorted by
+   * input value, the new control point should be inserted at the
+   * position in which the order is still preserved.
+   */
   private insertAtPos(position: number, input: number, output: number): void {
     position = Math.floor(position);
 
@@ -55,11 +112,27 @@ class Curve extends ModifierModule {
     this.controlPoints[position] = new Tuple(input, output);
   }
 
+  /**
+   * Adds a control point to the curve.
+   * It does not matter which order these points are added.
+   *
+   * @note No two control points can have the same input value.
+   *
+   * @param input The input value stored in the control point.
+   * @param output The output value stored in the control point.
+   */
   public addControlPoint(input: number, output: number): void {
     // Find the insertion point for the new control point and insert the new
     // point at that position.  The control point array will remain sorted by
     // input value.
     this.insertAtPos(this.findInsertionPos(new Tuple(input, output)), input, output);
+  }
+
+  /**
+   * Deletes all the control points on the curve.
+   */
+  public clearAllControlPoints(): void {
+    this.controlPoints = [];
   }
 
   public getValue(x: number, y: number, z: number): number {

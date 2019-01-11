@@ -3,10 +3,51 @@ import Module from '@app/module/Module';
 import { clamp } from '@app/util';
 import ModifierModule from './ModifierModule';
 
+/**
+ * Noise module that maps the output value from a source module onto a
+ * terrace-forming curve.
+ *
+ * This noise module maps the output value from the source module onto a
+ * terrace-forming curve.  The start of this curve has a slope of zero;
+ * its slope then smoothly increases.  This curve also contains
+ * *control points* which resets the slope to zero at that point,
+ * producing a "terracing" effect.
+ *
+ * To add a control point to this noise module, call the
+ * addControlPoint() method.
+ *
+ * An application must add a minimum of two control points to the curve.
+ * If this is not done, the getValue() method fails.  The control points
+ * can have any value, although no two control points can have the same
+ * value.  There is no limit to the number of control points that can be
+ * added to the curve.
+ *
+ * This noise module clamps the output value from the source module if
+ * that value is less than the value of the lowest control point or
+ * greater than the value of the highest control point.
+ *
+ * This noise module is often used to generate terrain features such as
+ * your stereotypical desert canyon.
+ *
+ * This noise module requires one source module.
+ */
 class Terrace extends ModifierModule {
-  private controlPoints: number[];
-  private invert: boolean;
+  /**
+   * Whether the terrace-forming curve between all control points is inverted.
+   */
+  public invert: boolean;
 
+  /**
+   * Array that stores the control points.
+   */
+  private controlPoints: number[];
+
+
+  /**
+   * @param sourceModule The noise module that is used to generate the output values.
+   * @param controlPoints Initial control points array.
+   * @param invert Whether the terrace-forming curve between all control points is inverted.
+   */
   constructor(sourceModule: Module, controlPoints?: number[], invert?: boolean) {
     super(sourceModule);
 
@@ -14,6 +55,19 @@ class Terrace extends ModifierModule {
     this.invert = invert || false;
   }
 
+  /**
+   * Determines the array index in which to insert the control point
+   * into the internal control point array.
+   *
+   * By inserting the control point at the returned array index, this
+   * class ensures that the control point array is sorted by value.
+   * The code that maps a value onto the curve requires a sorted
+   * control point array.
+   *
+   * @param value The value of the control point.
+   *
+   * @returns The array index in which to insert the control point.
+   */
   private findInsertionPos(value: number): number {
     // Iterate through list to find first controlPoint larger than new value
     //  and insert right before that
@@ -32,6 +86,24 @@ class Terrace extends ModifierModule {
     return this.controlPoints.length;
   }
 
+  /**
+   * Inserts the control point at the specified position in the
+   * internal control point array.
+   *
+   * To make room for this new control point, this method reallocates
+   * the control point array and shifts all control points occurring
+   * after the insertion position up by one.
+   *
+   * Because the curve mapping algorithm in this noise module requires
+   * that all control points in the array be sorted by value, the new
+   * control point should be inserted at the position in which the
+   * order is still preserved.
+   *
+   * @param insertionPos The zero-based array position in which to
+   *  insert the control point.
+   * @param value The value of the control point.
+   *
+   */
   private insertAtPos(insertionPos: number, value: number): void {
     insertionPos = Math.floor(insertionPos);
 
@@ -56,6 +128,17 @@ class Terrace extends ModifierModule {
     this.controlPoints[insertionPos] = value;
   }
 
+  /**
+   * Adds a control point to the terrace-forming curve.
+   *
+   * Two or more control points define the terrace-forming curve.  The
+   * start of this curve has a slope of zero; its slope then smoothly
+   * increases.  At the control points, its slope resets to zero.
+   *
+   * It does not matter which order these points are added.
+   *
+   * @param value The value of the control point to add.
+   */
   public addControlPoint(value: number): void {
     // Find the insertion point for the new control point and insert the new
     // point at that position.  The control point array will remain sorted by
