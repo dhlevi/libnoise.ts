@@ -2,16 +2,69 @@ import MathConsts from '@app/mathconsts';
 import NoiseGen from '@app/noisegen';
 import GeneratorModule from './GeneratorModule';
 
+/**
+ * Noise module that outputs Voronoi cells.
+ *
+ * In mathematics, a *Voronoi cell* is a region containing all the
+ * points that are closer to a specific *seed point* than to any
+ * other seed point.  These cells mesh with one another, producing
+ * polygon-like formations.
+ *
+ * By default, this noise module randomly places a seed point within
+ * each unit cube.  By modifying the *frequency* of the seed points,
+ * an application can change the distance between seed points.  The
+ * higher the frequency, the closer together this noise module places
+ * the seed points, which reduces the size of the cells.
+ *
+ * This noise module assigns each Voronoi cell with a random constant
+ * value from a coherent-noise function.  The *displacement value*
+ * controls the range of random values to assign to each cell.  The
+ * range of random values is +/- the displacement value.
+ *
+ * To modify the random positions of the seed points, update the seed value.
+ *
+ * This noise module can optionally add the distance from the nearest
+ * seed to the output value.  To enable this feature, set the `distance` flag
+ * to true.  This causes the points in the Voronoi cells
+ * to increase in value the further away that point is from the nearest
+ * seed point.
+ *
+ * Voronoi cells are often used to generate cracked-mud terrain
+ * formations or crystal-like textures.
+ *
+ * This noise module requires no source modules.
+ */
 class Voronoi extends GeneratorModule {
   public static readonly DEFAULT_VORONOI_DISPLACEMENT = 1.0;
   public static readonly DEFAULT_VORONOI_FREQUENCY = 1.0;
   public static readonly DEFAULT_VORONOI_SEED = 0;
 
-  private frequency: number;
+  /**
+   * Scale of the random displacement to apply to each Voronoi cell.
+   */
   private displacement: number;
+  /**
+   * Determines if the distance from the nearest seed point is applied to
+   * the output value.
+   */
   private distance: boolean;
+  /**
+   * Frequency of the seed points.
+   */
+  private frequency: number;
+  /**
+   * Seed value used by the coherent-noise function to determine the
+   * positions of the seed points.
+   */
   private seed: number;
 
+  /**
+   *
+   * @param frequency Frequency of the seed points.
+   * @param displacement Scale of the random displacement to apply to each Voronoi cell.
+   * @param distance Determines if the distance from the nearest seed point is applied to the output value.
+   * @param seed Seed value used by the coherent-noise function to determine the positions of the seed points.
+   */
   constructor(frequency?: number, displacement?: number, distance?: boolean, seed?: number) {
     super();
 
