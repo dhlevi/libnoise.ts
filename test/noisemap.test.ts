@@ -100,25 +100,6 @@ describe('noisemap', () => {
     expect(testFunc).to.throw();
   });
 
-  it("calling addValue correctly adds to the existing value", () => {
-    // Setup
-    const mockMap = createMockMap();
-    const x = 1;
-    const y = 1;
-    const originalValue = 10;
-    mockMap.setValue(x, y, originalValue);
-    const addValue = 3;
-    const expectedValue = originalValue + addValue;
-
-    // Test
-    mockMap.addValue(x, y, addValue);
-    const updatedValue = mockMap.getValue(x, y);
-
-
-    // Assert
-    expect(updatedValue).to.equal(expectedValue);
-  });
-
   it("calling getValue returns the correct value", () => {
     // Setup
     const mockMap = createMockMap();
@@ -164,24 +145,6 @@ describe('noisemap', () => {
 
     // Assert
     expect(updatedValue).to.equal(newValue);
-  });
-
-  it("calling subtractValue correctly subtracts to the existing value", () => {
-    // Setup
-    const mockMap = createMockMap();
-    const x = 1;
-    const y = 1;
-    const originalValue = 10;
-    mockMap.setValue(x, y, originalValue);
-    const subtractValue = 3;
-    const expectedValue = originalValue - subtractValue;
-
-    // Test
-    mockMap.subtractValue(x, y, subtractValue);
-    const updatedValue = mockMap.getValue(x, y);
-
-    // Assert
-    expect(updatedValue).to.equal(expectedValue);
   });
 });
 
