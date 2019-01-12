@@ -61,38 +61,38 @@ describe("builders/plane", () => {
     expect(testFunc).to.throw();
   });
 
-  it("lowerYBound defaults to 0", () => {
+  it("lowerZBound defaults to 0", () => {
     // Setup
     const mockModule = createMockModule();
 
     // Test
-    let lowerYBound: number = mockModule.lowerYBound;
+    let lowerZBound: number = mockModule.lowerZBound;
 
     // Assert
-    expect(lowerYBound).to.equal(0);
+    expect(lowerZBound).to.equal(0);
   });
 
-  it("setting lowerYBound updates correctly", () => {
+  it("setting lowerZBound updates correctly", () => {
     // Setup
     const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
-    mockModule.lowerYBound = newValue;
-    const updatedLowerYBound = mockModule.lowerYBound;
+    mockModule.lowerZBound = newValue;
+    const updatedLowerYBound = mockModule.lowerZBound;
 
     // Assert
     expect(updatedLowerYBound).to.equal(newValue);
   });
 
-  it("setting lowerYBound to a value higher than upperYBound throws an error", () => {
+  it("setting lowerZBound to a value higher than upperZBound throws an error", () => {
     // Setup
     const mockModule = createMockModule();
-    const newValue = mockModule.upperYBound + 1;
+    const newValue = mockModule.upperZBound + 1;
 
     // Test
     const testFunc = () => {
-      mockModule.lowerYBound = newValue;
+      mockModule.lowerZBound = newValue;
     };
 
     // Assert
@@ -137,38 +137,38 @@ describe("builders/plane", () => {
     expect(testFunc).to.throw();
   });
 
-  it("upperYBound defaults to 1", () => {
+  it("upperZBound defaults to 1", () => {
     // Setup
     const mockModule = createMockModule();
 
     // Test
-    let upperYBound: number = mockModule.upperYBound;
+    let upperZBound: number = mockModule.upperZBound;
 
     // Assert
-    expect(upperYBound).to.equal(1);
+    expect(upperZBound).to.equal(1);
   });
 
-  it("setting upperYBound updates correctly", () => {
+  it("setting upperZBound updates correctly", () => {
     // Setup
     const mockModule = createMockModule();
     const newValue = 0.5;
 
     // Test
-    mockModule.upperYBound = newValue;
-    const updatedUpperAngleBound = mockModule.upperYBound;
+    mockModule.upperZBound = newValue;
+    const updatedUpperAngleBound = mockModule.upperZBound;
 
     // Assert
     expect(updatedUpperAngleBound).to.equal(newValue);
   });
 
-  it("setting upperYBound to a value lower than lowerYBound throws an error", () => {
+  it("setting upperZBound to a value lower than lowerZBound throws an error", () => {
     // Setup
     const mockModule = createMockModule();
-    const newValue = mockModule.lowerYBound - 1;
+    const newValue = mockModule.lowerZBound - 1;
 
     // Test
     const testFunc = () => {
-      mockModule.upperYBound = newValue;
+      mockModule.upperZBound = newValue;
     };
 
     // Assert

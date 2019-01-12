@@ -10,16 +10,15 @@ import Builder from './Builder';
  * This class builds a noise map by filling it with coherent-noise values
  * generated from the surface of a plane.
  *
- * This class describes these input values using (x, y) coordinates.
+ * This class describes these input values using (x, z) coordinates.
  * Their z coordinates are always 0.0.
  *
  * The application must provide the lower and upper x coordinate bounds
- * of the noise map, in units, and the lower and upper y coordinate
+ * of the noise map, in units, and the lower and upper z coordinate
  * bounds of the noise map, in units.
  *
  * To make a tileable noise map with no seams at the edges, set `seamless` to true.
  */
-// @TODO refactor y coordinates into z coordinates
 class NoiseMapBuilderPlane extends Builder {
   /**
    * A flag that enables or disables seamless tiling.
@@ -29,9 +28,9 @@ class NoiseMapBuilderPlane extends Builder {
    */
   public seamless: boolean;
   private _lowerXBound: number = 0;
-  private _lowerYBound: number = 0;
+  private _lowerZBound: number = 0;
   private _upperXBound: number = 1;
-  private _upperYBound: number = 1;
+  private _upperZBound: number = 1;
 
   /**
    * @param sourceModule The source module
@@ -62,19 +61,19 @@ class NoiseMapBuilderPlane extends Builder {
   }
 
   /**
-   * The lower y boundary of the noise map, in units.
+   * The lower z boundary of the noise map, in units.
    *
-   * The lower y boundary must be less than the upper y boundary.
+   * The lower z boundary must be less than the upper z boundary.
    */
-  public get lowerYBound(): number {
-    return this._lowerYBound;
+  public get lowerZBound(): number {
+    return this._lowerZBound;
   }
-  public set lowerYBound(v: number) {
-    if (v >= this.upperYBound) {
-      throw new Error('Lower Y bound cannot be equal to or exceed upper Y bound!');
+  public set lowerZBound(v: number) {
+    if (v >= this.upperZBound) {
+      throw new Error('Lower Z bound cannot be equal to or exceed upper Z bound!');
     }
 
-    this._lowerYBound = v;
+    this._lowerZBound = v;
   }
 
   /**
@@ -94,70 +93,70 @@ class NoiseMapBuilderPlane extends Builder {
   }
 
   /**
-   * The upper y boundary of the noise map, in units.
+   * The upper z boundary of the noise map, in units.
    *
-   * The upper y boundary must be greater than the lower y boundary.
+   * The upper z boundary must be greater than the lower z boundary.
    */
-  public get upperYBound(): number {
-    return this._upperYBound;
+  public get upperZBound(): number {
+    return this._upperZBound;
   }
-  public set upperYBound(v: number) {
-    if (v <= this.lowerYBound) {
-      throw new Error('Upper Y bound cannot be equal to or less than lower Y bound!');
+  public set upperZBound(v: number) {
+    if (v <= this.lowerZBound) {
+      throw new Error('Upper Z bound cannot be equal to or less than lower Z bound!');
     }
 
-    this._upperYBound = v;
+    this._upperZBound = v;
   }
 
   public build(): NoiseMap {
     let xExtent = this.upperXBound - this.lowerXBound;
-    let yExtent = this.upperYBound - this.lowerYBound;
+    let zExtent = this.upperZBound - this.lowerZBound;
 
     // @TODO is this possible? seems to be covered by validation in setters
-    if (xExtent < 0 || yExtent < 0) {
+    if (xExtent < 0 || zExtent < 0) {
       throw new Error('Invalid bounds!');
     }
 
     // Create the plane model.
     let plane = new Plane(this.sourceModule);
     let xDelta = xExtent / this.width;
-    let yDelta = yExtent / this.height;
+    let zDelta = zExtent / this.height;
     let curX = this.lowerXBound;
-    let curY = this.lowerYBound;
+    let curZ = this.lowerZBound;
     let value;
     let xBlend;
 
     // Fill every point in the noise map with the output values from the model.
-    for (let y = 0; y < this.height; y++) {
+    for (let z = 0; z < this.height; z++) {
       curX = this.lowerXBound;
 
       for (let x = 0; x < this.width; x++) {
         if (!this.seamless) {
-          value = plane.getValue(curX, curY);
+          value = plane.getValue(curX, curZ);
         } else {
           xBlend = 1.0 - ((curX - this.lowerXBound) / xExtent);
 
           value = Interpolation.linear(
             Interpolation.linear(
-              plane.getValue(curX, curY),
-              plane.getValue(curX + xExtent, curY),
+              plane.getValue(curX, curZ),
+              plane.getValue(curX + xExtent, curZ),
               xBlend,
             ),
             Interpolation.linear(
-              plane.getValue(curX, curY + yExtent),
-              plane.getValue(curX + xExtent, curY + yExtent),
+              plane.getValue(curX, curZ + zExtent),
+              plane.getValue(curX + xExtent, curZ + zExtent),
               xBlend,
             ),
-            1.0 - ((curY - this.lowerYBound) / yExtent),
+            1.0 - ((curZ - this.lowerZBound) / zExtent),
           );
         }
 
-        this.noiseMap.setValue(x, y, value);
+        this.noiseMap.setValue(x, z, value);
 
         curX += xDelta;
       }
 
-      curY += yDelta;
+      curZ += zDelta;
     }
 
     return this.noiseMap;
@@ -167,15 +166,15 @@ class NoiseMapBuilderPlane extends Builder {
    * Sets the boundaries of the planar noise map.
    *
    * @param lowerXBound The lower x boundary of the noise map, in units.
-   * @param lowerYBound The lower y boundary of the noise map, in units.
+   * @param lowerZBound The lower z boundary of the noise map, in units.
    * @param upperXBound The upper x boundary of the noise map, in units.
-   * @param upperYBound The upper y boundary of the noise map, in units.
+   * @param upperZBound The upper z boundary of the noise map, in units.
    */
-  public setBounds(lowerXBound: number, lowerYBound: number, upperXBound: number, upperYBound: number): void {
+  public setBounds(lowerXBound: number, lowerZBound: number, upperXBound: number, upperZBound: number): void {
     this.upperXBound = upperXBound;
-    this.upperYBound = upperYBound;
+    this.upperZBound = upperZBound;
     this.lowerXBound = lowerXBound;
-    this.lowerYBound = lowerYBound;
+    this.lowerZBound = lowerZBound;
   }
 }
 
