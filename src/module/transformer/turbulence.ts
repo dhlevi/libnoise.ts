@@ -2,6 +2,61 @@ import Perlin from '@app/module/generator/perlin';
 import Module from '@app/module/Module';
 import TransformerModule from './TransformerModule';
 
+/**
+ * Noise module that randomly displaces the input value before
+ * returning the output value from a source module.
+ *
+ * Turbulence is the pseudo-random displacement of the input value.
+ * The getValue() method randomly displaces the ( x, y, z )
+ * coordinates of the input value before retrieving the output value from
+ * the source module.  To control the turbulence, an application can
+ * modify its frequency, its power, and its roughness.
+ *
+ * The frequency of the turbulence determines how rapidly the
+ * displacement amount changes.
+ *
+ * The power of the turbulence determines the scaling factor that is
+ * applied to the displacement amount.
+ *
+ * The roughness of the turbulence determines the roughness of the
+ * changes to the displacement amount.  Low values smoothly change the
+ * displacement amount.  High values roughly change the displacement
+ * amount, which produces more "kinky" changes.
+ *
+ * Use of this noise module may require some trial and error.  Assuming
+ * that you are using a generator module as the source module, you
+ * should first:
+ * - Set the frequency to the same frequency as the source module.
+ * - Set the power to the reciprocal of the frequency.
+ *
+ * From these initial frequency and power values, modify these values
+ * until this noise module produce the desired changes in your terrain or
+ * texture.  For example:
+ * - Low frequency (1/8 initial frequency) and low power (1/8 initial
+ *   power) produces very minor, almost unnoticeable changes.
+ * - Low frequency (1/8 initial frequency) and high power (8 times
+ *   initial power) produces "ropey" lava-like terrain or marble-like
+ *   textures.
+ * - High frequency (8 times initial frequency) and low power (1/8
+ *   initial power) produces a noisy version of the initial terrain or
+ *   texture.
+ * - High frequency (8 times initial frequency) and high power (8 times
+ *   initial power) produces nearly pure noise, which isn't entirely
+ *   useful.
+ *
+ * Displacing the input values result in more realistic terrain and
+ * textures.  If you are generating elevations for terrain height maps,
+ * you can use this noise module to produce more realistic mountain
+ * ranges or terrain features that look like flowing lava rock.  If you
+ * are generating values for textures, you can use this noise module to
+ * produce realistic marble-like or "oily" textures.
+ *
+ * Internally, there are three Perlin noise modules
+ * that displace the input value; one for the x, one for the y,
+ * and one for the z coordinate.
+ *
+ * This noise module requires one source module.
+ */
 class Turbulence extends TransformerModule {
   public static readonly DEFAULT_TURBULENCE_POWER = 1.0;
   public static readonly DEFAULT_TURBULENCE_ROUGHNESS = 3;
@@ -10,8 +65,19 @@ class Turbulence extends TransformerModule {
   private yDistortModule: Perlin;
   private zDistortModule: Perlin;
 
+  /**
+   * The power (scale) of the displacement.
+   */
   public power: number;
 
+  /**
+   *
+   * @param sourceModule The noise module that is used to generate the output values.
+   * @param frequency
+   * @param power
+   * @param roughness
+   * @param seed
+   */
   constructor(sourceModule: Module, frequency?: number, power?: number, roughness?: number, seed?: number) {
     super(sourceModule);
 
@@ -25,6 +91,12 @@ class Turbulence extends TransformerModule {
     this.seed = seed || Perlin.DEFAULT_PERLIN_SEED;
   }
 
+  /**
+   * The frequency of the turbulence.
+   *
+   * The frequency of the turbulence determines how rapidly the
+   * displacement amount changes.
+   */
   public get frequency(): number {
     return this.xDistortModule.frequency;
   }
@@ -34,6 +106,14 @@ class Turbulence extends TransformerModule {
     this.zDistortModule.frequency = v;
   }
 
+  /**
+   * The roughness of the turbulence.
+   *
+   * The roughness of the turbulence determines the roughness of the
+   * changes to the displacement amount.  Low values smoothly change
+   * the displacement amount.  High values roughly change the
+   * displacement amount, which produces more "kinky" changes.
+   */
   public get roughness(): number {
     return this.xDistortModule.octaves;
   }
@@ -43,6 +123,17 @@ class Turbulence extends TransformerModule {
     this.zDistortModule.octaves = v;
   }
 
+  /**
+   * The seed value.
+   *
+   * Internally, there are three Perlin noise modules
+   * that displace the input value; one for the x, one for the y,
+   * and one for the z coordinate.  This noise module assigns the
+   * following seed values to the Perlin noise modules:
+   * - It assigns the seed value (seed + 0) to the x noise module.
+   * - It assigns the seed value (seed + 1) to the y noise module.
+   * - It assigns the seed value (seed + 2) to the z noise module.
+   */
   public get seed(): number {
     return this.xDistortModule.seed;
   }

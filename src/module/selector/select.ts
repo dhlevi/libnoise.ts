@@ -7,7 +7,7 @@ import SelectorModule from './SelectorModule';
  * Noise module that outputs the value selected from one of two source
  * modules chosen by the output value from a control module.
  *
- * Source modules A and B output the values to blend.
+ * Source modules A and B output the values to be selected.
  * The control module determines the value to select.  If
  * the output value from the control module is within a range of values
  * known as the *selection range*, this noise module outputs the

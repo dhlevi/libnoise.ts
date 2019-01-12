@@ -2,6 +2,22 @@ import MathConsts from '@app/mathconsts';
 import Module from '@app/module/Module';
 import TransformerModule from './TransformerModule';
 
+/**
+ * Noise module that rotates the input value around the origin before
+ * returning the output value from a source module.
+ *
+ * The getValue() method rotates the coordinates of the input value
+ * around the origin before returning the output value from the source
+ * module.  To set the rotation angles, call the setAngles() method.  To
+ * set the rotation angle around the individual x, y, or z axes,
+ * set the xAngle(), yAngle() or zAngle() properties, respectively.
+ *
+ * The coordinate system of the input value is assumed to be
+ * "left-handed" (x increases to the right, y increases upward,
+ * and z increases inward.)
+ *
+ * This noise module requires one source module.
+ */
 class RotatePoint extends TransformerModule {
   public static readonly DEFAULT_ROTATE_X = 0.0;
   public static readonly DEFAULT_ROTATE_Y = 0.0;
@@ -21,6 +37,13 @@ class RotatePoint extends TransformerModule {
   private _yAngle: number = RotatePoint.DEFAULT_ROTATE_Y;
   private _zAngle: number = RotatePoint.DEFAULT_ROTATE_Z;
 
+  /**
+   *
+   * @param sourceModule The noise module that is used to generate the output values.
+   * @param xAngle The rotation angle around the x axis, in degrees.
+   * @param yAngle The rotation angle around the y axis, in degrees.
+   * @param zAngle The rotation angle around the z axis, in degrees.
+   */
   constructor(sourceModule: Module, xAngle?: number, yAngle?: number, zAngle?: number) {
     super(sourceModule);
 
@@ -31,6 +54,9 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
+  /**
+   * The rotation angle around the x axis, in degrees.
+   */
   public get xAngle(): number {
     return this._xAngle;
   }
@@ -40,6 +66,9 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
+  /**
+   * The rotation angle around the y axis, in degrees.
+   */
   public get yAngle(): number {
     return this._yAngle;
   }
@@ -49,6 +78,9 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
+  /**
+   * The rotation angle around the z axis, in degrees.
+   */
   public get zAngle(): number {
     return this._zAngle;
   }
@@ -58,6 +90,10 @@ class RotatePoint extends TransformerModule {
     this.calcMatrices();
   }
 
+  /**
+   * Recompute rotation matrices, to be called whenever either
+   * xAngle, yAngle or zAngle updates.
+   */
   private calcMatrices(): void {
     let xCos = Math.cos(this.xAngle * MathConsts.DEG_TO_RAD);
     let yCos = Math.cos(this.yAngle * MathConsts.DEG_TO_RAD);
@@ -85,6 +121,18 @@ class RotatePoint extends TransformerModule {
     );
   }
 
+  /**
+   * Sets the rotation angles around all three axes to apply to the
+   * input value.
+   *
+   * The getValue() method rotates the coordinates of the input value
+   * around the origin before returning the output value from the
+   * source module.
+   *
+   * @param xAngle The rotation angle around the x axis, in degrees.
+   * @param yAngle The rotation angle around the y axis, in degrees.
+   * @param zAngle The rotation angle around the z axis, in degrees.
+   */
   public setAngles(xAngle: number, yAngle: number, zAngle: number): void {
     this.xAngle = xAngle;
     this.yAngle = yAngle;
