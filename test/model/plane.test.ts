@@ -22,11 +22,11 @@ describe('model/plane', () => {
   it("calling getValue returns a number", () => {
     // Setup
     const x = 10;
-    const y = 10;
+    const z = 10;
     const mockModule = createMockModule();
 
     // Test
-    const value = mockModule.getValue(x, y);
+    const value = mockModule.getValue(x, z);
 
     // Assert
     expect(value).to.be.ok;

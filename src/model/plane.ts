@@ -30,8 +30,8 @@ class Plane extends Model {
    *
    * @returns The output value from the noise module.
    */
-  public getValue(x: number, y: number): number {
-    return this.sourceModule.getValue(x, 0, y);
+  public getValue(x: number, z: number): number {
+    return this.sourceModule.getValue(x, 0, z);
   }
 }
 
