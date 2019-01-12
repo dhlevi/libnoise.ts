@@ -50,24 +50,19 @@ class Curve extends ModifierModule {
    * @param inputValue The input value of the control point.
    *
    * @returns The array index in which to insert the control point.
-   *
-   * @TODO rewrite this logic based on source
    */
-  private findInsertionPos(value: Tuple<number>): number {
-    // Iterate through list to find first controlPoint larger than new value
-    //  and insert right before that
-    for (let i = 0; i < this.controlPoints.length; i++) {
-      const controlPoint = this.controlPoints[i];
-      if (controlPoint.item1 === value.item1 && controlPoint.item2 === value.item2) {
-        // Inserting control point that already exists
-        throw new Error(`Cannot insert control point ${value.toString()}: control point already exists`);
-      } else if (controlPoint.item1 > value.item1 || (controlPoint.item1 === value.item1 && controlPoint.item2 > value.item2)) {
-        // We've found our insertion pos
-        return i;
+  private findInsertionPos(inputValue: number): number {
+    for (let insertionPos = 0; insertionPos < this.controlPoints.length; insertionPos++) {
+      if (inputValue < this.controlPoints[insertionPos].item1) {
+        // We found the array index in which to insert the new control point.
+        // Exit now.
+        return insertionPos;
+      } else if (inputValue === this.controlPoints[insertionPos].item1) {
+        // Each control point is required to contain a unique input value, so
+        // throw an exception.
+        throw new Error(`Cannot insert control point with input value '${inputValue}': control point with that input value already exists`);
       }
     }
-
-    // Did not find any points greater than the new one, insert this last
     return this.controlPoints.length;
   }
 
@@ -125,7 +120,7 @@ class Curve extends ModifierModule {
     // Find the insertion point for the new control point and insert the new
     // point at that position.  The control point array will remain sorted by
     // input value.
-    this.insertAtPos(this.findInsertionPos(new Tuple(input, output)), input, output);
+    this.insertAtPos(this.findInsertionPos(input), input, output);
   }
 
   /**
