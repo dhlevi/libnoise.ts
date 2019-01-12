@@ -97,8 +97,12 @@ class NoiseMap {
    * @param height The new height for the noise map.
    */
   public setSize(width: number, height: number): void {
-    // @TODO validate width and height are positive
-    // @TODO should this copy values to a new array i.e. clear anything out of bounds?
+    if (width <= 0) {
+      throw new Error("Cannot set size of noise map – width must be greater than 0");
+    } else if (height <= 0) {
+      throw new Error("Cannot set size of noise map – height must be greater than 0");
+    }
+
     this.width = width;
     this.height = height;
   }
@@ -115,7 +119,11 @@ class NoiseMap {
    *
    */
   public setValue(x: number, y: number, value: number): void {
-    // @TODO No-op if x, y out of bounds
+    if (x < 0 || x >= this.width || y < 0 || y >= this.height) {
+      // x or y is out of bounds, no-op
+      return;
+    }
+
     this.map[y * this.width + x] = value;
   }
 

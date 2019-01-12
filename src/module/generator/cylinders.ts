@@ -45,7 +45,6 @@ class Cylinders extends GeneratorModule {
   public getValue(x: number, y: number, z: number): number {
     x = (x * this.frequency);
     y = (y * this.frequency);
-    z = (z);
 
     let distFromCenter = Math.sqrt(x * x + z * z);
     let distFromSmallerSphere = distFromCenter - Math.floor(distFromCenter);

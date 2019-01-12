@@ -1,4 +1,4 @@
-import NoiseGen from '@app/noisegen';
+import NoiseGen, { Quality } from '@app/noisegen';
 import { makeInt32Range } from '@app/util';
 import GeneratorModule from './GeneratorModule';
 
@@ -84,11 +84,8 @@ class Perlin extends GeneratorModule {
   public static readonly DEFAULT_PERLIN_LACUNARITY = 2.0;
   public static readonly DEFAULT_PERLIN_OCTAVE_COUNT = 6;
   public static readonly DEFAULT_PERLIN_PERSISTENCE = 0.5;
-  public static readonly DEFAULT_PERLIN_QUALITY = NoiseGen.QUALITY_STD;
+  public static readonly DEFAULT_PERLIN_QUALITY = Quality.Standard;
   public static readonly DEFAULT_PERLIN_SEED = 0;
-
-
-  // @TODO enforce by throwing an error or something
   public static readonly PERLIN_MAX_OCTAVE = 30;
 
   /**
@@ -103,10 +100,7 @@ class Perlin extends GeneratorModule {
    * Quality of the Perlin noise.
    */
   public quality: number;
-  /**
-   * Total number of octaves that generate the Perlin noise.
-   */
-  public octaves: number;
+
   /**
    * Persistence of the Perlin noise.
    */
@@ -115,6 +109,8 @@ class Perlin extends GeneratorModule {
    * Seed value used by the Perlin-noise function.
    */
   public seed: number;
+
+  private _octaves: number = Perlin.DEFAULT_PERLIN_OCTAVE_COUNT;
 
   /**
    * @param frequency Frequency of the first octave.
@@ -133,6 +129,20 @@ class Perlin extends GeneratorModule {
     this.persistence = persistence || Perlin.DEFAULT_PERLIN_PERSISTENCE;
     this.seed = seed || Perlin.DEFAULT_PERLIN_SEED;
     this.quality = quality || Perlin.DEFAULT_PERLIN_QUALITY;
+  }
+
+  /**
+   * Total number of octaves that generate the billowy noise.
+   */
+  public get octaves(): number {
+    return this._octaves;
+  }
+  public set octaves(value: number) {
+    if (value > Perlin.PERLIN_MAX_OCTAVE) {
+      throw new Error(`Cannot set octaves greater than maximum of ${Perlin.PERLIN_MAX_OCTAVE}`);
+    }
+
+    this._octaves = value;
   }
 
   public getValue(x: number, y: number, z: number): number {

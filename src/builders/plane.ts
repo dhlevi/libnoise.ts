@@ -26,7 +26,7 @@ class NoiseMapBuilderPlane extends Builder {
    * Enabling seamless tiling builds a noise map with no seams at the
    * edges.  This allows the noise map to be tileable.
    */
-  public seamless: boolean;
+  public isSeamless: boolean;
   private _lowerXBound: number = 0;
   private _lowerZBound: number = 0;
   private _upperXBound: number = 1;
@@ -36,12 +36,12 @@ class NoiseMapBuilderPlane extends Builder {
    * @param sourceModule The source module
    * @param width The width of the destination noise map, in points
    * @param height The height of the destination noise map, in points
-   * @param seamless A flag that enables or disables seamless tiling
+   * @param isSeamless A flag that enables or disables seamless tiling
    */
-  constructor(sourceModule: Module, width: number = 256, height: number = 256, seamless: boolean = false) {
+  constructor(sourceModule: Module, width?: number, height?: number, isSeamless: boolean = false) {
     super(sourceModule, width, height);
 
-    this.seamless = seamless;
+    this.isSeamless = isSeamless;
   }
 
   /**
@@ -52,12 +52,12 @@ class NoiseMapBuilderPlane extends Builder {
   public get lowerXBound(): number {
     return this._lowerXBound;
   }
-  public set lowerXBound(v: number) {
-    if (v >= this.upperXBound) {
+  public set lowerXBound(value: number) {
+    if (value >= this.upperXBound) {
       throw new Error('Lower X bound cannot be equal to or exceed upper X bound!');
     }
 
-    this._lowerXBound = v;
+    this._lowerXBound = value;
   }
 
   /**
@@ -68,12 +68,12 @@ class NoiseMapBuilderPlane extends Builder {
   public get lowerZBound(): number {
     return this._lowerZBound;
   }
-  public set lowerZBound(v: number) {
-    if (v >= this.upperZBound) {
+  public set lowerZBound(value: number) {
+    if (value >= this.upperZBound) {
       throw new Error('Lower Z bound cannot be equal to or exceed upper Z bound!');
     }
 
-    this._lowerZBound = v;
+    this._lowerZBound = value;
   }
 
   /**
@@ -84,12 +84,12 @@ class NoiseMapBuilderPlane extends Builder {
   public get upperXBound(): number {
     return this._upperXBound;
   }
-  public set upperXBound(v: number) {
-    if (v <= this.lowerXBound) {
+  public set upperXBound(value: number) {
+    if (value <= this.lowerXBound) {
       throw new Error('Upper X bound cannot be equal to or less than lower X bound!');
     }
 
-    this._upperXBound = v;
+    this._upperXBound = value;
   }
 
   /**
@@ -100,63 +100,58 @@ class NoiseMapBuilderPlane extends Builder {
   public get upperZBound(): number {
     return this._upperZBound;
   }
-  public set upperZBound(v: number) {
-    if (v <= this.lowerZBound) {
+  public set upperZBound(value: number) {
+    if (value <= this.lowerZBound) {
       throw new Error('Upper Z bound cannot be equal to or less than lower Z bound!');
     }
 
-    this._upperZBound = v;
+    this._upperZBound = value;
   }
 
   public build(): NoiseMap {
     let xExtent = this.upperXBound - this.lowerXBound;
     let zExtent = this.upperZBound - this.lowerZBound;
 
-    // @TODO is this possible? seems to be covered by validation in setters
-    if (xExtent < 0 || zExtent < 0) {
-      throw new Error('Invalid bounds!');
-    }
-
     // Create the plane model.
     let plane = new Plane(this.sourceModule);
     let xDelta = xExtent / this.width;
     let zDelta = zExtent / this.height;
-    let curX = this.lowerXBound;
-    let curZ = this.lowerZBound;
-    let value;
-    let xBlend;
+
+    let currentX = this.lowerXBound;
+    let currentZ = this.lowerZBound;
 
     // Fill every point in the noise map with the output values from the model.
     for (let z = 0; z < this.height; z++) {
-      curX = this.lowerXBound;
+      currentX = this.lowerXBound;
 
       for (let x = 0; x < this.width; x++) {
-        if (!this.seamless) {
-          value = plane.getValue(curX, curZ);
+        let value;
+        if (!this.isSeamless) {
+          value = plane.getValue(currentX, currentZ);
         } else {
-          xBlend = 1.0 - ((curX - this.lowerXBound) / xExtent);
+          let xBlend = 1.0 - ((currentX - this.lowerXBound) / xExtent);
 
           value = Interpolation.linear(
             Interpolation.linear(
-              plane.getValue(curX, curZ),
-              plane.getValue(curX + xExtent, curZ),
+              plane.getValue(currentX, currentZ),
+              plane.getValue(currentX + xExtent, currentZ),
               xBlend,
             ),
             Interpolation.linear(
-              plane.getValue(curX, curZ + zExtent),
-              plane.getValue(curX + xExtent, curZ + zExtent),
+              plane.getValue(currentX, currentZ + zExtent),
+              plane.getValue(currentX + xExtent, currentZ + zExtent),
               xBlend,
             ),
-            1.0 - ((curZ - this.lowerZBound) / zExtent),
+            1.0 - ((currentZ - this.lowerZBound) / zExtent),
           );
         }
 
         this.noiseMap.setValue(x, z, value);
 
-        curX += xDelta;
+        currentX += xDelta;
       }
 
-      curZ += zDelta;
+      currentZ += zDelta;
     }
 
     return this.noiseMap;

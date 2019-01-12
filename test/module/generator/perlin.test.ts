@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 import { Perlin } from '@app/module/generator';
-import NoiseGen from '@app/noisegen';
+import { Quality } from '@app/noisegen';
 
 describe('module/generator/perlin', () => {
   it("can construct successfully", () => {
@@ -12,7 +12,7 @@ describe('module/generator/perlin', () => {
     const octaves = 6;
     const persist = 0.5;
     const seed = 0;
-    const quality = NoiseGen.QUALITY_STD;
+    const quality = Quality.Standard;
 
     // Test
     const testFunc = () => {
@@ -44,7 +44,7 @@ function createMockModule(): Perlin {
   const octaves = 6;
   const persist = 0.5;
   const seed = 0;
-  const quality = NoiseGen.QUALITY_STD;
+  const quality = Quality.Standard;
 
   return new Perlin(frequency, lacunarity, octaves, persist, seed, quality);
 }

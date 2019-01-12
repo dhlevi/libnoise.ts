@@ -30,7 +30,7 @@ export default abstract class Builder {
    * The destination noise map.
    *
    * The destination noise map will contain the coherent-noise values
-   * from this noise map after a successful call to the Build() method.
+   * from this noise map after a successful call to the build() method.
    *
    * The destination noise map must exist throughout the lifetime of
    * this object unless another noise map replaces that noise map.
@@ -42,7 +42,7 @@ export default abstract class Builder {
    * @param width The width of the destination noise map, in points
    * @param height The height of the destination noise map, in points
    */
-  public constructor(sourceModule: Module, width: number, height: number) {
+  public constructor(sourceModule: Module, width?: number, height?: number) {
     this.sourceModule = sourceModule;
     this.noiseMap = new NoiseMap(width, height);
   }
@@ -61,7 +61,7 @@ export default abstract class Builder {
    * @param height The height of the destination noise map, in points.
    *
    * This method does not change the size of the destination noise map
-   * until the Build() method is called.
+   * until the build() method is called.
    */
   public setSize(width: number, height: number): void {
     this.width = width;

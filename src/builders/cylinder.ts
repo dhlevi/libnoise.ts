@@ -39,12 +39,12 @@ class NoiseMapBuilderCylinder extends Builder {
   public get lowerAngleBound(): number {
     return this._lowerAngleBound;
   }
-  public set lowerAngleBound(v: number) {
-    if (v >= this.upperAngleBound) {
+  public set lowerAngleBound(value: number) {
+    if (value >= this.upperAngleBound) {
       throw new Error('Lower angle bound cannot be equal to or exceed upper angle bound!');
     }
 
-    this._lowerAngleBound = v;
+    this._lowerAngleBound = value;
   }
 
   /**
@@ -56,12 +56,12 @@ class NoiseMapBuilderCylinder extends Builder {
   public get lowerHeightBound(): number {
     return this._lowerHeightBound;
   }
-  public set lowerHeightBound(v: number) {
-    if (v >= this.upperHeightBound) {
+  public set lowerHeightBound(value: number) {
+    if (value >= this.upperHeightBound) {
       throw new Error('Lower angle height cannot be equal to or exceed upper angle height!');
     }
 
-    this._lowerHeightBound = v;
+    this._lowerHeightBound = value;
   }
 
   /**
@@ -72,12 +72,12 @@ class NoiseMapBuilderCylinder extends Builder {
   public get upperAngleBound(): number {
     return this._upperAngleBound;
   }
-  public set upperAngleBound(v: number) {
-    if (v <= this.lowerAngleBound) {
+  public set upperAngleBound(value: number) {
+    if (value <= this.lowerAngleBound) {
       throw new Error('Upper angle bound cannot be equal to or less than lower angle bound!');
     }
 
-    this._upperAngleBound = v;
+    this._upperAngleBound = value;
   }
 
   /**
@@ -89,12 +89,12 @@ class NoiseMapBuilderCylinder extends Builder {
   public get upperHeightBound(): number {
     return this._upperHeightBound;
   }
-  public set upperHeightBound(v: number) {
-    if (v <= this.lowerHeightBound) {
+  public set upperHeightBound(value: number) {
+    if (value <= this.lowerHeightBound) {
       throw new Error('Upper angle height cannot be equal to or less than lower angle height!');
     }
 
-    this._upperHeightBound = v;
+    this._upperHeightBound = value;
   }
 
   public build(): NoiseMap {
@@ -102,19 +102,19 @@ class NoiseMapBuilderCylinder extends Builder {
     let cylinder = new Cylinder(this.sourceModule);
     let xDelta = (this.upperAngleBound - this.lowerAngleBound) / this.width;
     let yDelta = (this.upperHeightBound - this.lowerHeightBound) / this.height;
-    let curAngle = this.lowerAngleBound;
-    let curHeight = this.lowerHeightBound;
+    let currentAngle = this.lowerAngleBound;
+    let currentHeight = this.lowerHeightBound;
 
     // Fill every point in the noise map with the output values from the model.
     for (let y = 0; y < this.height; y++) {
-      curAngle = this.lowerAngleBound;
+      currentAngle = this.lowerAngleBound;
 
       for (let x = 0; x < this.width; x++) {
-        this.noiseMap.setValue(x, y, cylinder.getValue(curAngle, curHeight));
-        curAngle += xDelta;
+        this.noiseMap.setValue(x, y, cylinder.getValue(currentAngle, currentHeight));
+        currentAngle += xDelta;
       }
 
-      curHeight += yDelta;
+      currentHeight += yDelta;
     }
 
     return this.noiseMap;

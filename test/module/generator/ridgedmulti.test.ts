@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 import { RidgedMulti } from '@app/module/generator';
-import NoiseGen from '@app/noisegen';
+import { Quality } from '@app/noisegen';
 
 describe('module/generator/ridgedmulti', () => {
   it("can construct successfully", () => {
@@ -11,7 +11,7 @@ describe('module/generator/ridgedmulti', () => {
     const lacunarity = 2;
     const octaves = 6;
     const seed = 0;
-    const quality = NoiseGen.QUALITY_STD;
+    const quality = Quality.Standard;
     const offset = 1;
     const gain = 2;
 
@@ -56,7 +56,7 @@ function createMockModule(): RidgedMulti {
   const lacunarity = 2;
   const octaves = 6;
   const seed = 0;
-  const quality = NoiseGen.QUALITY_STD;
+  const quality = Quality.Standard;
   const offset = 1;
   const gain = 2;
 

@@ -4,16 +4,7 @@ import VectorTable from '@app/vectortable';
 // Type definitions
 type CoherentNoiseCallback = (x0: number, y0: number, z0: number, x1: number, y1: number, z1: number, xs: number, ys: number, zs: number) => number;
 
-// @TODO type-definition
-const NoiseGen = {
-  // Constants
-  X_NOISE_GEN: 1619,
-  Y_NOISE_GEN: 31337,
-  Z_NOISE_GEN: 6971,
-  SEED_NOISE_GEN: 1013,
-  SHIFT_NOISE_GEN: 8,
-
-  // @TODO enum
+export enum Quality {
   /**
    * Generates coherent noise quickly.  When a coherent-noise function with
    * NoiseGen.prototype quality setting is used to generate a bump-map image, there are
@@ -21,8 +12,7 @@ const NoiseGen = {
    * because the derivative of that function is discontinuous at integer
    * boundaries.
    */
-  QUALITY_FAST: 0,
-
+  Fast = 0,
   /**
    * Generates standard-quality coherent noise.  When a coherent-noise
    * function with NoiseGen.prototype quality setting is used to generate a bump-map
@@ -30,8 +20,7 @@ const NoiseGen = {
    * image.  This is because the second derivative of that function is
    * discontinuous at integer boundaries.
    */
-  QUALITY_STD: 1,
-
+  Standard = 1,
   /**
    * Generates the best-quality coherent noise.  When a coherent-noise
    * function with NoiseGen.prototype quality setting is used to generate a bump-map
@@ -39,7 +28,16 @@ const NoiseGen = {
    * is because the first and second derivatives of that function are
    * continuous at integer boundaries.
    */
-  QUALITY_BEST: 2,
+  Best = 2,
+}
+
+export default class NoiseGen {
+  // Constants
+  private static readonly X_NOISE_GEN = 1619;
+  private static readonly Y_NOISE_GEN = 31337;
+  private static readonly Z_NOISE_GEN = 6971;
+  private static readonly SEED_NOISE_GEN = 1013;
+  private static readonly SHIFT_NOISE_GEN = 8;
 
   /**
    * Generates an integer-noise value from the coordinates of a
@@ -58,7 +56,7 @@ const NoiseGen = {
    * always returns the same output value if the same input value is passed
    * to it.
    */
-  intValueNoise3D(x: number, y: number, z: number, seed: number): number {
+  public static intValueNoise3D(x: number, y: number, z: number, seed: number): number {
     x = Math.floor(x);
     y = Math.floor(y);
     z = Math.floor(z);
@@ -76,7 +74,7 @@ const NoiseGen = {
     n = (n >> 13) ^ n;
 
     return ((n * (n * n * 60493 + 19990303) + 1376312589) & 0x7fffffff);
-  },
+  }
 
   /**
    * Generates a value-noise value from the coordinates of a
@@ -95,9 +93,9 @@ const NoiseGen = {
    * always returns the same output value if the same input value is passed
    * to it.
    */
-  valueNoise3D(x: number, y: number, z: number, seed: number = 0): number {
+  public static valueNoise3D(x: number, y: number, z: number, seed: number = 0): number {
     return 1.0 - (NoiseGen.intValueNoise3D(Math.floor(x), Math.floor(y), Math.floor(z), Math.floor(seed)) / 1073741824.0);
-  },
+  }
 
   /**
    * Generates a gradient-noise value from the coordinates of a
@@ -142,7 +140,7 @@ const NoiseGen = {
    * always returns the same output value if the same input value is passed
    * to it.
    */
-  gradientNoise3D(fx: number, fy: number, fz: number, ix: number, iy: number, iz: number, seed: number = 1): number {
+  public static gradientNoise3D(fx: number, fy: number, fz: number, ix: number, iy: number, iz: number, seed: number = 1): number {
     // Randomly generate a gradient vector given the integer coordinates of the
     // input value.  This implementation generates a random number and uses it
     // as an index into a normalized-vector lookup table.
@@ -174,16 +172,14 @@ const NoiseGen = {
       (yvGradient * yvPoint) +
       (zvGradient * zvPoint)
     ) * 2.12;
-  },
+  }
 
   // @TODO remove `seed` param, it is not used. Or maybe it should be?
-  // @TODO this should be private, it does not exist in the original libnoise
-  coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?: CoherentNoiseCallback): number {
+  private static coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?: CoherentNoiseCallback): number {
     if (!func) {
       throw new Error('Must provide proper interpolation function!');
     }
 
-    // @TODO convert these default values to overloads
     if (!seed) {
       seed = 1;
     } else {
@@ -191,7 +187,7 @@ const NoiseGen = {
     }
 
     if (!quality) {
-      quality = NoiseGen.QUALITY_STD;
+      quality = Quality.Standard;
     } else {
       quality = Math.floor(quality);
     }
@@ -214,20 +210,20 @@ const NoiseGen = {
     let xs = 0, ys = 0, zs = 0;
 
     switch (quality) {
-      case NoiseGen.QUALITY_BEST:
+      case Quality.Best:
         xs = Interpolation.quinticSCurve(x - x0);
         ys = Interpolation.quinticSCurve(y - y0);
         zs = Interpolation.quinticSCurve(z - z0);
         break;
 
-      case NoiseGen.QUALITY_STD:
+      case Quality.Standard:
         xs = Interpolation.cubicSCurve(x - x0);
         ys = Interpolation.cubicSCurve(y - y0);
         zs = Interpolation.cubicSCurve(z - z0);
         break;
 
       default:
-      case NoiseGen.QUALITY_FAST:
+      case Quality.Fast:
         xs = x - x0;
         ys = y - y0;
         zs = z - z0;
@@ -236,7 +232,7 @@ const NoiseGen = {
 
     // use provided function to interpolate
     return func(x0, y0, z0, x1, y1, z1, xs, ys, zs);
-  },
+  }
 
   /**
    * Generates a value-coherent-noise value from the coordinates of a
@@ -255,7 +251,7 @@ const NoiseGen = {
    * For an explanation of the difference between *gradient* noise and
    * *value* noise, see the comments for the gradientNoise3D() function.
    */
-  valueCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
+  public static valueCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
     return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
       // Now calculate the noise values at each vertex of the cube.  To generate
@@ -282,7 +278,7 @@ const NoiseGen = {
       return Interpolation.linear(iy0, iy1, zs);
 
     });
-  },
+  }
 
   /**
    * Generates a gradient-coherent-noise value from the coordinates of a
@@ -301,7 +297,7 @@ const NoiseGen = {
    * For an explanation of the difference between *gradient* noise and
    * *value* noise, see the comments for the gradientNoise3D() function.
    */
-  gradientCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
+  public static gradientCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
     return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
       // Now calculate the noise values at each vertex of the cube.  To generate
@@ -327,7 +323,5 @@ const NoiseGen = {
 
       return Interpolation.linear(iy0, iy1, zs);
     });
-  },
-};
-
-export default NoiseGen;
+  }
+}

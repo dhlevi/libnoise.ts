@@ -112,20 +112,20 @@ class NoiseMapBuilderSphere extends Builder {
     let sphere = new Sphere(this.sourceModule);
     let xDelta = (this.eastLonBound - this.westLonBound) / this.width;
     let yDelta = (this.northLatBound - this.southLatBound) / this.height;
-    let curLon = this.westLonBound;
-    let curLat = this.eastLonBound;
+    let currentLongitude = this.westLonBound;
+    let currentLatitude = this.eastLonBound;
 
     // Fill every point in the noise map with the output values from the model.
     for (let y = 0; y < this.height; y++) {
-      curLon = this.westLonBound;
+      currentLongitude = this.westLonBound;
 
       for (let x = 0; x < this.width; x++) {
-        this.noiseMap.setValue(x, y, sphere.getValue(curLat, curLon));
+        this.noiseMap.setValue(x, y, sphere.getValue(currentLatitude, currentLongitude));
 
-        curLon += xDelta;
+        currentLongitude += xDelta;
       }
 
-      curLat += yDelta;
+      currentLatitude += yDelta;
     }
 
     return this.noiseMap;

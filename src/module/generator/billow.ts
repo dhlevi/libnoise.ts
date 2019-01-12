@@ -1,4 +1,4 @@
-import NoiseGen from '@app/noisegen';
+import NoiseGen, { Quality } from '@app/noisegen';
 import { makeInt32Range } from '@app/util';
 import GeneratorModule from './GeneratorModule';
 
@@ -17,10 +17,8 @@ class Billow extends GeneratorModule {
   public static readonly DEFAULT_BILLOW_LACUNARITY = 2.0;
   public static readonly DEFAULT_BILLOW_OCTAVE_COUNT = 6;
   public static readonly DEFAULT_BILLOW_PERSISTENCE = 0.5;
-  public static readonly DEFAULT_BILLOW_QUALITY = NoiseGen.QUALITY_STD;
+  public static readonly DEFAULT_BILLOW_QUALITY = Quality.Standard;
   public static readonly DEFAULT_BILLOW_SEED = 0;
-
-  // @TODO enforce by throwing an error or something
   public static readonly BILLOW_MAX_OCTAVE = 30;
 
   /**
@@ -35,10 +33,7 @@ class Billow extends GeneratorModule {
    * Quality of the billowy noise.
    */
   public quality: number;
-  /**
-   * Total number of octaves that generate the billowy noise.
-   */
-  public octaves: number;
+
   /**
    * Persistence value of the billowy noise.
    */
@@ -47,6 +42,8 @@ class Billow extends GeneratorModule {
    * Seed value used by the billowy-noise function.
    */
   public seed: number;
+
+  private _octaves: number = Billow.DEFAULT_BILLOW_OCTAVE_COUNT;
 
   /**
    * @param frequency Frequency of the first octave.
@@ -65,6 +62,20 @@ class Billow extends GeneratorModule {
     this.persistence = persistence || Billow.DEFAULT_BILLOW_PERSISTENCE;
     this.seed = seed || Billow.DEFAULT_BILLOW_SEED;
     this.quality = quality || Billow.DEFAULT_BILLOW_QUALITY;
+  }
+
+  /**
+   * Total number of octaves that generate the billowy noise.
+   */
+  public get octaves(): number {
+    return this._octaves;
+  }
+  public set octaves(value: number) {
+    if (value > Billow.BILLOW_MAX_OCTAVE) {
+      throw new Error(`Cannot set octaves greater than maximum of ${Billow.BILLOW_MAX_OCTAVE}`);
+    }
+
+    this._octaves = value;
   }
 
   public getValue(x: number, y: number, z: number): number {

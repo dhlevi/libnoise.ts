@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 import { Billow } from '@app/module/generator';
-import NoiseGen from '@app/noisegen';
+import { Quality } from '@app/noisegen';
 
 describe('module/generator/billow', () => {
   it("can construct successfully", () => {
@@ -12,7 +12,7 @@ describe('module/generator/billow', () => {
     const octaves = 5;
     const persist = 0.4;
     const seed = 18;
-    const quality = NoiseGen.QUALITY_STD;
+    const quality = Quality.Standard;
 
     // Test
     const testFunc = () => {
@@ -44,7 +44,7 @@ function createMockModule(): Billow {
   const octaves = 5;
   const persist = 0.4;
   const seed = 18;
-  const quality = NoiseGen.QUALITY_STD;
+  const quality = Quality.Standard;
 
   return new Billow(frequency, lacunarity, octaves, persist, seed, quality);
 }
