@@ -24,7 +24,7 @@
     "noise"
   ],
   "author": "peabnuts123",
-  "license": "ISC",
+  "license": "LGPL-2.1",
   "bugs": {
     "url": "https://github.com/peabnuts123/libnoise.ts/issues"
   },
