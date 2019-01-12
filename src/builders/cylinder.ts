@@ -98,6 +98,10 @@ class NoiseMapBuilderCylinder extends Builder {
   }
 
   public build(): NoiseMap {
+    if (!this.sourceModule) {
+      throw new Error("Cannot build cylinder model, source module is empty");
+    }
+
     // Create the cylinder model.
     let cylinder = new Cylinder(this.sourceModule);
     let xDelta = (this.upperAngleBound - this.lowerAngleBound) / this.width;

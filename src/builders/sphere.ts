@@ -108,6 +108,10 @@ class NoiseMapBuilderSphere extends Builder {
   }
 
   public build(): NoiseMap {
+    if (!this.sourceModule) {
+      throw new Error("Cannot build sphere model, source module is empty");
+    }
+
     // Create the cylinder model.
     let sphere = new Sphere(this.sourceModule);
     let xDelta = (this.eastLonBound - this.westLonBound) / this.width;

@@ -109,6 +109,10 @@ class NoiseMapBuilderPlane extends Builder {
   }
 
   public build(): NoiseMap {
+    if (!this.sourceModule) {
+      throw new Error("Cannot build plane model, source module is empty");
+    }
+
     let xExtent = this.upperXBound - this.lowerXBound;
     let zExtent = this.upperZBound - this.lowerZBound;
 
