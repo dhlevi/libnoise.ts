@@ -41,6 +41,23 @@ const NoiseGen = {
    */
   QUALITY_BEST: 2,
 
+  /**
+   * Generates an integer-noise value from the coordinates of a
+   * three-dimensional input value.
+   *
+   * @param x The integer x coordinate of the input value.
+   * @param y The integer y coordinate of the input value.
+   * @param z The integer z coordinate of the input value.
+   * @param seed A random number seed.
+   *
+   * @returns The generated integer-noise value.
+   *
+   * The return value ranges from 0 to 2147483647.
+   *
+   * A noise function differs from a random-number generator because it
+   * always returns the same output value if the same input value is passed
+   * to it.
+   */
   intValueNoise3D(x: number, y: number, z: number, seed: number): number {
     x = Math.floor(x);
     y = Math.floor(y);
@@ -61,10 +78,70 @@ const NoiseGen = {
     return ((n * (n * n * 60493 + 19990303) + 1376312589) & 0x7fffffff);
   },
 
+  /**
+   * Generates a value-noise value from the coordinates of a
+   * three-dimensional input value.
+   *
+   * @param x The x coordinate of the input value.
+   * @param y The y coordinate of the input value.
+   * @param z The z coordinate of the input value.
+   * @param seed A random number seed.
+   *
+   * @returns The generated value-noise value.
+   *
+   * The return value ranges from -1.0 to +1.0.
+   *
+   * A noise function differs from a random-number generator because it
+   * always returns the same output value if the same input value is passed
+   * to it.
+   */
   valueNoise3D(x: number, y: number, z: number, seed: number = 0): number {
     return 1.0 - (NoiseGen.intValueNoise3D(Math.floor(x), Math.floor(y), Math.floor(z), Math.floor(seed)) / 1073741824.0);
   },
 
+  /**
+   * Generates a gradient-noise value from the coordinates of a
+   * three-dimensional input value and the integer coordinates of a
+   * nearby three-dimensional value.
+   *
+   * @param fx The floating-point x coordinate of the input value.
+   * @param fy The floating-point y coordinate of the input value.
+   * @param fz The floating-point z coordinate of the input value.
+   * @param ix The integer x coordinate of a nearby value.
+   * @param iy The integer y coordinate of a nearby value.
+   * @param iz The integer z coordinate of a nearby value.
+   * @param seed The random number seed.
+   *
+   * @returns The generated gradient-noise value.
+   *
+   * The difference between fx and ix must be less than or equal
+   * to one.
+   *
+   * The difference between fy and iy must be less than or equal
+   * to one.
+   *
+   * The difference between fz and iz must be less than or equal
+   * to one.
+   *
+   * A *gradient*-noise function generates better-quality noise than a
+   * *value*-noise function.  Most noise modules use gradient noise for
+   * this reason, although it takes much longer to calculate.
+   *
+   * The return value ranges from -1.0 to +1.0.
+   *
+   * This function generates a gradient-noise value by performing the
+   * following steps:
+   * - It first calculates a random normalized vector based on the
+   *   nearby integer value passed to this function.
+   * - It then calculates a new value by adding this vector to the
+   *   nearby integer value passed to this function.
+   * - It then calculates the dot product of the above-generated value
+   *   and the floating-point input value passed to this function.
+   *
+   * A noise function differs from a random-number generator because it
+   * always returns the same output value if the same input value is passed
+   * to it.
+   */
   gradientNoise3D(fx: number, fy: number, fz: number, ix: number, iy: number, iz: number, seed: number = 1): number {
     // Randomly generate a gradient vector given the integer coordinates of the
     // input value.  This implementation generates a random number and uses it
@@ -100,6 +177,7 @@ const NoiseGen = {
   },
 
   // @TODO remove `seed` param, it is not used. Or maybe it should be?
+  // @TODO this should be private, it does not exist in the original libnoise
   coherentNoise3D(x: number, y: number, z: number, seed?: number, quality?: number, func?: CoherentNoiseCallback): number {
     if (!func) {
       throw new Error('Must provide proper interpolation function!');
@@ -160,6 +238,23 @@ const NoiseGen = {
     return func(x0, y0, z0, x1, y1, z1, xs, ys, zs);
   },
 
+  /**
+   * Generates a value-coherent-noise value from the coordinates of a
+   * three-dimensional input value.
+   *
+   * @param x The x coordinate of the input value.
+   * @param y The y coordinate of the input value.
+   * @param z The z coordinate of the input value.
+   * @param seed The random number seed.
+   * @param quality The quality of the coherent-noise.
+   *
+   * @returns The generated value-coherent-noise value.
+   *
+   * The return value ranges from -1.0 to +1.0.
+   *
+   * For an explanation of the difference between *gradient* noise and
+   * *value* noise, see the comments for the gradientNoise3D() function.
+   */
   valueCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
     return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
@@ -189,6 +284,23 @@ const NoiseGen = {
     });
   },
 
+  /**
+   * Generates a gradient-coherent-noise value from the coordinates of a
+   * three-dimensional input value.
+   *
+   * @param x The x coordinate of the input value.
+   * @param y The y coordinate of the input value.
+   * @param z The z coordinate of the input value.
+   * @param seed The random number seed.
+   * @param quality The quality of the coherent-noise.
+   *
+   * @returns The generated gradient-coherent-noise value.
+   *
+   * The return value ranges from -1.0 to +1.0.
+   *
+   * For an explanation of the difference between *gradient* noise and
+   * *value* noise, see the comments for the gradientNoise3D() function.
+   */
   gradientCoherentNoise3D(x: number, y: number, z: number, seed: number, quality: number): number {
     return NoiseGen.coherentNoise3D(x, y, z, seed, quality, (x0, y0, z0, x1, y1, z1, xs, ys, zs) => {
 
