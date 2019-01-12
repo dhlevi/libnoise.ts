@@ -1,0 +1,11 @@
+{
+  "checkJs": true,
+  "paths": {
+    "@app/*": [
+      "src/*"
+    ]
+  },
+  "include": [
+    "test/**/*.test.js"
+  ]
+}
