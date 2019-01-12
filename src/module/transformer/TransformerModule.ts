@@ -6,8 +6,14 @@ import Module from '@app/module/Module';
  * module.  A transformer module does not modify the output value.
  */
 export default abstract class TransformerModule extends Module {
+  /**
+   * The noise module that is used to generate the output values.
+   */
   public sourceModule: Module;
 
+  /**
+   * @param sourceModule The noise module that is used to generate the output values.
+   */
   public constructor(sourceModule: Module) {
     super();
 

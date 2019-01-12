@@ -5,8 +5,14 @@ import Module from '@app/module/Module';
  * source module.
  */
 export default abstract class ModifierModule extends Module {
+  /**
+   * The noise module that is used to generate the output values.
+   */
   public sourceModule: Module;
 
+  /**
+   * @param sourceModule The noise module that is used to generate the output values.
+   */
   public constructor(sourceModule: Module) {
     super();
 

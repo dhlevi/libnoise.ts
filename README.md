@@ -6,8 +6,6 @@
 This is a fork that ports the code to TypeScript and modernises things a bit. This library can be used with both Node.js and web projects.
 
 ## Backlog
-  - Rewrite validation of curve.ts
-  - Better document base classes
   - Reconcile public/private members against libnoise source
   - Resolve @TODOs
   - Align property and variable names with libnoise

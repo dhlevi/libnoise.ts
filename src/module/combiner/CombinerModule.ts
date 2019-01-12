@@ -6,9 +6,19 @@ import Module from '@app/module/Module';
  * or more source modules together.
  */
 export default abstract class CombinerModule extends Module {
+  /**
+   * The first noise module that is used to generate output values.
+   */
   public sourceModuleA: Module;
+  /**
+   * The second noise module that is used to generate output values.
+   */
   public sourceModuleB: Module;
 
+  /**
+   * @param sourceModuleA The first noise module that is used to generate the output values.
+   * @param sourceModuleB The second noise module that is used to generate the output values.
+   */
   public constructor(sourceModuleA: Module, sourceModuleB: Module) {
     super();
 
