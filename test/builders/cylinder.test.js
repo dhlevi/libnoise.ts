@@ -9,10 +9,10 @@ describe("JavaScript/builders/cylinder", () => {
     // Setup / Test
     const testFunc = () => {
       new Cylinder();
-    }
+    };
 
     // Assert
-    expect(testFunc).to.throw("Cannot construct Builder – sourceModule is required");
+    expect(testFunc).to.throw("Cannot construct Builder - sourceModule is required");
   });
 
   it("calling build without a sourceModule throws an error", () => {
@@ -23,7 +23,7 @@ describe("JavaScript/builders/cylinder", () => {
     // Test
     const testFunc = () => {
       mockModule.build();
-    }
+    };
 
     // Assert
     expect(testFunc).to.throw("Cannot build cylinder model, source module is empty");

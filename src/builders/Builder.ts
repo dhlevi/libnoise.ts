@@ -44,7 +44,7 @@ export default abstract class Builder {
    */
   public constructor(sourceModule: Module, width?: number, height?: number) {
     if (!sourceModule) {
-      throw new Error("Cannot construct Builder – sourceModule is required");
+      throw new Error("Cannot construct Builder - sourceModule is required");
     }
 
     this.sourceModule = sourceModule;

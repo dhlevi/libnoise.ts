@@ -9,10 +9,10 @@ describe("JavaScript/builders/plane", () => {
     // Setup / Test
     const testFunc = () => {
       new Plane();
-    }
+    };
 
     // Assert
-    expect(testFunc).to.throw("Cannot construct Builder – sourceModule is required");
+    expect(testFunc).to.throw("Cannot construct Builder - sourceModule is required");
   });
 
   it("calling build without a sourceModule throws an error", () => {
@@ -23,7 +23,7 @@ describe("JavaScript/builders/plane", () => {
     // Test
     const testFunc = () => {
       mockModule.build();
-    }
+    };
 
     // Assert
     expect(testFunc).to.throw("Cannot build plane model, source module is empty");

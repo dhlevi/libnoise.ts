@@ -98,9 +98,9 @@ class NoiseMap {
    */
   public setSize(width: number, height: number): void {
     if (width <= 0) {
-      throw new Error("Cannot set size of noise map – width must be greater than 0");
+      throw new Error("Cannot set size of noise map - width must be greater than 0");
     } else if (height <= 0) {
-      throw new Error("Cannot set size of noise map – height must be greater than 0");
+      throw new Error("Cannot set size of noise map - height must be greater than 0");
     }
 
     this.width = width;
