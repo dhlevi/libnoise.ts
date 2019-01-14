@@ -22,6 +22,12 @@ export default abstract class CombinerModule extends Module {
   public constructor(sourceModuleA: Module, sourceModuleB: Module) {
     super();
 
+    if (!sourceModuleA) {
+      throw new Error("Cannot construct Model - sourceModuleA is required");
+    } else if (!sourceModuleB) {
+      throw new Error("Cannot construct Model - sourceModuleB is required");
+    }
+
     this.sourceModuleA = sourceModuleA;
     this.sourceModuleB = sourceModuleB;
   }
