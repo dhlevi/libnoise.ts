@@ -99,7 +99,7 @@ class Perlin extends GeneratorModule {
   /**
    * Quality of the Perlin noise.
    */
-  public quality: number;
+  public quality: Quality;
 
   /**
    * Persistence of the Perlin noise.
@@ -120,7 +120,7 @@ class Perlin extends GeneratorModule {
    * @param seed Seed value used by the billowy-noise function.
    * @param quality Quality of the billowy noise.
    */
-  constructor(frequency?: number, lacunarity?: number, octaves?: number, persistence?: number, seed?: number, quality?: number) {
+  constructor(frequency?: number, lacunarity?: number, octaves?: number, persistence?: number, seed?: number, quality?: Quality) {
     super();
 
     this.frequency = frequency || Perlin.DEFAULT_PERLIN_FREQUENCY;

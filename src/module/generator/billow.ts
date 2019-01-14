@@ -32,7 +32,7 @@ class Billow extends GeneratorModule {
   /**
    * Quality of the billowy noise.
    */
-  public quality: number;
+  public quality: Quality;
 
   /**
    * Persistence value of the billowy noise.
@@ -53,7 +53,7 @@ class Billow extends GeneratorModule {
    * @param seed Seed value used by the billowy-noise function.
    * @param quality Quality of the billowy noise.
    */
-  constructor(frequency?: number, lacunarity?: number, octaves?: number, persistence?: number, seed?: number, quality?: number) {
+  constructor(frequency?: number, lacunarity?: number, octaves?: number, persistence?: number, seed?: number, quality?: Quality) {
     super();
 
     this.frequency = frequency || Billow.DEFAULT_BILLOW_FREQUENCY;

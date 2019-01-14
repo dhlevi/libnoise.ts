@@ -71,7 +71,7 @@ class RidgedMulti extends GeneratorModule {
   /**
    * Quality of the ridged-multifractal noise.
    */
-  public quality: number;
+  public quality: Quality;
   /**
    * Total number of octaves that generate the ridged-multifractal noise.
    */
@@ -104,7 +104,7 @@ class RidgedMulti extends GeneratorModule {
    * @param offset Offset used when generating ridged-multifractal noise.
    * @param gain Gain used when generating ridged-multifractal noise.
    */
-  constructor(frequency?: number, lacunarity?: number, octaves?: number, seed?: number, quality?: number, offset?: number, gain?: number) {
+  constructor(frequency?: number, lacunarity?: number, octaves?: number, seed?: number, quality?: Quality, offset?: number, gain?: number) {
     super();
 
     this.frequency = frequency || RidgedMulti.DEFAULT_RIDGED_FREQUENCY;
