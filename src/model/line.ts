@@ -65,6 +65,10 @@ class Line extends Model {
    * @returns The output value from the noise module.
    */
   public getValue(p: number): number {
+    if (!this.sourceModule) {
+      throw new Error("Cannot call getValue on line model, source module is empty");
+    }
+
     let value = this.sourceModule.getValue(
       (this.x1 - this.x0) * p + this.x0,
       (this.y1 - this.y0) * p + this.y0,
@@ -83,6 +87,10 @@ class Line extends Model {
    * @param z z coordinate of the end position.
    */
   public setEndPoint(x: number, y: number, z: number): void {
+    if (x == null || y == null || z == null) {
+      throw new Error(`Cannot set end point for line model. x, y, and z parameters are required. x: ${x}. y: ${y}. z: ${z}`);
+    }
+
     this.x1 = x;
     this.y1 = y;
     this.z1 = z;
@@ -97,6 +105,10 @@ class Line extends Model {
    * @param z z coordinate of the start position.
    */
   public setStartPoint(x: number, y: number, z: number): void {
+    if (x == null || y == null || z == null) {
+      throw new Error(`Cannot set start point for line model. x, y, and z parameters are required. x: ${x}. y: ${y}. z: ${z}`);
+    }
+
     this.x0 = x;
     this.y0 = y;
     this.z0 = z;

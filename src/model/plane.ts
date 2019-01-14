@@ -31,6 +31,10 @@ class Plane extends Model {
    * @returns The output value from the noise module.
    */
   public getValue(x: number, z: number): number {
+    if (!this.sourceModule) {
+      throw new Error("Cannot call getValue on plane model, source module is empty");
+    }
+
     return this.sourceModule.getValue(x, 0, z);
   }
 }

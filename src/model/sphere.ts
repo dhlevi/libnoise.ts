@@ -35,6 +35,10 @@ class Sphere extends Model {
    * @returns The output value from the noise module.
    */
   public getValue(latitude: number, longitude: number): number {
+    if (!this.sourceModule) {
+      throw new Error("Cannot call getValue on sphere model, source module is empty");
+    }
+
     let r: number = Math.cos(MathConsts.DEG_TO_RAD * latitude);
 
     return this.sourceModule.getValue(

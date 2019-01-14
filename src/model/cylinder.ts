@@ -32,6 +32,10 @@ class Cylinder extends Model {
    * @returns The output value from the noise module.
    */
   public getValue(angleDegrees: number, height: number): number {
+    if (!this.sourceModule) {
+      throw new Error("Cannot call getValue on cylinder model, source module is empty");
+    }
+
     let i = angleDegrees * MathConsts.DEG_TO_RAD;
 
     return this.sourceModule.getValue(Math.cos(i), height, Math.sin(i));
