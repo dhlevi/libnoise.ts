@@ -7,6 +7,6 @@ This is a fork that ports the code to TypeScript and modernises things a bit. Th
 
 ## Backlog
   - Write proper README
-  - Consider re-adding javascript-esque validation for npm consumption
+  - Add CI workflow
   - Probably make script utils less modular and just call themselves
   
