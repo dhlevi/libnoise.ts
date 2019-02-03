@@ -54,7 +54,7 @@ class NoiseMapBuilderPlane extends Builder {
   }
   public set lowerXBound(value: number) {
     if (value >= this.upperXBound) {
-      throw new Error('Lower X bound cannot be equal to or exceed upper X bound!');
+      throw new Error("Lower X bound cannot be equal to or exceed upper X bound!");
     }
 
     this._lowerXBound = value;
@@ -70,7 +70,7 @@ class NoiseMapBuilderPlane extends Builder {
   }
   public set lowerZBound(value: number) {
     if (value >= this.upperZBound) {
-      throw new Error('Lower Z bound cannot be equal to or exceed upper Z bound!');
+      throw new Error("Lower Z bound cannot be equal to or exceed upper Z bound!");
     }
 
     this._lowerZBound = value;
@@ -86,7 +86,7 @@ class NoiseMapBuilderPlane extends Builder {
   }
   public set upperXBound(value: number) {
     if (value <= this.lowerXBound) {
-      throw new Error('Upper X bound cannot be equal to or less than lower X bound!');
+      throw new Error("Upper X bound cannot be equal to or less than lower X bound!");
     }
 
     this._upperXBound = value;
@@ -102,17 +102,13 @@ class NoiseMapBuilderPlane extends Builder {
   }
   public set upperZBound(value: number) {
     if (value <= this.lowerZBound) {
-      throw new Error('Upper Z bound cannot be equal to or less than lower Z bound!');
+      throw new Error("Upper Z bound cannot be equal to or less than lower Z bound!");
     }
 
     this._upperZBound = value;
   }
 
   public build(): NoiseMap {
-    if (!this.sourceModule) {
-      throw new Error("Cannot build plane model, source module is empty");
-    }
-
     let xExtent = this.upperXBound - this.lowerXBound;
     let zExtent = this.upperZBound - this.lowerZBound;
 

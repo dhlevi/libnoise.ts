@@ -53,7 +53,7 @@ class NoiseMapBuilderSphere extends Builder {
   }
   public set northLatBound(v: number) {
     if (v <= this.southLatBound) {
-      throw new Error('North latitudinal bound cannot be equal to or less than south latitudinal bound!');
+      throw new Error("North latitudinal bound cannot be equal to or less than south latitudinal bound!");
     }
 
     this._northLatBound = v;
@@ -69,7 +69,7 @@ class NoiseMapBuilderSphere extends Builder {
   }
   public set southLatBound(v: number) {
     if (v >= this.northLatBound) {
-      throw new Error('South latitudinal bound cannot be equal to or exceed north latitudinal bound!');
+      throw new Error("South latitudinal bound cannot be equal to or exceed north latitudinal bound!");
     }
 
     this._southLatBound = v;
@@ -85,7 +85,7 @@ class NoiseMapBuilderSphere extends Builder {
   }
   public set eastLonBound(v: number) {
     if (v <= this.westLonBound) {
-      throw new Error('East longitudinal bound cannot be equal to or less than west longitudinal bound!');
+      throw new Error("East longitudinal bound cannot be equal to or less than west longitudinal bound!");
     }
 
     this._eastLonBound = v;
@@ -101,17 +101,13 @@ class NoiseMapBuilderSphere extends Builder {
   }
   public set westLonBound(v: number) {
     if (v >= this.eastLonBound) {
-      throw new Error('West longitudinal bound cannot be equal to or exceed east longitudinal bound!');
+      throw new Error("West longitudinal bound cannot be equal to or exceed east longitudinal bound!");
     }
 
     this._westLonBound = v;
   }
 
   public build(): NoiseMap {
-    if (!this.sourceModule) {
-      throw new Error("Cannot build sphere model, source module is empty");
-    }
-
     // Create the cylinder model.
     let sphere = new Sphere(this.sourceModule);
     let xDelta = (this.eastLonBound - this.westLonBound) / this.width;

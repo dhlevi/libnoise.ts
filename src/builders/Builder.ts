@@ -43,10 +43,6 @@ export default abstract class Builder {
    * @param height The height of the destination noise map, in points
    */
   public constructor(sourceModule: Module, width?: number, height?: number) {
-    if (!sourceModule) {
-      throw new Error("Cannot construct Builder - sourceModule is required");
-    }
-
     this.sourceModule = sourceModule;
     this.noiseMap = new NoiseMap(width, height);
   }

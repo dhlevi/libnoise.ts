@@ -10,10 +10,6 @@ export default abstract class Model {
    * @param sourceModule The noise module that is used to generate the output values.
    */
   public constructor(sourceModule: Module) {
-    if (!sourceModule) {
-      throw new Error("Cannot construct Model - sourceModule is required");
-    }
-
     this.sourceModule = sourceModule;
   }
 }

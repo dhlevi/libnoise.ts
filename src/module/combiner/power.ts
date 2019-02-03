@@ -8,12 +8,6 @@ import CombinerModule from './CombinerModule';
  */
 class Power extends CombinerModule {
   public getValue(x: number, y: number, z: number): number {
-    if (!this.sourceModuleA) {
-      throw new Error("Cannot call getValue on power combiner module, sourceModuleA is empty");
-    } else if (!this.sourceModuleB) {
-      throw new Error("Cannot call getValue on power combiner module, sourceModuleB is empty");
-    }
-
     return Math.pow(
       this.sourceModuleA.getValue(x, y, z),
       this.sourceModuleB.getValue(x, y, z),

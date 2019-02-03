@@ -115,10 +115,10 @@ class Perlin extends GeneratorModule {
   /**
    * @param frequency Frequency of the first octave.
    * @param lacunarity Frequency multiplier between successive octaves.
-   * @param octaves Total number of octaves that generate the billowy noise.
-   * @param persistence Persistence value of the billowy noise.
-   * @param seed Seed value used by the billowy-noise function.
-   * @param quality Quality of the billowy noise.
+   * @param octaves Total number of octaves that generate the perlin noise.
+   * @param persistence Persistence value of the perlin noise.
+   * @param seed Seed value used by the perlin-noise function.
+   * @param quality Quality of the perlin noise.
    */
   constructor(frequency?: number, lacunarity?: number, octaves?: number, persistence?: number, seed?: number, quality?: Quality) {
     super();
@@ -132,7 +132,7 @@ class Perlin extends GeneratorModule {
   }
 
   /**
-   * Total number of octaves that generate the billowy noise.
+   * Total number of octaves that generate the perlin noise.
    */
   public get octaves(): number {
     return this._octaves;

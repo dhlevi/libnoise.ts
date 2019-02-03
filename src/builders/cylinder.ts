@@ -41,7 +41,7 @@ class NoiseMapBuilderCylinder extends Builder {
   }
   public set lowerAngleBound(value: number) {
     if (value >= this.upperAngleBound) {
-      throw new Error('Lower angle bound cannot be equal to or exceed upper angle bound!');
+      throw new Error("Lower angle bound cannot be equal to or exceed upper angle bound!");
     }
 
     this._lowerAngleBound = value;
@@ -58,7 +58,7 @@ class NoiseMapBuilderCylinder extends Builder {
   }
   public set lowerHeightBound(value: number) {
     if (value >= this.upperHeightBound) {
-      throw new Error('Lower angle height cannot be equal to or exceed upper angle height!');
+      throw new Error("Lower angle height cannot be equal to or exceed upper angle height!");
     }
 
     this._lowerHeightBound = value;
@@ -74,7 +74,7 @@ class NoiseMapBuilderCylinder extends Builder {
   }
   public set upperAngleBound(value: number) {
     if (value <= this.lowerAngleBound) {
-      throw new Error('Upper angle bound cannot be equal to or less than lower angle bound!');
+      throw new Error("Upper angle bound cannot be equal to or less than lower angle bound!");
     }
 
     this._upperAngleBound = value;
@@ -91,17 +91,13 @@ class NoiseMapBuilderCylinder extends Builder {
   }
   public set upperHeightBound(value: number) {
     if (value <= this.lowerHeightBound) {
-      throw new Error('Upper angle height cannot be equal to or less than lower angle height!');
+      throw new Error("Upper angle height cannot be equal to or less than lower angle height!");
     }
 
     this._upperHeightBound = value;
   }
 
   public build(): NoiseMap {
-    if (!this.sourceModule) {
-      throw new Error("Cannot build cylinder model, source module is empty");
-    }
-
     // Create the cylinder model.
     let cylinder = new Cylinder(this.sourceModule);
     let xDelta = (this.upperAngleBound - this.lowerAngleBound) / this.width;

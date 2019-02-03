@@ -73,10 +73,6 @@ class RidgedMulti extends GeneratorModule {
    */
   public quality: Quality;
   /**
-   * Total number of octaves that generate the ridged-multifractal noise.
-   */
-  public octaves: number;
-  /**
    * Seed value used by the ridged-multifractal-noise function.
    */
   public seed: number;
@@ -89,6 +85,7 @@ class RidgedMulti extends GeneratorModule {
    */
   public gain: number;
 
+  private _octaves: number = RidgedMulti.DEFAULT_RIDGED_OCTAVE_COUNT;
   private _lacunarity: number = RidgedMulti.DEFAULT_RIDGED_LACUNARITY;
   /**
    * Contains the spectral weights for each octave.
@@ -98,9 +95,9 @@ class RidgedMulti extends GeneratorModule {
   /**
    * @param frequency Frequency of the first octave.
    * @param lacunarity Frequency multiplier between successive octaves.
-   * @param octaves Total number of octaves that generate the billowy noise.
-   * @param seed Seed value used by the billowy-noise function.
-   * @param quality Quality of the billowy noise.
+   * @param octaves Total number of octaves that generate the ridged-multifractal noise.
+   * @param seed Seed value used by the ridged-multifractal-noise function.
+   * @param quality Quality of the ridged-multifractal noise.
    * @param offset Offset used when generating ridged-multifractal noise.
    * @param gain Gain used when generating ridged-multifractal noise.
    */
@@ -135,6 +132,20 @@ class RidgedMulti extends GeneratorModule {
       this.weights[i] = Math.pow(frequency, -h);
       frequency *= this.lacunarity;
     }
+  }
+
+  /**
+   * Total number of octaves that generate the ridged-multifractal noise.
+   */
+  public get octaves(): number {
+    return this._octaves;
+  }
+  public set octaves(value: number) {
+    if (value > RidgedMulti.RIDGED_MAX_OCTAVE) {
+      throw new Error(`Cannot set octaves greater than maximum of ${RidgedMulti.RIDGED_MAX_OCTAVE}`);
+    }
+
+    this._octaves = value;
   }
 
   public getValue(x: number, y: number, z: number): number {
