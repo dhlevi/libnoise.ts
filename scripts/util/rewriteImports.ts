@@ -19,7 +19,7 @@ interface IRewriteRule {
   replacement: string;
 }
 
-export default async function rewriteImports(relativeDirectoryPath: string, buildConstants: IBuildConstantsBase) {
+export default async function rewriteImports(relativeDirectoryPath: string, buildConstants: IBuildConstantsBase): Promise<void> {
   let baseUrl: string = buildConstants.tsConfig.compilerOptions.baseUrl;
   let pathsRaw: IConfigPaths = buildConstants.tsConfig.compilerOptions.paths;
 

@@ -6,6 +6,6 @@ const rimrafAsync = promisify(rimraf);
 /**
  * Remove a set of folders/files from disk
  */
-export default async function cleanBuild(foldersToClean: string[]) {
+export default async function cleanBuild(foldersToClean: string[]): Promise<void> {
   await Promise.all(foldersToClean.map((folder) => rimrafAsync(folder)));
 }

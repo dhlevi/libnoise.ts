@@ -45,7 +45,7 @@ export interface IDeployOptions {
 }
 
 // Execution takes place in async function
-export default async function deploy(buildConstants: IBuildConstantsBase, options?: IDeployOptions) {
+export default async function deploy(buildConstants: IBuildConstantsBase, options?: IDeployOptions): Promise<void> {
   // Option defaults
   options = _.defaultTo(options, {});
   options.additionalStepWork = _.defaultTo(options.additionalStepWork, {});

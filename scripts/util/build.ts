@@ -1,6 +1,6 @@
 import { execAsync, IBuildConstantsBase, rewriteImports } from '.';
 
-export default async function build(buildConstants: IBuildConstantsBase) {
+export default async function build(buildConstants: IBuildConstantsBase): Promise<void> {
   // Subscribe to SIGINT for this process
   process.on('SIGINT', cleanUp);
   process.on('exit', cleanUp);
@@ -22,7 +22,7 @@ export default async function build(buildConstants: IBuildConstantsBase) {
     process.exit(-1);
   }
 
-  function cleanUp() {
+  function cleanUp(): void {
     // Exit
     process.exit();
   }
