@@ -1,13 +1,12 @@
-import { cleanBuild, getBaseBuildConstants } from './util';
+import rimraf from 'rimraf';
+
+import { getBaseBuildConstants } from './util';
 
 const buildConstants = getBaseBuildConstants();
 
 const foldersToClean: string[] = [
   buildConstants.publishDirectory,
   buildConstants.tsBuildFolder,
-  'processing-package',
 ];
 
-(async () => {
-  await cleanBuild(foldersToClean);
-})();
+foldersToClean.map((folder) => rimraf.sync(folder));

@@ -8,7 +8,7 @@ export interface IBuildConstantsBase {
 
 export default function getBaseBuildConstants(): IBuildConstantsBase {
   // Build folder constants
-  // @TODO make /find a type declaration for tsconfig
+  // @TODO make/find a type declaration for tsconfig
   const tsConfig = getJson('./tsconfig.json');
 
   return {
