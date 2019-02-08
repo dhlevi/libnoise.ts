@@ -29,18 +29,6 @@ class Select extends SelectorModule {
   public static readonly DEFAULT_SELECT_LOWER_BOUND = -1.0;
   public static readonly DEFAULT_SELECT_UPPER_BOUND = 1.0;
 
-  /**
-   * The control module.
-   *
-   * The control module determines the output value to select.  If the
-   * output value from the control module is within a range of values
-   * known as the *selection range*, the getValue() method outputs
-   * the value from the source module with an index value of 1.
-   * Otherwise, this method outputs the value from the source module
-   * with an index value of 0.
-   */
-  public controlModule: Module;
-
   private _edgeFalloff: number = Select.DEFAULT_SELECT_EDGE_FALLOFF;
   private _lowerBound: number = Select.DEFAULT_SELECT_LOWER_BOUND;
   private _upperBound: number = Select.DEFAULT_SELECT_UPPER_BOUND;
@@ -52,9 +40,8 @@ class Select extends SelectorModule {
    *  sourceModuleA and sourceModuleB.
    */
   constructor(sourceModuleA: Module, sourceModuleB: Module, controlModule: Module, edge?: number, lowerBound?: number, upperBound?: number) {
-    super(sourceModuleA, sourceModuleB);
+    super(sourceModuleA, sourceModuleB, controlModule);
 
-    this.controlModule = controlModule;
     this.edgeFalloff = edge || Select.DEFAULT_SELECT_EDGE_FALLOFF;
     this.lowerBound = lowerBound || Select.DEFAULT_SELECT_LOWER_BOUND;
     this.upperBound = upperBound || Select.DEFAULT_SELECT_UPPER_BOUND;

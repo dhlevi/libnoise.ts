@@ -20,26 +20,13 @@ import SelectorModule from './SelectorModule';
  */
 class Blend extends SelectorModule {
   /**
-   * The control module.
-   *
-   * The control module determines the weight of the blending
-   * operation.  Negative values weigh the blend towards the output
-   * value from the source module with an index value of 0.  Positive
-   * values weigh the blend towards the output value from the source
-   * module with an index value of 1.
-   */
-  public controlModule: Module;
-
-  /**
    * @param sourceModuleA Noise module that is used to generate the output values.
    * @param sourceModuleB Noise module that is used to generate the output values.
    * @param controlModule Noise module that is used to control the blend between
    *  sourceModuleA and sourceModuleB.
    */
   constructor(sourceModuleA: Module, sourceModuleB: Module, controlModule: Module) {
-    super(sourceModuleA, sourceModuleB);
-
-    this.controlModule = controlModule;
+    super(sourceModuleA, sourceModuleB, controlModule);
   }
 
   public getValue(x: number, y: number, z: number): number {
