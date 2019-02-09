@@ -1,7 +1,7 @@
 import {
-  execAsync,
   getBaseBuildConstants,
   rewriteImports,
+  spawnAsync,
 } from './util';
 
 (async () => {
@@ -13,10 +13,10 @@ import {
 
   try {
     // Clean previous build before building
-    console.log(await execAsync(`npm run build:clean`));
+    await spawnAsync(`npm run build:clean`);
 
     // Compile typescript
-    console.log(await execAsync(`tsc --project .`, true));
+    await spawnAsync(`tsc --project .`, true);
 
     // Enter build folder
     process.chdir(buildConstants.tsBuildFolder);

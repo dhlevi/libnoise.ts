@@ -1,4 +1,4 @@
-import { execAsync, getBaseBuildConstants } from "../util";
+import { getBaseBuildConstants, spawnAsync } from "../util";
 import ERROR_CODES from './errorCodes';
 
 (async () => {
@@ -6,7 +6,7 @@ import ERROR_CODES from './errorCodes';
 
   try {
     // Copy project to publish directory
-    await execAsync(`cp -r ${buildConstants.tsBuildFolder}/src ${buildConstants.publishDirectory}`, true);
+    await spawnAsync(`cp -r ${buildConstants.tsBuildFolder}/src ${buildConstants.publishDirectory}`, true);
   } catch (e) {
     console.error(e);
     console.error("Failed to copy project to publish directory");
@@ -16,7 +16,7 @@ import ERROR_CODES from './errorCodes';
 
   try {
     // Copy package.json into build directory
-    await execAsync(`cp package.json ${buildConstants.publishDirectory}`, true);
+    await spawnAsync(`cp package.json ${buildConstants.publishDirectory}`, true);
   } catch (e) {
     console.error(e);
     console.error("Failed to copy package.json into output directory");

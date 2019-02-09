@@ -1,10 +1,10 @@
-import { execAsync } from "../util";
+import { spawnAsync } from "../util";
 import ERROR_CODES from './errorCodes';
 
 (async () => {
   try {
     // Invoke test command
-    console.log(await execAsync('npm test'));
+    await spawnAsync('npm test');
 
     console.log("Success! All tests executed without error.");
   } catch (e) {

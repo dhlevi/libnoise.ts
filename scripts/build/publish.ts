@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { execAsync } from "../util";
+import { spawnAsync } from "../util";
 import ERROR_CODES from './errorCodes';
 
 (async () => {
@@ -16,7 +16,7 @@ import ERROR_CODES from './errorCodes';
     }
 
     // Create .npmrc
-    await execAsync(`echo '//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}' > .npmrc`);
+    await spawnAsync(`echo '//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}' > .npmrc`);
 
     console.log("Success! Created .npmrc file with npm access token.");
   } catch (e) {
@@ -28,7 +28,7 @@ import ERROR_CODES from './errorCodes';
 
   try {
     // Publish package to npm
-    console.log(await execAsync('npm publish'));
+    await spawnAsync('npm publish');
 
     console.log("Success! Published to npm.");
   } catch (e) {

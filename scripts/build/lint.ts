@@ -1,10 +1,10 @@
-import { execAsync } from "../util";
+import { spawnAsync } from "../util";
 import ERROR_CODES from './errorCodes';
 
 (async () => {
   try {
     // Invoke lint command
-    console.log(await execAsync('npm run lint'));
+    await spawnAsync('npm run lint');
 
     console.log("Success! Linting returned no errors.");
   } catch (e) {

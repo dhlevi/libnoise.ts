@@ -1,10 +1,10 @@
-import { execAsync } from "../util";
+import { spawnAsync } from "../util";
 import ERROR_CODES from './errorCodes';
 
 (async () => {
   try {
     // Invoke build command
-    console.log(await execAsync('npm run build'));
+    await spawnAsync('npm run build');
 
     console.log("Success! Built project without error.");
   } catch (e) {
