@@ -11,7 +11,7 @@ import { getBaseBuildConstants } from "../util";
   const branchName = process.env.BUILD_SOURCEBRANCHNAME as string;
   const buildId = process.env.BUILD_BUILDID as string;
 
-  const authHandler = azdev.getBearerHandler(token);
+  const authHandler = azdev.getPersonalAccessTokenHandler(token);
   const connection = new azdev.WebApi(orgUrl, authHandler);
   const build = await connection.getBuildApi();
   const buildDefinition = await build.getDefinition(definitionId, projectName);
