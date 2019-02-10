@@ -24,6 +24,16 @@ import ERROR_CODES from './errorCodes';
     process.exit(ERROR_CODES.COPY_PACKAGE_JSON_FAILED);
   }
 
+  try {
+    // Copy README into build directory
+    await spawnAsync(`cp ./README.md ${buildConstants.publishDirectory}/README.md`, true);
+  } catch (e) {
+    console.error(e);
+    console.error("Failed to copy README.md into output directory");
+    // @FAILURE
+    process.exit(ERROR_CODES.COPY_README_FAILED);
+  }
+
   // cd into build directory
   process.chdir(buildConstants.publishDirectory);
 
