@@ -16,7 +16,7 @@ import ERROR_CODES from './errorCodes';
 
   try {
     // Copy package.json into build directory
-    await spawnAsync(`cp package.json ${buildConstants.publishDirectory}`, true);
+    await spawnAsync(`cp ./package.json ${buildConstants.publishDirectory}/package.json`, true);
   } catch (e) {
     console.error(e);
     console.error("Failed to copy package.json into output directory");
