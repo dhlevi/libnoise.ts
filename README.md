@@ -1,5 +1,6 @@
 # libnoise.ts 
 
+[![Build status](https://peabnuts123.visualstudio.com/libnoise.ts/_apis/build/status/libnoise.ts)](https://peabnuts123.visualstudio.com/libnoise.ts/_build/latest?definitionId=2)
 
 A (mostly) direct port of C++ [libnoise](http://libnoise.sourceforge.net/index.html) (including noiseutils) designed to run in Node.js and on the web. This fork ports [the original code](https://github.com/jmcneese/libnoise.js) (written by jmcneese) to TypeScript and modernises things a bit. As this is a TypeScript library it is designed to be used primarily in a TypeScript environment. It will, of course, work perfectly fine in a JavaScript setting but no effort has been made to validate things the TypeScript compiler would otherwise catch (e.g. calling a constructor with no parameters will not throw an error).
 
