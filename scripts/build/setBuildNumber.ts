@@ -9,7 +9,7 @@ import ERROR_CODES from './errorCodes';
 
     let version = buildConstants.packageJson.version;
     if (branchName !== 'master') {
-      version += `<${branchName}-${buildId}>`;
+      version += `_${branchName}-${buildId}`;
     }
 
     console.log(`##vso[build.updatebuildnumber]${version}`);
