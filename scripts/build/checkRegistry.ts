@@ -19,7 +19,7 @@ import ERROR_CODES from './errorCodes';
 
   // Create Registry object
   const npm = new Registry({
-    registry: 'https://skimdb.npmjs.com/registry',
+    registry: 'https://registry.npmjs.org',
   });
 
   try {
