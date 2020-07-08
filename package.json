@@ -1,6 +1,6 @@
 {
   "name": "libnoise-ts",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A port of libnoise, modernised and ported to TypeScript",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/peabnuts123/libnoise.ts.git"
+    "url": "git+https://github.com/dhlevi/libnoise.ts.git"
   },
   "keywords": [
     "typescript",

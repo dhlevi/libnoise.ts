@@ -35,7 +35,7 @@ class Terrace extends ModifierModule {
   /**
    * Whether the terrace-forming curve between all control points is inverted.
    */
-  public invert: boolean;
+  public inverted: boolean;
 
   /**
    * Array that stores the control points.
@@ -52,7 +52,7 @@ class Terrace extends ModifierModule {
     super(sourceModule);
 
     this.controlPoints = controlPoints || [];
-    this.invert = invert || false;
+    this.inverted = invert || false;
   }
 
   /**
@@ -177,7 +177,7 @@ class Terrace extends ModifierModule {
     let value1 = this.controlPoints[index1];
     let alpha = (sourceModuleValue - value0) / (value1 - value0);
 
-    if (this.invert) {
+    if (this.inverted) {
       alpha -= 1.0;
       let swap = value0;
       value0 = value1;

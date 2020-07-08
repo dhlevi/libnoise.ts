@@ -22,7 +22,7 @@ class ScaleBias extends ModifierModule {
   /**
    * Scaling factor to apply to the output value from the source module.
    */
-  public scale: number;
+  public scaler: number;
 
   /**
    * @param sourceModule The noise module that is used to generate the output values.
@@ -32,12 +32,12 @@ class ScaleBias extends ModifierModule {
   constructor(sourceModule: Module, scale?: number, bias?: number) {
     super(sourceModule);
 
-    this.scale = scale || ScaleBias.DEFAULT_SCALE;
+    this.scaler = scale || ScaleBias.DEFAULT_SCALE;
     this.bias = bias || ScaleBias.DEFAULT_BIAS;
   }
 
   public getValue(x: number, y: number, z: number): number {
-    return this.sourceModule.getValue(x, y, z) * this.scale + this.bias;
+    return this.sourceModule.getValue(x, y, z) * this.scaler + this.bias;
   }
 }
 

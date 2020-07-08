@@ -1,4 +1,5 @@
 import Abs from './abs';
+import Cache from './cache'
 import Clamp from './clamp';
 import Curve from './curve';
 import Exponent from './exponent';
@@ -9,6 +10,7 @@ import Terrace from './terrace';
 
 export {
   Abs,
+  Cache,
   Clamp,
   Curve,
   Exponent,

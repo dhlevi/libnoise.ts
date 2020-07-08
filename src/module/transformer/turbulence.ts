@@ -68,7 +68,7 @@ class Turbulence extends TransformerModule {
   /**
    * The power (scale) of the displacement.
    */
-  public power: number;
+  public pwr: number;
 
   /**
    *
@@ -86,7 +86,7 @@ class Turbulence extends TransformerModule {
     this.zDistortModule = new Perlin();
     this.sourceModule = sourceModule || null;
     this.frequency = frequency || Perlin.DEFAULT_PERLIN_FREQUENCY;
-    this.power = power || Turbulence.DEFAULT_TURBULENCE_POWER;
+    this.pwr = power || Turbulence.DEFAULT_TURBULENCE_POWER;
     this.roughness = roughness || Turbulence.DEFAULT_TURBULENCE_ROUGHNESS;
     this.seed = seed || Perlin.DEFAULT_PERLIN_SEED;
   }
@@ -163,9 +163,9 @@ class Turbulence extends TransformerModule {
 
     // Retrieve the output value at the offsetted input value instead of the original input value.
     return this.sourceModule.getValue(
-      (x + (this.xDistortModule.getValue(x0, y0, z0) * this.power)),
-      (y + (this.yDistortModule.getValue(x1, y1, z1) * this.power)),
-      (z + (this.zDistortModule.getValue(x2, y2, z2) * this.power)),
+      (x + (this.xDistortModule.getValue(x0, y0, z0) * this.pwr)),
+      (y + (this.yDistortModule.getValue(x1, y1, z1) * this.pwr)),
+      (z + (this.zDistortModule.getValue(x2, y2, z2) * this.pwr)),
     );
   }
 }

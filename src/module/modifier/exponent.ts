@@ -16,7 +16,7 @@ class Exponent extends ModifierModule {
   /**
    * Exponent to apply to the output value from the source module.
    */
-  public exponent: number;
+  public exp: number;
 
   /**
    * @param sourceModule The noise module that is used to generate the output values.
@@ -25,11 +25,11 @@ class Exponent extends ModifierModule {
   constructor(sourceModule: Module, exponent?: number) {
     super(sourceModule);
 
-    this.exponent = exponent || 1;
+    this.exp = exponent || 1;
   }
 
   public getValue(x: number, y: number, z: number): number {
-    return Math.pow(Math.abs((this.sourceModule.getValue(x, y, z) + 1.0) / 2.0), this.exponent) * 2.0 - 1.0;
+    return Math.pow(Math.abs((this.sourceModule.getValue(x, y, z) + 1.0) / 2.0), this.exp) * 2.0 - 1.0;
   }
 }
 
